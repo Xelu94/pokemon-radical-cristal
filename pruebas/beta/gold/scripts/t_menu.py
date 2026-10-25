@@ -1,0 +1,12 @@
+from lib import *
+arm(200)
+g = G('ROUTE_29', 4, 6)
+strong_party(g)
+g.p.tick(90)
+g.press('start', 30)
+print(g.screen_text())
+g.press('down', 15); g.press('a', 60)
+print(g.screen_text())
+g.press('b', 60); g.press('b', 60)
+print(g.screen_text())
+g.close()

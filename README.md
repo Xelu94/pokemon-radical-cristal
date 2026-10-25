@@ -1,6 +1,6 @@
 # Radical Cristal — Tito Xeluis
 
-Modificación personal de **Pokémon Cristal** (antes «Cristal Nuzlocke») para Game Boy Color con un Nuzlocke integrado en el motor, combate modernizado, aleatorización por niveles, una liga extra y personajes propios. Versión **5.3**. Autor: **Tito Xeluis** (apodo de YouTube; [@Xelu94](https://github.com/Xelu94) en GitHub). El NPC Tito Xeluis del juego lleva el nombre del autor.
+Modificación personal de **Pokémon Cristal** (antes «Cristal Nuzlocke») para Game Boy Color con un Nuzlocke integrado en el motor, combate modernizado, aleatorización por niveles, una liga extra y personajes propios. Versión **5.4**. Autor: **Tito Xeluis** (apodo de YouTube; [@Xelu94](https://github.com/Xelu94) en GitHub). El NPC Tito Xeluis del juego lleva el nombre del autor.
 
 > *English summary:* **Radical Cristal** is a personal ROM hack of Pokémon Crystal (Game Boy Color, SM83 assembly) built on the Spanish source tree of [MicaelAlighieri/pokecristal](https://github.com/MicaelAlighieri/pokecristal) and the [pret/pokecrystal](https://github.com/pret/pokecrystal) disassembly. It adds built-in Nuzlocke rules, per-move physical/special split, a Fairy type, level caps, a custom NPC (Tito Xeluis), a roaming thief (Ulex), the other protagonist as a rival, a 5-fight Super League at level 100, a new Dark Lugia, a sandbox build for testing and an offline seed-based randomizer. It is **not** a game written from scratch and **not** an official Pokémon product. Spanish only. Download the single `.gbc` from [Releases](https://github.com/Xelu94/pokemon-radical-cristal/releases) and open it in a Game Boy Color emulator.
 
@@ -10,15 +10,15 @@ Modificación personal de **Pokémon Cristal** (antes «Cristal Nuzlocke») para
 
 ## Descarga y cómo jugar
 
-**[⬇ Descargar Radical Cristal.gbc (v5.3)](https://github.com/Xelu94/pokemon-radical-cristal/releases/download/v5.3/Radical.Cristal.gbc)** — enlace directo al asset de la [Release v5.3](https://github.com/Xelu94/pokemon-radical-cristal/releases/tag/v5.3). GitHub sustituye los espacios del nombre por puntos en la URL; el archivo es el mismo.
+**[⬇ Descargar Radical Cristal.gbc (v5.4)](https://github.com/Xelu94/pokemon-radical-cristal/releases/download/v5.4/Radical.Cristal.gbc)** — enlace directo al asset de la [Release v5.4](https://github.com/Xelu94/pokemon-radical-cristal/releases/tag/v5.4). GitHub sustituye los espacios del nombre por puntos en la URL; el archivo es el mismo.
 
-Versiones anteriores publicadas: [v5.2](https://github.com/Xelu94/pokemon-radical-cristal/releases/tag/v5.2), [v5.1](https://github.com/Xelu94/pokemon-radical-cristal/releases/tag/v5.1), [v5.0](https://github.com/Xelu94/pokemon-radical-cristal/releases/tag/v5.0), [v4.4](https://github.com/Xelu94/pokemon-radical-cristal/releases/tag/v4.4), [v4.3](https://github.com/Xelu94/pokemon-radical-cristal/releases/tag/v4.3) y [v4.2](https://github.com/Xelu94/pokemon-radical-cristal/releases/tag/v4.2).
+Versiones anteriores publicadas: [v5.3](https://github.com/Xelu94/pokemon-radical-cristal/releases/tag/v5.3), [v5.2](https://github.com/Xelu94/pokemon-radical-cristal/releases/tag/v5.2), [v5.1](https://github.com/Xelu94/pokemon-radical-cristal/releases/tag/v5.1), [v5.0](https://github.com/Xelu94/pokemon-radical-cristal/releases/tag/v5.0), [v4.4](https://github.com/Xelu94/pokemon-radical-cristal/releases/tag/v4.4), [v4.3](https://github.com/Xelu94/pokemon-radical-cristal/releases/tag/v4.3) y [v4.2](https://github.com/Xelu94/pokemon-radical-cristal/releases/tag/v4.2).
 
 | | |
 |---|---|
 | Archivo | `Radical Cristal.gbc` (2 MiB) |
-| Versión | 5.3 |
-| SHA-256 | `aab4601450c38aa762b643033df21af26dd698cb30d44dce50f92780783e6408` |
+| Versión | 5.4 |
+| SHA-256 | `91845e52c2afee9f0f6e0425f15fc62e7685aff5c116284cceee768ac00e67c1` |
 1. Descarga el único archivo `.gbc` de la Release. No hay ZIP, parches ni instalador: no necesitas una ROM base ni aplicar nada.
 2. Ábrelo con un emulador compatible con Game Boy Color (por ejemplo mGBA). El emulador se obtiene por separado y no forma parte de este proyecto.
 3. Guarda dentro del juego. Las actualizaciones de esta familia continúan el guardado interno (`.sav`); no uses estados rápidos de otra compilación. Detalles en [compatibilidad de guardados](docs/COMPATIBILIDAD-GUARDADOS.md).
@@ -62,6 +62,13 @@ El proyecto evoluciona una base existente de ensamblador SM83 con límites estri
 - **Pruebas que ejecutan la ROM** con PyBoy (rutinas reales y recorridos de interfaz con montajes controlados) y Playwright (randomizador en navegador sin solicitudes de red) ([pruebas](docs/COMPILACION-Y-PRUEBAS.md)).
 
 ![Randomizador sin conexión](capturas/randomizador.png)
+
+### Novedades de la versión 5.4
+
+- **Revisión de dos beta testers automáticos** (uno como GOLD y otro como CRISTAL). Registro de errores y soluciones: [docs/ERRORES-Y-SOLUCIONES.md](docs/ERRORES-Y-SOLUCIONES.md).
+- **Ya no se reinicia la consola** al elegir otro ataque con Banda, Gafas o Pañuelo Elegidos (probable causa de «Inversión cierra el juego»).
+- **Los PNJ ya no cambian de sprite** al cruzar un mapa a pie y volver; el PNJ de la Ruta 29 que avisa de Ulex ya no se distorsiona al andar.
+- Los movimientos MO que salen al azar **se pueden olvidar**, y las comillas del campeón de la Superliga se ven bien.
 
 ### Novedades de la versión 5.3
 
@@ -116,11 +123,11 @@ No es una aplicación React, Electron, Unity ni Godot, y no usa servidor, base d
 
 ## Estado y validación
 
-La versión 5.3 pasó **217 comprobaciones agrupadas** en 14 grupos (servicios y mapas de Tito, Ulex, combate, randomizador y navegador sin conexión, interfaz de la 4.3 y 4.4, rutinas y recorridos de la 5.x; los recorridos de historia se ejecutan como chico y como chica). Es un recuento de comprobaciones, **no un porcentaje de cobertura**; algunas agrupan muchos casos (Poder Oculto se contrasta con 768 combinaciones de DVs). Las comprobaciones de informes de versiones anteriores no se suman.
+La versión 5.4 pasó **222 comprobaciones agrupadas** en 15 grupos (servicios y mapas de Tito, Ulex, combate, randomizador y navegador sin conexión, interfaz de la 4.3 y 4.4, rutinas y recorridos de la 5.x, arreglos de los beta testers; los recorridos de historia se ejecutan como chico y como chica). Es un recuento de comprobaciones, **no un porcentaje de cobertura**; algunas agrupan muchos casos (Poder Oculto se contrasta con 768 combinaciones de DVs). Las comprobaciones de informes de versiones anteriores no se suman.
 
 La reconstrucción también está comprobada: aplicar el parche a la base española y compilar con RGBDS 1.0.0 produce exactamente los SHA-256 de la ROM normal y de la compilación sandbox de los informes.
 
-Límites reales: los montajes omiten la introducción; algunos combates aumentan el daño para recorrer los equipos; en Ruta 17 se desactiva la gravedad solo en la prueba. No se ha completado una campaña entera ni queda demostrado el equilibrio global. El fallo móvil original de Viento Hielo no se reprodujo con el mismo emulador y guardado del usuario. La integración continua (flujo de GitHub Actions y script en [`pruebas/ci`](pruebas/ci)) solo comprueba herramientas y el randomizador contra la ROM de la Release; la compilación y las pruebas con emulador se ejecutan en local. Informe: [evidencias/Validacion-v5.3.json](evidencias/Validacion-v5.3.json).
+Límites reales: los montajes omiten la introducción; algunos combates aumentan el daño para recorrer los equipos; en Ruta 17 se desactiva la gravedad solo en la prueba. No se ha completado una campaña entera ni queda demostrado el equilibrio global. El fallo móvil original de Viento Hielo no se reprodujo con el mismo emulador y guardado del usuario. La integración continua (flujo de GitHub Actions y script en [`pruebas/ci`](pruebas/ci)) solo comprueba herramientas y el randomizador contra la ROM de la Release; la compilación y las pruebas con emulador se ejecutan en local. Informe: [evidencias/Validacion-v5.4.json](evidencias/Validacion-v5.4.json).
 No implementado: habilidades, megaevolución, generaciones tercera/cuarta, recursos de Prism.
 
 ## Contenido del repositorio

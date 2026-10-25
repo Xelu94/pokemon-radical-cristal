@@ -194,7 +194,7 @@ check('the party submenu does not offer FLY without the HM', fly_id not in fly_m
 for row in (6, 7):
     g = Game('ROUTE_29', 2, row)
     g.texts(['GuideGentGiftText', 'GotMapCardText'])
-    for _ in range(12):
+    for _ in range(24):
         g.press('left', 4)
     for step in range(70):
         g.p.tick(30)

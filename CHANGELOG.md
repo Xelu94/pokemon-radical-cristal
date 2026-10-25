@@ -2,6 +2,28 @@
 
 Formato por versión. Las versiones anteriores a la 4 no están documentadas en este paquete; solo se sabe que la actualización v3→v4 permite continuar el guardado.
 
+## 5.4 — Revisión de los beta testers: sprites, Elegidos y MO (25 de octubre de 2026)
+
+Dos beta testers automáticos (uno jugando como GOLD y otro como CRISTAL) recorrieron los mapas, los PNJ, los ataques y los menús en el emulador. Hallaron seis errores, todos corregidos. **222 comprobaciones agrupadas** ([evidencias/Validacion-v5.4.json](evidencias/Validacion-v5.4.json)): las 217 de la 5.3 más 5 nuevas. Registro completo de causas y soluciones: [docs/ERRORES-Y-SOLUCIONES.md](docs/ERRORES-Y-SOLUCIONES.md); informes de los testers: [pruebas/beta](pruebas/beta).
+
+**Errores corregidos**
+
+1. **Reinicio de la consola al elegir otro ataque con Banda, Gafas o Pañuelo Elegidos.** El aviso «El objeto elegido fija el ataque.» estaba en un banco de ROM distinto del que lee el motor de texto de combate. Es la causa más probable de «Inversión cierra el juego»: ese ataque no falla en ninguna prueba (los 254 ataques, como jugador y como rival). El texto ahora está en `data/text/battle.asm`.
+2. **Los PNJ cambiaban de sprite al volver a un mapa o cruzar una zona** (PLATA y el guía de Ciudad Cerezo tras el primer combate, la profesora de la Ruta 29, PNJ de Ciudad Trigal). Al cruzar el borde de un mapa a pie no se reconstruía la lista de gráficos, y la siguiente recarga dejaba a cada PNJ con los gráficos de otro. Nuevo paso `RebuildSpriteList` en el cruce de mapas, antes de crear los objetos. 287 cruces entre mapas sin fallos (antes 32 con fallos).
+3. **El PNJ de la Ruta 29 que avisa de Ulex se distorsionaba al andar** al llegar desde Pueblo Primavera a pie, que es el camino de toda partida nueva. Mismo origen que el punto 2.
+4. **El otro protagonista no estaba en la lista de gráficos de Pueblo Primavera** al entrar desde las rutas 27 o 29. Mismo origen.
+5. **Comillas del campeón de la Superliga:** `«»` se imprimían como símbolos raros; ahora son `“”`.
+6. **Los movimientos MO no se podían olvidar.** Los ataques aleatorios pueden ser Corte, Vuelo, Surf, Fuerza, Destello, Torbellino o Cascada (34 de 251 especies tras usar caramelos raros) y el menú de olvidar los rechazaba, aunque las MO ya son herramientas de la mochila. Se quita esa comprobación.
+
+**Límites:** el cruce de mapas apaga la pantalla unos 7 fotogramas mientras recarga los gráficos (como al cerrar un menú); está medido en emulador, no en una consola real. El fallo exacto de «Inversión» no se ha reproducido con el ataque en sí; si vuelve a ocurrir, indica si llevabas equipado un objeto Elegido.
+
+ROM de esta versión (reconstruida desde la base española aplicando el parche con RGBDS 1.0.0):
+
+| | SHA-256 |
+|---|---|
+| ROM normal (`Radical Cristal.gbc`) | `91845e52c2afee9f0f6e0425f15fc62e7685aff5c116284cceee768ac00e67c1` |
+| Sandbox | `4afbf8921e51f9086bbb5412f9d43f7ede1b1271c1aff42d9ff5ec106d9d2020` |
+
 ## 5.3 — Revisión de la Superliga, Elm, tiendas y caramelos (23 de octubre de 2026)
 
 Corrige lo que salió al probar la 5.2 con el sandbox y añade tres mejoras. **217 comprobaciones agrupadas** ([evidencias/Validacion-v5.3.json](evidencias/Validacion-v5.3.json)): las 200 de la 5.2, las nuevas de esta versión y el recorrido de historia ampliado, jugado como chico y como chica.

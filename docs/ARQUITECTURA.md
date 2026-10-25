@@ -114,3 +114,9 @@ La base (motor, mapas, gráficos y textos de Pokémon Cristal en español) proce
 - **Guardia de Rojo.** El objeto usa la bandera `EVENT_SILVER_CAVE_GUARD_GONE`; `disappear` la activa. Los objetos con bandera -1 no se pueden ocultar de forma permanente.
 - **Sandbox.** El destino de la Meseta Añil sale en (6, 10); OBJETOS recorre una lista `.HMs` y llama a `ReceiveItem` con cantidad 1.
 
+## Cambios de la 5.4
+
+- **Lista de gráficos de PNJ al cruzar mapas.** Desde la 5.0 `AddOutdoorSprites` añade primero los objetos del propio mapa, así que la disposición de VRAM (`wUsedSprites`) depende del mapa y no solo de su grupo. `MapSetupScript_Connection` ahora ejecuta `RebuildSpriteList` (`engine/overworld/map_setup.asm`, comando `$2e` de `data/maps/setup_script_pointers.asm`) antes de `LoadMapObjects`, para que los objetos nuevos cacheen sus tiles (`OBJECT_SPRITE_TILE`) con la disposición correcta. La rutina apaga la LCD mientras carga: con la pantalla encendida la copia de unos 300 tiles tardaba 65 fotogramas.
+- **Texto de bloqueo de objeto Elegido.** `StdBattleTextbox` lee siempre del banco `$20`; los textos que se le pasan deben estar en `data/text/battle.asm`, no dentro del bloque `Battle Core`.
+- **Olvidar MO.** `engine/pokemon/learn.asm` ya no llama a `IsHMMove`: las MO son herramientas de la mochila.
+

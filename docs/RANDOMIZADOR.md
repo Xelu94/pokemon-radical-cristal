@@ -5,7 +5,7 @@
 ## Uso
 
 1. Abre `herramientas/Randomizador.html` en un navegador moderno.
-2. Selecciona `Radical Cristal.gbc` (v5.3) o una copia generada antes con esta misma herramienta.
+2. Selecciona `Radical Cristal.gbc` (v5.4) o una copia generada antes con esta misma herramienta.
 3. Escribe una semilla o pulsa «Otra semilla».
 4. Pulsa «Generar y descargar ROM». El archivo se llama `Radical-Cristal-<semilla>.gbc`. *(Desde la 4.4:* debajo aparece una vista previa de la semilla con los iniciales, los equipos de los 22 líderes, Alto Mando y rivales principales y las 50 MT, solo con nombres.)
 5. **Empieza una partida nueva**: cambiar de semilla requiere partida nueva y cada guardado pertenece a su aventura.
