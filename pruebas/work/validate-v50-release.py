@@ -24,7 +24,10 @@ groups=[('Tito services and maps','test-v4-tito.py',True,'v4-tito-tests.json',48
         ('v5.0 story and world (Ulex warning, Joy, Elm, other protagonist, Super League, data)','test-v45-story.py',False,'v45-story-tests.json',28),
         ('v5.3 sandbox HMs and mart stones (data and routines)','test-v53-routines.py',False,'v53-routines-tests.json',5),
         ('v5.4 beta-tester fixes (Choice lock text, sprite list on connections)','test-v54-fixes.py',False,'v54-fixes-tests.json',5),
-        ('v5.0 story and world played as a girl (Gold ambushes, Cristal does not)','test-v45-story.py',False,'v45-story-girl-tests.json',28,{'PLAYER_GENDER':'1'})]
+        ('v5.5 routines (evolution by level, level floor, moves of their own type, Fairy moves for Tito, Poison moves)','test-v55-routines.py',False,'v55-routines-tests.json',35),
+        ('v5.5 story (the other protagonist runs up from behind, TMs are not used up)','test-v55-story.py',False,'v55-story-tests.json',6),
+        ('v5.0 story and world played as a girl (Gold ambushes, Cristal does not)','test-v45-story.py',False,'v45-story-girl-tests.json',28,{'PLAYER_GENDER':'1'}),
+        ('v5.5 story played as a girl (Gold runs up from behind)','test-v55-story.py',False,'v55-story-girl-tests.json',6,{'PLAYER_GENDER':'1'})]
 reports=[]
 for title,script,rom_arg,report,expected,*extra in groups:
     executable=str(node) if script.endswith('.cjs') else sys.executable
@@ -39,7 +42,7 @@ for title,script,rom_arg,report,expected,*extra in groups:
     reports.append({'name':title,'report':report,'passed':expected})
     print('PASS',title,expected,flush=True)
 digest=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
-summary={'version':'5.4','fecha':'2026-10-25','normal_sha256':digest(work/'source/pokecristal.gbc'),
+summary={'version':'5.5','fecha':'2026-10-30','normal_sha256':digest(work/'source/pokecristal.gbc'),
          'sandbox_sha256':digest(work/'source/pokecristal_debug.gbc'),'passed':sum(g['passed'] for g in reports),
          'groups':reports,'limitaciones':['No equivale a una campaña completa.',
          'Se omite la introducción en las pruebas de interfaz; en Ruta 17 se desactiva la gravedad solo en el montaje de prueba.',

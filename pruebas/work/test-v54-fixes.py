@@ -36,7 +36,7 @@ check('the Route 29 Ulex-warning dude walks without background tiles in his spri
       any(l.startswith('bad samples 0') for l in out))
 out = run('repro_silver.py')
 check('Silver and the Guide Gent keep their graphics after the first fight when arriving in Cherrygrove from Route 29',
-      sum('[[], [], []]' in l for l in out) == 2)
+      sum(l.rstrip().endswith('[[]]') for l in out) == 2)
 learn = (root / 'work/source/engine/pokemon/learn.asm').read_text(encoding='utf8')
 check('the forget-a-move menu no longer refuses HM moves (HMs are bag tools, random moves may be HM moves)',
       'IsHMMove' not in learn and 'MoveCantForgetHMText' not in learn)

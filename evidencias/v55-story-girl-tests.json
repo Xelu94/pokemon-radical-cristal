@@ -1,0 +1,29 @@
+{
+  "passed": 6,
+  "tests": [
+    {
+      "name": "row 8: walking west with a Pokemon makes Gold run up from behind, battle, heal the party and give a Max Potion",
+      "passed": true
+    },
+    {
+      "name": "row 8: heading west again does not start another battle",
+      "passed": true
+    },
+    {
+      "name": "row 9: walking west with a Pokemon makes Gold run up from behind, battle, heal the party and give a Max Potion",
+      "passed": true
+    },
+    {
+      "name": "row 9: heading west again does not start another battle",
+      "passed": true
+    },
+    {
+      "name": "without a Pokemon walking west starts no ambush",
+      "passed": true
+    },
+    {
+      "name": "teaching a TM works and the TM stays in the bag (3 before, 3 after)",
+      "passed": true
+    }
+  ]
+}

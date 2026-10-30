@@ -197,10 +197,10 @@ index 3c478b9..092adbc 100644
  
  ; Facings indexes (see data/sprites/facings.asm)
 diff --git a/constants/move_constants.asm b/constants/move_constants.asm
-index 4b09855..271e3bc 100644
+index 4b09855..6806243 100644
 --- a/constants/move_constants.asm
 +++ b/constants/move_constants.asm
-@@ -257,8 +257,23 @@
+@@ -257,8 +257,27 @@
  	const ROCK_SMASH   ; f9
  	const WHIRLPOOL    ; fa
  	const BEAT_UP      ; fb
@@ -215,6 +215,10 @@ index 4b09855..271e3bc 100644
 +DEF DRAGON_PULSE EQU BARRAGE ; 140: PULSO DRAGÓN
 +DEF DRAGON_CLAW EQU RAZOR_WIND ; 13: GARRA DRAGÓN
 +DEF DARK_PULSE EQU BIDE ; 117: PULSO UMBRÍO
++DEF POISON_JAB EQU VICEGRIP ; 11: PUYA NOCIVA
++DEF CROSS_POISON EQU BIND ; 20: VENENO X
++DEF GUNK_SHOT EQU CONVERSION ; 160: LANZAMUGRE
++DEF SLUDGE_WAVE EQU CONVERSION2 ; 176: ONDA TÓXICA
 +DEF NIGHT_SLASH EQU MIRROR_MOVE ; 119: TAJO UMBRÍO
 +DEF IRON_HEAD EQU EGG_BOMB ; 121: CABEZAHIERRO
 +DEF FLASH_CANNON EQU SHARPEN ; 159: FOCO RESPL.
@@ -393,6 +397,42 @@ index 49fa661..5edc271 100644
 +DEF PHYSICAL EQU %01000000
 +DEF SPECIAL EQU %10000000
 +DEF STATUS EQU %11000000
+diff --git a/data/battle/ai/encore_moves.asm b/data/battle/ai/encore_moves.asm
+index 03e028b..cb1cd4b 100644
+--- a/data/battle/ai/encore_moves.asm
++++ b/data/battle/ai/encore_moves.asm
+@@ -21,7 +21,6 @@ EncoreMoves:
+ 	db POISON_GAS
+ 	db SPLASH
+ 	db SHARPEN
+-	db CONVERSION
+ 	db SUPER_FANG
+ 	db SUBSTITUTE
+ 	db TRIPLE_KICK
+diff --git a/data/battle/ai/residual_moves.asm b/data/battle/ai/residual_moves.asm
+index c99ac0f..0a421c7 100644
+--- a/data/battle/ai/residual_moves.asm
++++ b/data/battle/ai/residual_moves.asm
+@@ -10,7 +10,6 @@ ResidualMoves:
+ 	db BIDE
+ 	db POISON_GAS
+ 	db TRANSFORM
+-	db CONVERSION
+ 	db SUBSTITUTE
+ 	db SPIKES
+ 	db -1 ; end
+diff --git a/data/battle/ai/stall_moves.asm b/data/battle/ai/stall_moves.asm
+index 22ba251..475884a 100644
+--- a/data/battle/ai/stall_moves.asm
++++ b/data/battle/ai/stall_moves.asm
+@@ -31,7 +31,6 @@ StallMoves:
+ 	db SPLASH
+ 	db ACID_ARMOR
+ 	db SHARPEN
+-	db CONVERSION
+ 	db SUBSTITUTE
+ 	db FLAME_WHEEL
+ 	db -1 ; end
 diff --git a/data/battle/held_consumables.asm b/data/battle/held_consumables.asm
 index bd47c1d..96e2182 100644
 --- a/data/battle/held_consumables.asm
@@ -58017,10 +58057,10 @@ index db7069d..d93d3e9 100644
  	mapsetup FadeToMapMusic
  	mapsetup LoadMapPalettes
 diff --git a/data/moves/animations.asm b/data/moves/animations.asm
-index f441d57..f1af636 100644
+index f441d57..ad43512 100644
 --- a/data/moves/animations.asm
 +++ b/data/moves/animations.asm
-@@ -5,7 +5,7 @@ BattleAnimations::
+@@ -5,23 +5,23 @@ BattleAnimations::
  	dw BattleAnim_Pound
  	dw BattleAnim_KarateChop
  	dw BattleAnim_Doubleslap
@@ -58029,15 +58069,25 @@ index f441d57..f1af636 100644
  	dw BattleAnim_MegaPunch
  	dw BattleAnim_PayDay
  	dw BattleAnim_FirePunch
-@@ -14,7 +14,7 @@ BattleAnimations::
+ 	dw BattleAnim_IcePunch
+ 	dw BattleAnim_Thunderpunch
  	dw BattleAnim_Scratch
- 	dw BattleAnim_Vicegrip
+-	dw BattleAnim_Vicegrip
++	dw BattleAnim_PoisonSting ; POISON_JAB, reused legacy ID11
  	dw BattleAnim_Guillotine
 -	dw BattleAnim_RazorWind
 +	dw BattleAnim_Slash ; DRAGON_CLAW, reused legacy ID13
  	dw BattleAnim_SwordsDance
  	dw BattleAnim_Cut
  	dw BattleAnim_Gust
+ 	dw BattleAnim_WingAttack
+ 	dw BattleAnim_Whirlwind
+ 	dw BattleAnim_Fly
+-	dw BattleAnim_Bind
++	dw BattleAnim_Slash ; CROSS_POISON, reused legacy ID20
+ 	dw BattleAnim_Slam
+ 	dw BattleAnim_VineWhip
+ 	dw BattleAnim_Stomp
 @@ -118,11 +118,11 @@ BattleAnimations::
  	dw BattleAnim_Haze
  	dw BattleAnim_Reflect
@@ -58071,15 +58121,26 @@ index f441d57..f1af636 100644
  	dw BattleAnim_LeechLife
  	dw BattleAnim_LovelyKiss
  	dw BattleAnim_SkyAttack
-@@ -160,7 +160,7 @@ BattleAnimations::
+@@ -160,8 +160,8 @@ BattleAnimations::
  	dw BattleAnim_Rest
  	dw BattleAnim_RockSlide
  	dw BattleAnim_HyperFang
 -	dw BattleAnim_Sharpen
+-	dw BattleAnim_Conversion
 +	dw BattleAnim_Swift ; FLASH_CANNON, reused legacy ID159
- 	dw BattleAnim_Conversion
++	dw BattleAnim_SludgeBomb ; GUNK_SHOT, reused legacy ID160
  	dw BattleAnim_TriAttack
  	dw BattleAnim_SuperFang
+ 	dw BattleAnim_Slash
+@@ -177,7 +177,7 @@ BattleAnimations::
+ 	dw BattleAnim_Snore
+ 	dw BattleAnim_Curse
+ 	dw BattleAnim_Flail
+-	dw BattleAnim_Conversion2
++	dw BattleAnim_Sludge ; SLUDGE_WAVE, reused legacy ID176
+ 	dw BattleAnim_Aeroblast
+ 	dw BattleAnim_CottonSpore
+ 	dw BattleAnim_Reversal
 @@ -187,7 +187,7 @@ BattleAnimations::
  	dw BattleAnim_MachPunch
  	dw BattleAnim_ScaryFace
@@ -58149,7 +58210,7 @@ index 4a47305..2965264 100644
  	db CRABHAMMER
  	db SLASH
 diff --git a/data/moves/descriptions.asm b/data/moves/descriptions.asm
-index 0a59a41..fcd5f86 100644
+index 0a59a41..c3da174 100644
 --- a/data/moves/descriptions.asm
 +++ b/data/moves/descriptions.asm
 @@ -252,10 +252,10 @@ MoveDescriptions::
@@ -58177,7 +58238,17 @@ index 0a59a41..fcd5f86 100644
  
  MegaPunchDescription:
  	db   "Un puñetazo de"
-@@ -316,8 +316,8 @@ GuillotineDescription:
+@@ -308,16 +308,16 @@ ScratchDescription:
+ 	next "afiladas garras.@"
+ 
+ VicegripDescription:
+-	db   "Atrapa con sus"
+-	next "potentes pinzas.@"
++	db   "Golpe punzante"
++	next "que envenena.@"
+ 
+ GuillotineDescription:
+ 	db   "Pinzas que derri-"
  	next "ban de un golpe.@"
  
  RazorWindDescription:
@@ -58188,6 +58259,17 @@ index 0a59a41..fcd5f86 100644
  
  SwordsDanceDescription:
  	db   "Baile que mejora"
+@@ -344,8 +344,8 @@ FlyDescription:
+ 	next "2° turno: Ataca@"
+ 
+ BindDescription:
+-	db   "Ataca al enemigo"
+-	next "de 2 a 5 turnos.@"
++	db   "Corta en cruz y"
++	next "puede envenenar.@"
+ 
+ SlamDescription:
+ 	db   "Golpea con sus"
 @@ -730,24 +730,24 @@ FocusEnergyDescription:
  	next "de golpe crítico.@"
  
@@ -58241,7 +58323,7 @@ index 0a59a41..fcd5f86 100644
  
  LeechLifeDescription:
  	db   "Roba la mitad del"
-@@ -898,8 +898,8 @@ HyperFangDescription:
+@@ -898,12 +898,12 @@ HyperFangDescription:
  	next "causar retirada.@"
  
  SharpenDescription:
@@ -58251,7 +58333,24 @@ index 0a59a41..fcd5f86 100644
 +	next "Puede bajar D.ESP.@"
  
  ConversionDescription:
- 	db   "Cambia el tipo de"
+-	db   "Cambia el tipo de"
+-	next "#MON.@"
++	db   "Lanza lodo tóxico."
++	next "Puede envenenar.@"
+ 
+ TriAttackDescription:
+ 	db   "Dispara tres tipos"
+@@ -966,8 +966,8 @@ FlailDescription:
+ 	next "tienes pocos PS.@"
+ 
+ Conversion2Description:
+-	db   "Tu tipo se hace"
+-	next "resistente.@"
++	db   "Una ola de lodo"
++	next "que envenena.@"
+ 
+ AeroblastDescription:
+ 	db   "Alta probabilidad"
 @@ -1006,8 +1006,8 @@ FaintAttackDescription:
  	next "falla nunca.@"
  
@@ -58280,7 +58379,7 @@ index 0a59a41..fcd5f86 100644
 +	db   "Puede bajar el"
 +	next "ATAQUE del rival.@"
 diff --git a/data/moves/moves.asm b/data/moves/moves.asm
-index 6f1b44a..1a68b7f 100644
+index 6f1b44a..274c99a 100644
 --- a/data/moves/moves.asm
 +++ b/data/moves/moves.asm
 @@ -4,265 +4,270 @@ MACRO move
@@ -58565,7 +58664,7 @@ index 6f1b44a..1a68b7f 100644
 +	move ICE_PUNCH, EFFECT_FREEZE_HIT, 75, ICE, PHYSICAL, 100, 15, 10
 +	move THUNDERPUNCH, EFFECT_PARALYZE_HIT, 75, ELECTRIC, PHYSICAL, 100, 15, 10
 +	move SCRATCH, EFFECT_NORMAL_HIT, 40, NORMAL, PHYSICAL, 100, 35, 0
-+	move VICEGRIP, EFFECT_NORMAL_HIT, 55, NORMAL, PHYSICAL, 100, 30, 0
++	move POISON_JAB, EFFECT_POISON_HIT, 80, POISON, PHYSICAL, 100, 20, 30
 +	move GUILLOTINE, EFFECT_OHKO, 0, NORMAL, PHYSICAL, 30, 5, 0
 +	move DRAGON_CLAW, EFFECT_NORMAL_HIT, 80, DRAGON, PHYSICAL, 100, 15, 0
 +	move SWORDS_DANCE, EFFECT_ATTACK_UP_2, 0, NORMAL, STATUS, 100, 30, 0
@@ -58574,7 +58673,7 @@ index 6f1b44a..1a68b7f 100644
 +	move WING_ATTACK, EFFECT_NORMAL_HIT, 60, FLYING, PHYSICAL, 100, 35, 0
 +	move WHIRLWIND, EFFECT_FORCE_SWITCH, 0, NORMAL, STATUS, 100, 20, 0
 +	move FLY, EFFECT_FLY, 70, FLYING, PHYSICAL, 95, 15, 0
-+	move BIND, EFFECT_TRAP_TARGET, 15, NORMAL, PHYSICAL, 75, 20, 0
++	move CROSS_POISON, EFFECT_POISON_HIT, 70, POISON, PHYSICAL, 100, 20, 10
 +	move SLAM, EFFECT_NORMAL_HIT, 80, NORMAL, PHYSICAL, 75, 20, 0
 +	move VINE_WHIP, EFFECT_NORMAL_HIT, 35, GRASS, PHYSICAL, 100, 10, 0
 +	move STOMP, EFFECT_STOMP, 65, NORMAL, PHYSICAL, 100, 20, 30
@@ -58714,7 +58813,7 @@ index 6f1b44a..1a68b7f 100644
 +	move ROCK_SLIDE, EFFECT_FLINCH_HIT, 75, ROCK, PHYSICAL, 90, 10, 30
 +	move HYPER_FANG, EFFECT_FLINCH_HIT, 80, NORMAL, PHYSICAL, 90, 15, 10
 +	move FLASH_CANNON, EFFECT_SP_DEF_DOWN_HIT, 80, STEEL, SPECIAL, 100, 10, 10
-+	move CONVERSION, EFFECT_CONVERSION, 0, NORMAL, STATUS, 100, 30, 0
++	move GUNK_SHOT, EFFECT_POISON_HIT, 120, POISON, PHYSICAL, 80, 5, 30
 +	move TRI_ATTACK, EFFECT_TRI_ATTACK, 80, NORMAL, SPECIAL, 100, 10, 20
 +	move SUPER_FANG, EFFECT_SUPER_FANG, 1, NORMAL, PHYSICAL, 90, 10, 0
 +	move SLASH, EFFECT_NORMAL_HIT, 70, NORMAL, PHYSICAL, 100, 20, 0
@@ -58730,7 +58829,7 @@ index 6f1b44a..1a68b7f 100644
 +	move SNORE, EFFECT_SNORE, 40, NORMAL, SPECIAL, 100, 15, 30
 +	move CURSE, EFFECT_CURSE, 0, CURSE_TYPE, STATUS, 100, 10, 0
 +	move FLAIL, EFFECT_REVERSAL, 1, NORMAL, PHYSICAL, 100, 15, 0
-+	move CONVERSION2, EFFECT_CONVERSION2, 0, NORMAL, STATUS, 100, 30, 0
++	move SLUDGE_WAVE, EFFECT_POISON_HIT, 95, POISON, SPECIAL, 100, 10, 10
 +	move AEROBLAST, EFFECT_NORMAL_HIT, 100, FLYING, SPECIAL, 95, 5, 0
 +	move COTTON_SPORE, EFFECT_SPEED_DOWN_2, 0, GRASS, STATUS, 85, 40, 0
 +	move REVERSAL, EFFECT_REVERSAL, 1, FIGHTING, PHYSICAL, 100, 15, 0
@@ -58811,10 +58910,10 @@ index 6f1b44a..1a68b7f 100644
 +	move PLAY_ROUGH, EFFECT_ATTACK_DOWN_HIT, 90, FAIRY, PHYSICAL, 90, 10, 10
  	assert_table_length NUM_ATTACKS
 diff --git a/data/moves/names.asm b/data/moves/names.asm
-index 4f49366..f880f2b 100644
+index 4f49366..6b71e17 100644
 --- a/data/moves/names.asm
 +++ b/data/moves/names.asm
-@@ -3,7 +3,7 @@ MoveNames::
+@@ -3,23 +3,23 @@ MoveNames::
  	li "DESTRUCTOR"
  	li "GOLPE KARATE"
  	li "DOBLEBOFETÓN"
@@ -58823,15 +58922,25 @@ index 4f49366..f880f2b 100644
  	li "MEGA PUÑO"
  	li "DÍA DE PAGO"
  	li "PUÑO FUEGO"
-@@ -12,7 +12,7 @@ MoveNames::
+ 	li "PUÑO HIELO"
+ 	li "PUÑO-TRUENO"
  	li "ARAÑAZO"
- 	li "AGARRE"
+-	li "AGARRE"
++	li "PUYA NOCIVA"
  	li "GUILLOTINA"
 -	li "V. CORTANTE"
 +	li "GARRA DRAGÓN"
  	li "DANZA-ESPADA"
  	li "CORTE"
  	li "TORNADO"
+ 	li "ATAQUE-ALA"
+ 	li "REMOLINO"
+ 	li "VUELO"
+-	li "ATADURA"
++	li "VENENO X"
+ 	li "PORTAZO"
+ 	li "LÁTIGO CEPA"
+ 	li "PISOTÓN"
 @@ -116,11 +116,11 @@ MoveNames::
  	li "NIEBLA"
  	li "REFLEJO"
@@ -58865,15 +58974,26 @@ index 4f49366..f880f2b 100644
  	li "CHUPA VIDAS"
  	li "BESO AMOROSO"
  	li "ATAQUE AÉREO"
-@@ -158,7 +158,7 @@ MoveNames::
+@@ -158,8 +158,8 @@ MoveNames::
  	li "DESCANSO"
  	li "AVALANCHA"
  	li "HIP.COLMILLO"
 -	li "AFILAR"
+-	li "CONVERSIÓN"
 +	li "FOCO RESPL."
- 	li "CONVERSIÓN"
++	li "LANZAMUGRE"
  	li "TRI-ATAQUE"
  	li "SÚPER DIENTE"
+ 	li "CUCHILLADA"
+@@ -175,7 +175,7 @@ MoveNames::
+ 	li "RONQUIDO"
+ 	li "MALDICIÓN"
+ 	li "AZOTE"
+-	li "CONVERSIÓN2"
++	li "ONDA TÓXICA"
+ 	li "AEROCHORRO"
+ 	li "ESPORAGODÓN"
+ 	li "INVERSIÓN"
 @@ -185,7 +185,7 @@ MoveNames::
  	li "ULTRA PUÑO"
  	li "CARA SUSTO"
@@ -75858,7 +75978,7 @@ index 7bd6bfe..df98fd2 100644
  	pop hl
  	cp CURSE_TYPE
 diff --git a/engine/battle/read_trainer_party.asm b/engine/battle/read_trainer_party.asm
-index f4ddfd3..030171b 100644
+index f4ddfd3..01f69da 100644
 --- a/engine/battle/read_trainer_party.asm
 +++ b/engine/battle/read_trainer_party.asm
 @@ -70,6 +70,7 @@ ReadTrainerParty:
@@ -75869,7 +75989,21 @@ index f4ddfd3..030171b 100644
  	jp ComputeTrainerReward
  
  .cal2
-@@ -96,15 +97,23 @@ TrainerType1:
+@@ -80,6 +81,13 @@ ReadTrainerParty:
+ 	call CloseSRAM
+ 	jr .done
+ 
++EvolveCurPartySpecies:
++; Trainers' Pokemon are fully evolved for their level.
++	push hl
++	farcall ProgressTrainerSpecies
++	pop hl
++	ret
++
+ TrainerTypes:
+ ; entries correspond to TRAINERTYPE_* constants
+ 	dw TrainerType1 ; level, species
+@@ -96,15 +104,24 @@ TrainerType1:
  	cp $ff
  	ret z
  
@@ -75881,6 +76015,7 @@ index f4ddfd3..030171b 100644
  	ld [wCurPartyLevel], a
  	ld a, [hli]
  	ld [wCurPartySpecies], a
++	call EvolveCurPartySpecies
 +	push hl
 +	farcall SuperLeagueRandomizeSpecies
 +	pop hl
@@ -75894,7 +76029,7 @@ index f4ddfd3..030171b 100644
  
  TrainerType2:
  ; moves
-@@ -115,6 +124,11 @@ TrainerType2:
+@@ -115,9 +132,15 @@ TrainerType2:
  	cp $ff
  	ret z
  
@@ -75906,7 +76041,11 @@ index f4ddfd3..030171b 100644
  	ld [wCurPartyLevel], a
  	ld a, [hli]
  	ld [wCurPartySpecies], a
-@@ -180,7 +194,7 @@ TrainerType2:
++	call EvolveCurPartySpecies
+ 	ld a, OTPARTYMON
+ 	ld [wMonType], a
+ 
+@@ -180,7 +203,7 @@ TrainerType2:
  .copied_pp
  
  	pop hl
@@ -75915,7 +76054,7 @@ index f4ddfd3..030171b 100644
  
  TrainerType3:
  ; item
-@@ -191,6 +205,11 @@ TrainerType3:
+@@ -191,9 +214,15 @@ TrainerType3:
  	cp $ff
  	ret z
  
@@ -75927,7 +76066,11 @@ index f4ddfd3..030171b 100644
  	ld [wCurPartyLevel], a
  	ld a, [hli]
  	ld [wCurPartySpecies], a
-@@ -208,7 +227,7 @@ TrainerType3:
++	call EvolveCurPartySpecies
+ 	ld a, OTPARTYMON
+ 	ld [wMonType], a
+ 	push hl
+@@ -208,7 +237,7 @@ TrainerType3:
  	pop hl
  	ld a, [hli]
  	ld [de], a
@@ -75936,7 +76079,7 @@ index f4ddfd3..030171b 100644
  
  TrainerType4:
  ; item + moves
-@@ -219,6 +238,11 @@ TrainerType4:
+@@ -219,9 +248,15 @@ TrainerType4:
  	cp $ff
  	ret z
  
@@ -75948,7 +76091,11 @@ index f4ddfd3..030171b 100644
  	ld [wCurPartyLevel], a
  	ld a, [hli]
  	ld [wCurPartySpecies], a
-@@ -299,7 +323,7 @@ TrainerType4:
++	call EvolveCurPartySpecies
+ 
+ 	ld a, OTPARTYMON
+ 	ld [wMonType], a
+@@ -299,7 +334,7 @@ TrainerType4:
  .copied_pp
  
  	pop hl
@@ -75957,7 +76104,7 @@ index f4ddfd3..030171b 100644
  
  ComputeTrainerReward:
  	ld hl, hProduct
-@@ -333,6 +357,21 @@ Battle_GetTrainerName::
+@@ -333,6 +368,21 @@ Battle_GetTrainerName::
  	ld c, a
  
  GetTrainerName::
@@ -75979,7 +76126,7 @@ index f4ddfd3..030171b 100644
  	ld a, c
  	cp CAL
  	jr nz, .not_cal2
-@@ -370,7 +409,7 @@ GetTrainerName::
+@@ -370,7 +420,7 @@ GetTrainerName::
  	ld a, [hli]
  	cp $ff
  	jr nz, .skip
@@ -78949,7 +79096,7 @@ index 0000000..231a6d2
 +	done
 +POPS
 diff --git a/engine/events/overworld.asm b/engine/events/overworld.asm
-index 6d698e2..cc3d1c9 100644
+index 6d698e2..e558827 100644
 --- a/engine/events/overworld.asm
 +++ b/engine/events/overworld.asm
 @@ -63,6 +63,14 @@ CheckBadge:
@@ -79067,6 +79214,14 @@ index 6d698e2..cc3d1c9 100644
  	call FieldMoveJumptableReset
  .loop
  	ld hl, .Jumptable
+@@ -1474,6 +1524,7 @@ FishFunction:
+ 	ld [wTempWildMonSpecies], a
+ 	ld a, e
+ 	ld [wCurPartyLevel], a
++	farcall ProgressTempWildMon
+ 	ld a, BATTLETYPE_FISH
+ 	ld [wBattleType], a
+ 	ld a, $2
 diff --git a/engine/events/poisonstep.asm b/engine/events/poisonstep.asm
 index b7a1ce2..e21ef87 100644
 --- a/engine/events/poisonstep.asm
@@ -79410,10 +79565,10 @@ index 0000000..4b0ff3a
 +POPS
 diff --git a/engine/events/tito_xeluis.asm b/engine/events/tito_xeluis.asm
 new file mode 100644
-index 0000000..ac8d93a
+index 0000000..f00340a
 --- /dev/null
 +++ b/engine/events/tito_xeluis.asm
-@@ -0,0 +1,768 @@
+@@ -0,0 +1,810 @@
 +SECTION "Tito Xeluis services", ROMX
 +
 +TitoXeluisServices::
@@ -79705,6 +79860,22 @@ index 0000000..ac8d93a
 +	inc hl
 +	push hl
 +	ld d, a
++	call TitoOfferReminderMove
++	pop hl
++	jr .next
++.done
++	call TitoOfferFairyMoves
++	ld a, [wTitoReminderMoves]
++	inc a
++	ld c, a
++	ld b, 0
++	ld hl, wTitoReminderMoves
++	add hl, bc
++	ld [hl], -1
++	ret
++
++TitoOfferReminderMove:
++; D = move. Adds it to the reminder list unless the Pokemon knows it or it is listed.
 +	ld hl, wPartyMon1Moves
 +	ld bc, PARTYMON_STRUCT_LENGTH
 +	ld a, [wCurPartyMon]
@@ -79739,17 +79910,43 @@ index 0000000..ac8d93a
 +	add hl, bc
 +	ld [hl], d
 +.skip
++	ret
++
++TitoOfferFairyMoves:
++; Fairy-type Pokemon rarely learn Fairy moves, so Tito also remembers these for them.
++	ld a, [wCurPartySpecies]
++	ld [wCurSpecies], a
++	call GetBaseData
++	ld a, [wBaseType1]
++	cp FAIRY
++	jr z, .fairy
++	ld a, [wBaseType2]
++	cp FAIRY
++	ret nz
++.fairy
++	ld hl, .Moves
++.next
++	ld a, [hli]
++	and a
++	ret z
++	ld b, a
++	ld a, [hli]
++	ld d, a
++	ld a, [wCurPartyLevel]
++	cp b
++	jr c, .next
++	push hl
++	call TitoOfferReminderMove
 +	pop hl
 +	jr .next
-+.done
-+	ld a, [wTitoReminderMoves]
-+	inc a
-+	ld c, a
-+	ld b, 0
-+	ld hl, wTitoReminderMoves
-+	add hl, bc
-+	ld [hl], -1
-+	ret
++.Moves:
++	db  5, FAIRY_WIND
++	db 10, CHARM
++	db 20, MOONLIGHT
++	db 30, DAZZLING_GLEAM
++	db 40, PLAY_ROUGH
++	db 50, MOONBLAST
++	db 0
 +
 +TitoHasAllBadges::
 +	ld a, [wJohtoBadges]
@@ -80182,6 +80379,18 @@ index 0000000..ac8d93a
 +SECTION "Tito Xeluis menu RAM", WRAM0
 +wTitoReminderMoves:: ds 32 ; count, <=30 moves, cancel
 +wTitoCurrentCap:: db
+diff --git a/engine/events/treemons.asm b/engine/events/treemons.asm
+index aac674f..5be0afb 100644
+--- a/engine/events/treemons.asm
++++ b/engine/events/treemons.asm
+@@ -187,6 +187,7 @@ SelectTreeMon:
+ 	ld [wTempWildMonSpecies], a
+ 	ld a, [hl]
+ 	ld [wCurPartyLevel], a
++	farcall ProgressTempWildMon
+ 	scf
+ 	ret
+ 
 diff --git a/engine/events/ulex.asm b/engine/events/ulex.asm
 new file mode 100644
 index 0000000..26af913
@@ -80584,10 +80793,10 @@ index 0000000..26af913
 +	assert @ - wUnusedMapBuffer <= 24
 diff --git a/engine/events/v4_world.asm b/engine/events/v4_world.asm
 new file mode 100644
-index 0000000..ed8a1e8
+index 0000000..0af3494
 --- /dev/null
 +++ b/engine/events/v4_world.asm
-@@ -0,0 +1,502 @@
+@@ -0,0 +1,499 @@
 +PUSHS
 +SECTION "V4 world quality of life", ROMX
 +
@@ -80671,7 +80880,7 @@ index 0000000..ed8a1e8
 +	jr z, ChooseRandomTM
 +	ret
 +
-+; Return the previous contiguous leader/league ace -3 (zero before Falkner).
++; Return the level of the last contiguous leader/league ace defeated (zero before Falkner).
 +; Badges may be earned out of order: only completed progression stages count.
 +GetProgressionLevelFloor::
 +	ld hl, .JohtoCaps
@@ -80706,9 +80915,6 @@ index 0000000..ed8a1e8
 +	jr .kanto
 +.done
 +	ld a, c
-+	and a
-+	ret z
-+	sub 3
 +	ret
 +
 +.JohtoCaps
@@ -81533,6 +81739,47 @@ index ac4adf2..8bfda4e 100644
  PackMenuGFX:
  INCBIN "gfx/pack/pack_menu.2bpp"
  PackGFX:
+diff --git a/engine/items/tmhm.asm b/engine/items/tmhm.asm
+index f63d16a..90d9582 100644
+--- a/engine/items/tmhm.asm
++++ b/engine/items/tmhm.asm
+@@ -152,7 +152,7 @@ TeachTMHM:
+ 
+ 	ld c, HAPPINESS_LEARNMOVE
+ 	callfar ChangeHappiness
+-	call ConsumeTM
++	; TMs are never used up
+ 	jr .learned_move
+ 
+ .nope
+@@ -516,27 +516,6 @@ VerboseReceiveTMHM: ; unreferenced
+ 	ld [hl], a
+ 	ret
+ 
+-ConsumeTM:
+-	call ConvertCurItemIntoCurTMHM
+-	ld a, [wTempTMHM]
+-	dec a
+-	ld hl, wTMsHMs
+-	ld b, 0
+-	ld c, a
+-	add hl, bc
+-	ld a, [hl]
+-	and a
+-	ret z
+-	dec a
+-	ld [hl], a
+-	ret nz
+-	ld a, [wTMHMPocketScrollPosition]
+-	and a
+-	ret z
+-	dec a
+-	ld [wTMHMPocketScrollPosition], a
+-	ret
+-
+ CountTMsHMs:
+ 	ld b, 0
+ 	ld c, NUM_TMS + NUM_HMS
 diff --git a/engine/link/link.asm b/engine/link/link.asm
 index fea75fd..da3477c 100644
 --- a/engine/link/link.asm
@@ -81959,10 +82206,24 @@ index 4e152a6..1f0accc 100644
  	and ~BATTLERESULT_BITMASK
  	ld [wScriptVar], a
 diff --git a/engine/overworld/wildmons.asm b/engine/overworld/wildmons.asm
-index 8e3479a..5534e0f 100644
+index 8e3479a..1fabc9b 100644
 --- a/engine/overworld/wildmons.asm
 +++ b/engine/overworld/wildmons.asm
-@@ -494,13 +494,15 @@ InitRoamMons:
+@@ -314,9 +314,10 @@ ChooseWildEncounter:
+ ; Store the level
+ .ok
+ ; BUG: ChooseWildEncounter doesn't really validate the wild Pokemon species (see docs/bugs_and_glitches.md)
+-	ld a, b
+-	ld [wCurPartyLevel], a
+-	ld b, [hl]
++	ld c, [hl]
++	push hl
++	farcall ProgressWildEncounter
++	pop hl
+ 	call ValidateTempWildMonSpecies
+ 	jr c, .nowildbattle
+ 
+@@ -494,13 +495,15 @@ InitRoamMons:
  ; initialize wRoamMon structs
  
  ; species
@@ -83126,6 +83387,319 @@ index 5d38904..de07800 100644
  	ret
  
  InitPartyMenuLayout:
+diff --git a/engine/pokemon/progression_tuning.asm b/engine/pokemon/progression_tuning.asm
+new file mode 100644
+index 0000000..ac3407b
+--- /dev/null
++++ b/engine/pokemon/progression_tuning.asm
+@@ -0,0 +1,307 @@
++; Difficulty tuning that grows with the player's progress: wild and trainer Pokemon
++; are fully evolved for their level, and from the sixth badge on every one of them
++; knows an attack of its own type.
++
++DEF STONE_EVOLUTION_LEVEL EQU 32
++DEF STAB_MIN_BADGES EQU 6
++
++PUSHS
++SECTION "Progression tuning", ROMX
++
++ProgressWildEncounter::
++; B = rolled level, C = species. Floors the level like a trainer's, stores it in
++; wCurPartyLevel and evolves the species. Returns B = species. Preserves nothing else.
++	farcall ClampProgressionLevel
++	ld a, b
++	ld [wCurPartyLevel], a
++	ld a, c
++	and a
++	jr z, .keep
++	cp NUM_POKEMON + 1
++	jr nc, .keep
++	call EvolveSpeciesForLevel
++	ld b, a
++	ret
++.keep
++	ld b, c
++	ret
++
++ProgressTempWildMon::
++; Fishing and tree encounters: wTempWildMonSpecies and wCurPartyLevel get the same treatment.
++	ld a, [wCurPartyLevel]
++	ld b, a
++	ld a, [wTempWildMonSpecies]
++	ld c, a
++	call ProgressWildEncounter
++	ld a, b
++	ld [wTempWildMonSpecies], a
++	ret
++
++ProgressTrainerSpecies::
++; Evolves wCurPartySpecies for the level in wCurPartyLevel.
++	ld a, [wCurPartyLevel]
++	ld b, a
++	ld a, [wCurPartySpecies]
++	ld c, a
++	call EvolveSpeciesForLevel
++	ld [wCurPartySpecies], a
++	ret
++
++EvolveSpeciesForLevel::
++; B = level, C = species. Returns A = the species after every evolution its level allows.
++; A level evolution applies once the level reaches its threshold. A Pokemon that evolves
++; with a stone and has at most two such evolutions takes the first one from level 32.
++	push bc
++	push de
++	push hl
++.stage
++	ld a, c
++	dec a
++	ld l, a
++	ld h, 0
++	add hl, hl
++	ld de, EvosAttacksPointers
++	add hl, de
++	ld a, BANK(EvosAttacksPointers)
++	call GetFarWord
++	ld d, 0 ; D = number of stone evolutions
++	ld e, 0 ; E = species of the first one
++.entry
++	ld a, BANK(EvosAttacksPointers)
++	call GetFarByte
++	inc hl
++	and a
++	jr z, .end_of_list
++	cp EVOLVE_LEVEL
++	jr z, .level
++	cp EVOLVE_ITEM
++	jr z, .item
++	cp EVOLVE_STAT
++	jr z, .stat
++; trade and happiness: parameter, species
++	inc hl
++	inc hl
++	jr .entry
++.level
++	ld a, BANK(EvosAttacksPointers)
++	call GetFarByte
++	inc hl
++	jr .threshold
++.stat
++; level, attribute comparison, species
++	ld a, BANK(EvosAttacksPointers)
++	call GetFarByte
++	inc hl
++	inc hl
++.threshold
++	cp b
++	jr c, .evolve
++	jr nz, .skip_species
++.evolve
++	ld a, BANK(EvosAttacksPointers)
++	call GetFarByte
++	ld c, a
++	jr .stage
++.skip_species
++	inc hl
++	jr .entry
++.item
++; item, species
++	inc hl
++	ld a, d
++	and a
++	jr nz, .counted
++	ld a, BANK(EvosAttacksPointers)
++	call GetFarByte
++	ld e, a
++.counted
++	inc d
++	inc hl
++	jr .entry
++.end_of_list
++	ld a, d
++	and a
++	jr z, .done
++	cp 3
++	jr nc, .done
++	ld a, b
++	cp STONE_EVOLUTION_LEVEL
++	jr c, .done
++	ld c, e
++	jr .stage
++.done
++	ld a, c
++	pop hl
++	pop de
++	pop bc
++	ret
++
++StabForWild::
++; Called at the end of RandomizeFourMoves with DE = the four moves. Only a wild
++; Pokemon after the sixth badge; its types are in wBaseType1 and wBaseType2.
++	ld a, [wBattleMode]
++	dec a ; WILD_BATTLE
++	ret nz
++	call CountBadges
++	cp STAB_MIN_BADGES
++	ret c
++	jp EnsureStabMove
++
++StabForTrainer::
++; Called by RandomizeTrainerMon with DE = MON_MOVES of the party struct.
++	call CountBadges
++	cp STAB_MIN_BADGES
++	ret c
++	push de
++	ld a, e
++	sub MON_MOVES
++	ld l, a
++	ld a, d
++	sbc 0
++	ld h, a
++	ld a, [hl]
++	ld [wCurSpecies], a
++	call GetBaseData
++	pop de
++	jp EnsureStabMove
++
++CountBadges:
++; Returns A = badges earned in Johto and Kanto. Preserves DE.
++	push de
++	ld a, [wJohtoBadges]
++	ld b, a
++	ld a, [wKantoBadges]
++	ld c, a
++	ld d, 0
++	ld e, 16
++.loop
++	srl b
++	rr c
++	jr nc, .next
++	inc d
++.next
++	dec e
++	jr nz, .loop
++	ld a, d
++	pop de
++	ret
++
++EnsureStabMove:
++; DE = the four moves, wBaseType1/2 = the Pokemon's types. If none of the moves is a
++; damaging attack of its own type, the fourth one becomes one. Preserves DE.
++	ld h, d
++	ld l, e
++	ld c, NUM_MOVES
++.have
++	ld a, [hli]
++	and a
++	jr z, .empty
++	push bc
++	push hl
++	call MoveIsStab
++	pop hl
++	pop bc
++	ret z
++.empty
++	dec c
++	jr nz, .have
++.roll
++	call Random
++	and a
++	jr z, .roll
++	cp NUM_ATTACKS + 1
++	jr nc, .roll
++	ld b, a ; B = candidate
++	ld c, NUM_ATTACKS ; C = candidates left
++.try
++	ld a, b
++	call MoveAllowed
++	jr nz, .next
++	ld a, b
++	push bc
++	call MoveIsStab
++	pop bc
++	jr nz, .next
++	ld h, d
++	ld l, e
++	ld a, [hli]
++	cp b
++	jr z, .next
++	ld a, [hli]
++	cp b
++	jr z, .next
++	ld a, [hli]
++	cp b
++	jr z, .next
++	ld a, [hl]
++	cp b
++	jr z, .next
++	ld [hl], b
++	ret
++.next
++	inc b
++	ld a, b
++	cp NUM_ATTACKS + 1
++	jr c, .in_range
++	ld b, 1
++.in_range
++	dec c
++	jr nz, .try
++	ret
++
++MoveIsStab:
++; A = move. Z if it deals damage and has one of the Pokemon's types.
++	dec a
++	ld hl, Moves + MOVE_POWER
++	ld bc, MOVE_LENGTH
++	call AddNTimes
++	ld a, BANK(Moves)
++	call GetFarByte
++	and a
++	jr z, .no
++	inc hl ; MOVE_TYPE
++	ld a, BANK(Moves)
++	call GetFarByte
++	and TYPE_MASK
++	ld b, a
++	ld a, [wBaseType1]
++	cp b
++	ret z
++	ld a, [wBaseType2]
++	cp b
++	ret
++.no
++	or 1
++	ret
++
++MoveAllowed:
++; A = move. Z if it may be given: not a move that needs a special situation.
++	cp STRUGGLE
++	jr z, .no
++	cp SELFDESTRUCT
++	jr z, .no
++	cp EXPLOSION
++	jr z, .no
++	cp DREAM_EATER
++	jr z, .no
++	cp SNORE
++	jr z, .no
++	cp COUNTER
++	jr z, .no
++	cp MIRROR_COAT
++	jr z, .no
++	cp GUILLOTINE
++	jr z, .no
++	cp HORN_DRILL
++	jr z, .no
++	cp FISSURE
++	jr z, .no
++	cp BEAT_UP
++	jr z, .no
++	xor a
++	ret
++.no
++	or 1
++	ret
++
++POPS
 diff --git a/engine/pokemon/stats_screen.asm b/engine/pokemon/stats_screen.asm
 index 114dfbc..85a371a 100644
 --- a/engine/pokemon/stats_screen.asm
@@ -83275,10 +83849,10 @@ index 1f0cc57..6229514 100644
  	ld b, a
 diff --git a/engine/pokemon/v2_balance.asm b/engine/pokemon/v2_balance.asm
 new file mode 100644
-index 0000000..d63687a
+index 0000000..5dfc8b2
 --- /dev/null
 +++ b/engine/pokemon/v2_balance.asm
-@@ -0,0 +1,373 @@
+@@ -0,0 +1,375 @@
 +; Shared by battle EXP, Rare Candy, Day-Care and TITO XELUIS.
 +; Output: B = current cap. Preserves C, DE and HL. The cap follows the
 +; first undefeated leader in progression order, including optional gyms.
@@ -83488,6 +84062,7 @@ index 0000000..d63687a
 +	ld a, b
 +	cp NUM_MOVES
 +	jr nz, .sample
++	farcall StabForWild
 +	pop hl
 +	pop de
 +	pop bc
@@ -83524,6 +84099,7 @@ index 0000000..d63687a
 +	ld d, h
 +	ld e, l
 +	call RandomizeFourMoves
++	farcall StabForTrainer
 +	ld h, d
 +	ld l, e
 +	push hl
@@ -84157,7 +84733,7 @@ index f271ef1..84ef789 100644
  	call WaitBGMap
  	call WaitPressAorB_BlinkCursor
 diff --git a/main.asm b/main.asm
-index 92e998f..d452249 100644
+index 92e998f..98d20fe 100644
 --- a/main.asm
 +++ b/main.asm
 @@ -238,6 +238,7 @@ INCLUDE "engine/events/basement_key.asm"
@@ -84168,7 +84744,7 @@ index 92e998f..d452249 100644
  INCLUDE "engine/battle/getgen1trainerclassname.asm"
  INCLUDE "engine/pokemon/mon_stats.asm"
  INCLUDE "engine/link/init_list.asm"
-@@ -691,4 +692,32 @@ SECTION "Stadium 2 Checksums", ROMX[$7DE0], BANK[$7F]
+@@ -691,4 +692,33 @@ SECTION "Stadium 2 Checksums", ROMX[$7DE0], BANK[$7F]
  ; This SECTION reserves space for those checksums.
  ; If it is removed, also remove the "tools/stadium" command in the Makefile.
  
@@ -84188,6 +84764,7 @@ index 92e998f..d452249 100644
 +
 +SECTION "Progressive Level Cap and Random Moves", ROMX
 +INCLUDE "engine/pokemon/v2_balance.asm"
++INCLUDE "engine/pokemon/progression_tuning.asm"
 +INCLUDE "engine/pokemon/hatch_reroll.asm"
 +INCLUDE "engine/events/route_nurse.asm"
 +INCLUDE "engine/events/other_protagonist.asm"
@@ -86243,7 +86820,7 @@ index 467e1aa..636e9c2 100644
  .GotTyrogue:
  	writetext MountMortarB1FKiyoGotTyrogueText
 diff --git a/maps/NewBarkTown.asm b/maps/NewBarkTown.asm
-index ca9d86b..d5b2219 100644
+index ca9d86b..cec963e 100644
 --- a/maps/NewBarkTown.asm
 +++ b/maps/NewBarkTown.asm
 @@ -2,6 +2,8 @@
@@ -86271,7 +86848,7 @@ index ca9d86b..d5b2219 100644
  
  NewBarkTownNoop1Scene:
  	end
-@@ -123,8 +134,150 @@ NewBarkTownRivalScript:
+@@ -123,8 +134,195 @@ NewBarkTownRivalScript:
  	playsound SFX_TACKLE
  	applymovement PLAYER, NewBarkTown_RivalShovesYouOutMovement
  	applymovement NEWBARKTOWN_RIVAL, NewBarkTown_RivalReturnsToTheShadowsMovement
@@ -86282,6 +86859,51 @@ index ca9d86b..d5b2219 100644
 +	disappear NEWBARKTOWN_RIVAL
 +	sjump NewBarkTownOtherAmbushScript
 +
++
++NewBarkTownOtherFromBehindScript:
++	; First time the player walks west towards Route 29 with a Pokemon: the
++	; other protagonist runs up from behind.
++	checkevent EVENT_OTHER_AMBUSH_NEW_BARK
++	iftrue NewBarkTownOtherAmbushDone
++	readmem wPartyCount
++	iffalse NewBarkTownOtherAmbushDone
++	readvar VAR_FACING
++	ifnotequal LEFT, NewBarkTownOtherAmbushDone
++	setevent EVENT_OTHER_SCENE_ACTIVE
++	readmem wPlayerGender
++	iftrue .BoyRuns
++	; the player is a boy: Cristal (the girl) runs up
++	readvar VAR_YCOORD
++	ifequal 9, .Girl9
++	moveobject NEWBARKTOWN_OTHER_GIRL, 5, 8
++	sjump .GirlRuns
++.Girl9:
++	moveobject NEWBARKTOWN_OTHER_GIRL, 5, 9
++.GirlRuns:
++	appear NEWBARKTOWN_OTHER_GIRL
++	applymovement NEWBARKTOWN_OTHER_GIRL, NewBarkTownOtherRunsToYouMovement
++	turnobject PLAYER, RIGHT
++	sjump NewBarkTownOtherAmbushScript
++
++.BoyRuns:
++	; the player is a girl: Gold (the boy) runs up
++	readvar VAR_YCOORD
++	ifequal 9, .Boy9
++	moveobject NEWBARKTOWN_OTHER_BOY, 5, 8
++	sjump .BoyRunsUp
++.Boy9:
++	moveobject NEWBARKTOWN_OTHER_BOY, 5, 9
++.BoyRunsUp:
++	appear NEWBARKTOWN_OTHER_BOY
++	applymovement NEWBARKTOWN_OTHER_BOY, NewBarkTownOtherRunsToYouMovement
++	turnobject PLAYER, RIGHT
++	sjump NewBarkTownOtherAmbushScript
++
++NewBarkTownOtherRunsToYouMovement:
++	big_step LEFT
++	big_step LEFT
++	big_step LEFT
++	step_end
 +
 +NewBarkTownOtherAmbushScript:
 +	checkevent EVENT_OTHER_AMBUSH_NEW_BARK
@@ -86422,7 +87044,16 @@ index ca9d86b..d5b2219 100644
  NewBarkTownSign:
  	jumptext NewBarkTownSignText
  
-@@ -303,3 +456,5 @@ NewBarkTown_MapEvents:
+@@ -292,6 +490,8 @@ NewBarkTown_MapEvents:
+ 	def_coord_events
+ 	coord_event  1,  8, SCENE_NEWBARKTOWN_TEACHER_STOPS_YOU, NewBarkTown_TeacherStopsYouScene1
+ 	coord_event  1,  9, SCENE_NEWBARKTOWN_TEACHER_STOPS_YOU, NewBarkTown_TeacherStopsYouScene2
++	coord_event  1,  8, SCENE_NEWBARKTOWN_NOOP, NewBarkTownOtherFromBehindScript
++	coord_event  1,  9, SCENE_NEWBARKTOWN_NOOP, NewBarkTownOtherFromBehindScript
+ 
+ 	def_bg_events
+ 	bg_event  8,  8, BGEVENT_READ, NewBarkTownSign
+@@ -303,3 +503,5 @@ NewBarkTown_MapEvents:
  	object_event  6,  8, SPRITE_TEACHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 1, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, NewBarkTownTeacherScript, -1
  	object_event 12,  9, SPRITE_FISHER, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, NewBarkTownFisherScript, -1
  	object_event  3,  2, SPRITE_RIVAL, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, NewBarkTownRivalScript, EVENT_RIVAL_NEW_BARK_TOWN

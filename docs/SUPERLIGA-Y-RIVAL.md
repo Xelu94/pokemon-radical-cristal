@@ -16,7 +16,7 @@ Si eres chico, la otra es **CRISTAL**; si eres chica, el otro es **GOLD**. Lleva
 
 | Cuándo | Qué ocurre | Equipo |
 |---|---|---|
-| Pueblo Primavera, tras el empujón del rival al lado del laboratorio | Plata desaparece y aparece GOLD/CRISTAL | RATTATA 5 |
+| Pueblo Primavera, la primera vez que con un Pokémon caminas hacia el oeste para entrar en la Ruta 29 (también tras el empujón del rival junto al laboratorio, si hablas antes con él) | Aparece corriendo por detrás de ti y te llama | RATTATA 5 |
 | Torre Bellsprout (3.ª planta), cuando Plata se marcha con la Cuerda Huida | Aparece tras la marcha de Plata | RATTATA 12, PIDGEY 12 |
 | Guarida Dragón (piso B1), tras hablar con Plata | Plata se va y aparece | RATICATE, ALAKAZAM, SNORLAX, TAUROS, ARCANINE (48) |
 | Centro Pokémon de la Meseta Añil, la primera vez que entras (hace falta un hueco en el equipo) | El último combate; te da un huevo y se va por la puerta | RATICATE, ALAKAZAM, SNORLAX, TAUROS, ARCANINE (60), DRAGONITE (62) |

@@ -2,6 +2,27 @@
 
 Formato por versión. Las versiones anteriores a la 4 no están documentadas en este paquete; solo se sabe que la actualización v3→v4 permite continuar el guardado.
 
+## 5.5 — Más dificultad: niveles, evoluciones, ataques de su tipo y rival por detrás (30 de octubre de 2026)
+
+Siete cambios pedidos tras jugar la 5.4 hasta el evento Rocket de la Torre Radio. **269 comprobaciones agrupadas** ([evidencias/Validacion-v5.5.json](evidencias/Validacion-v5.5.json)): las 222 de la 5.4 más las nuevas de esta versión (rutinas y recorrido de historia, como chico y como chica).
+
+1. **Niveles al mismo nivel que el último líder.** Una vez vences a un líder (o a un as de la Liga), los entrenadores y los Pokémon salvajes que vienen después ya no bajan de **su nivel exacto** (antes, tres niveles menos). Los salvajes también se elevan al pescar y al sacudir árboles, no solo en la hierba. Siguen exentas las rutas 29, 30 y 31 y los encuentros de nivel especial.
+2. **MT infinitas.** Usar una MT ya no la gasta.
+3. **Curva de dificultad más marcada: sin Pokémon a medio evolucionar.** Al generar un salvaje o un Pokémon de entrenador, evoluciona hasta donde le permite su nivel: las evoluciones por nivel cuando se alcanza el umbral (un Croconaw de nivel 40 pasa a ser Feraligatr) y las de piedra única desde el nivel 32 (Pikachu → Raichu); Eevee y las familias con muchas piedras no cambian. Se comprobaron 795 equipos de entrenador: ninguno conserva un Pokémon que su nivel debiera haber evolucionado.
+4. **El otro protagonista te alcanza por detrás.** La primera vez que, con un Pokémon, caminas hacia el oeste para entrar en la Ruta 29, GOLD o CRISTAL aparece corriendo detrás de ti, te llama y empieza el combate. Ya no hace falta hablar con Plata junto al laboratorio (esa vía sigue funcionando; la emboscada solo ocurre una vez).
+5. **Movimientos Hada para el Recordador de Tito.** Los Pokémon de tipo Hada pueden recordar Viento Hada, Encanto, Luz Lunar, Brillo Mágico, Carantoña y Fuerza Lunar según su nivel (5, 10, 20, 30, 40 y 50), aunque su tabla original no los tenga (Mr. Mime no aprendía ninguno).
+6. **Desde la sexta medalla, todo Pokémon con un ataque de su tipo.** Con seis o más medallas (Johto y Kanto sumadas), cada Pokémon salvaje o de entrenador tiene al menos un ataque de daño de su tipo (el cuarto movimiento se sustituye si no lo tiene).
+7. **Más ataques de tipo Veneno.** Cuatro movimientos modernos sustituyen a otros poco útiles en el mismo ID, con su propia animación: Puya Nociva (80, física), Veneno X (70, física), Lanzamugre (120, física, 80 % de precisión) y Onda Tóxica (95, especial), todos con probabilidad de envenenar. Pasan a ser, por ID, los de Agarre, Atadura, Conversión y Conversión2 ([tabla](docs/MOVIMIENTOS-SUSTITUIDOS.md)).
+
+**Límites:** un Pokémon de un guardado anterior que conociera Agarre, Atadura, Conversión o Conversión2 pasa a conocer el movimiento nuevo (se comprobó el ID, no los PP guardados). La dificultad sube de forma notable: los topes de nivel del jugador no cambian.
+
+ROM de esta versión (reconstruida desde la base española aplicando el parche con RGBDS 1.0.0):
+
+| | SHA-256 |
+|---|---|
+| ROM normal (`Radical Cristal.gbc`) | `b5530aa12dd945ae99ffb2045d4927c32e9077d9d0dbb899d21cfa3deb5738e8` |
+| Sandbox | `ec31d24151faf0a4dc80640d35aa93f426c8ce5277aac907a3b922dca2ddc050` |
+
 ## 5.4 — Revisión de los beta testers: sprites, Elegidos y MO (25 de octubre de 2026)
 
 Dos beta testers automáticos (uno jugando como GOLD y otro como CRISTAL) recorrieron los mapas, los PNJ, los ataques y los menús en el emulador. Hallaron seis errores, todos corregidos. **222 comprobaciones agrupadas** ([evidencias/Validacion-v5.4.json](evidencias/Validacion-v5.4.json)): las 217 de la 5.3 más 5 nuevas. Registro completo de causas y soluciones: [docs/ERRORES-Y-SOLUCIONES.md](docs/ERRORES-Y-SOLUCIONES.md); informes de los testers: [pruebas/beta](pruebas/beta).

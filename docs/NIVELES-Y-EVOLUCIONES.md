@@ -49,7 +49,19 @@ El Ulex de la Ruta 31 que se encuentra con cero medallas saca sus tres Pokémon 
 
 ### Escalado de rivales
 
-Salvajes y entrenadores no bajan del nivel del líder anterior menos tres. Se exceptúan las rutas iniciales 29, 30 y 31 y los encuentros de nivel especial.
+Salvajes y entrenadores no bajan del **nivel del último líder derrotado** (hasta la 5.4 era ese nivel menos tres). Se exceptúan las rutas iniciales 29, 30 y 31 y los encuentros de nivel especial. El suelo se aplica a la hierba, a la pesca, a los árboles y a todos los equipos de entrenador.
+
+### Evolución según el nivel (5.5)
+
+Cuando se genera un Pokémon salvaje o de entrenador, evoluciona hasta donde su nivel le deja:
+
+- Una evolución por **nivel** se aplica al alcanzar su umbral (Croconaw 30, Kadabra 36, Slowpoke 37 o 40…). Si hay varias, vale la primera cuyo umbral se alcance.
+- Una especie con **una o dos evoluciones por piedra** pasa a la primera desde el **nivel 32** (Pikachu → Raichu, Gloom → Vileplume).
+- Eevee y las familias con muchas piedras no cambian, igual que las evoluciones por intercambio o amistad que no se convirtieron a nivel.
+
+### Ataque de su tipo (5.5)
+
+Con **seis o más medallas** (Johto y Kanto sumadas), todo Pokémon salvaje o de entrenador conoce al menos un ataque de daño de uno de sus tipos. Si no lo tiene al generarse, el cuarto movimiento se sustituye por uno aleatorio que lo cumpla.
 
 ## Evoluciones modificadas
 

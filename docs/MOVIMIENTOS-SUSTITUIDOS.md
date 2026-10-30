@@ -3,7 +3,7 @@
 La tabla de movimientos mantiene **254 identificadores** (`NUM_ATTACKS`, `constants/move_constants.asm`). Cada identificador cabe en un byte y está referenciado por guardados, MT, tablas de aprendizaje y animaciones. Para no ampliar la tabla ni romper guardados, el proyecto hace dos cosas:
 
 1. Añade tres movimientos en los últimos identificadores (252–254).
-2. Sustituye nueve movimientos antiguos poco útiles por movimientos modernos **en el mismo ID**, reutilizando las animaciones del motor.
+2. Sustituye trece movimientos antiguos poco útiles por movimientos modernos **en el mismo ID**, reutilizando las animaciones del motor.
 
 Los datos salen de `data/moves/moves.asm` y `data/moves/names.asm` de la fuente integrada (formato: efecto, potencia, tipo, categoría, precisión, PP, probabilidad del efecto secundario).
 
@@ -30,6 +30,10 @@ Además, los movimientos de tipo Hada que ya existían en la base (Encanto, Luz 
 | 140 | Presa | Pulso Dragón | Dragón | Especial | 85 | 100 | 10 | — |
 | 159 | Afilar | Foco Resplandor | Acero | Especial | 80 | 100 | 10 | 10 % de bajar Defensa Especial |
 | 186 | Beso Dulce | Viento Hada | Hada | Especial | 40 | 100 | 30 | — |
+| 11 | Agarre | Puya Nociva | Veneno | Física | 80 | 100 | 20 | 30 % de envenenar |
+| 20 | Atadura | Veneno X | Veneno | Física | 70 | 100 | 20 | 10 % de envenenar |
+| 160 | Conversión | Lanzamugre | Veneno | Física | 120 | 80 | 5 | 30 % de envenenar |
+| 176 | Conversión2 | Onda Tóxica | Veneno | Especial | 95 | 100 | 10 | 10 % de envenenar |
 
 En el código fuente los nombres antiguos siguen siendo las constantes de los IDs y los nuevos son alias (`DEF X_SCISSOR EQU COMET_PUNCH`, etc.).
 

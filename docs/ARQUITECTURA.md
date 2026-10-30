@@ -120,3 +120,13 @@ La base (motor, mapas, gráficos y textos de Pokémon Cristal en español) proce
 - **Texto de bloqueo de objeto Elegido.** `StdBattleTextbox` lee siempre del banco `$20`; los textos que se le pasan deben estar en `data/text/battle.asm`, no dentro del bloque `Battle Core`.
 - **Olvidar MO.** `engine/pokemon/learn.asm` ya no llama a `IsHMMove`: las MO son herramientas de la mochila.
 
+## Cambios de la 5.5
+
+- **Ajustes de dificultad en una sección propia** (`engine/pokemon/progression_tuning.asm`, "Progression tuning"): `EvolveSpeciesForLevel` recorre `EvosAttacksPointers` y devuelve la especie final posible; `ProgressWildEncounter` (hierba, llamada desde `ChooseWildEncounter`) y `ProgressTempWildMon` (pesca y árboles) aplican `ClampProgressionLevel` y la evolución; `ProgressTrainerSpecies` hace lo mismo con la especie del equipo de un entrenador (`EvolveCurPartySpecies` en `read_trainer_party.asm`). Una llamada lejana (`farcall`) **no devuelve A**: el resultado va en B/C o se escribe en memoria.
+- **Suelo de nivel.** `GetProgressionLevelFloor` ya no resta 3 al nivel del último líder derrotado.
+- **Ataque de su tipo.** `StabForWild` (al final de `RandomizeFourMoves`, solo con `wBattleMode` salvaje) y `StabForTrainer` (en `RandomizeTrainerMon`) llaman a `EnsureStabMove`, que con seis medallas o más sustituye el cuarto movimiento por uno aleatorio de daño de los tipos del Pokémon. Los movimientos que exigen una situación especial (Autodestrucción, Come Sueños, Contador, golpes de un solo golpe…) no se eligen.
+- **MT infinitas.** Se elimina `ConsumeTM` (`engine/items/tmhm.asm`).
+- **Hada en el Recordador.** `TitoOfferFairyMoves` añade seis movimientos por nivel a la lista de `TitoBuildReminderMoves` (la lógica de «no repetir ni ofrecer lo conocido» pasó a `TitoOfferReminderMove`).
+- **Veneno.** Cuatro IDs reutilizados (`POISON_JAB` = Agarre, `CROSS_POISON` = Atadura, `GUNK_SHOT` = Conversión, `SLUDGE_WAVE` = Conversión2) con animaciones reutilizadas de `BattleAnimations`; se quitó Conversión de las listas de la IA.
+- **Emboscada por detrás.** Dos eventos de coordenadas en Pueblo Primavera (1, 8) y (1, 9) para la escena `SCENE_NEWBARKTOWN_NOOP`; el objeto del otro protagonista se coloca con `moveobject` a la derecha del jugador, corre con `big_step` y entra en el guion de emboscada existente.
+

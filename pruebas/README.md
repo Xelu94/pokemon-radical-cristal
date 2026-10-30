@@ -1,6 +1,6 @@
 # Pruebas portables
 
-Scripts de validación de la versión 5.4. Conservan la estructura relativa que esperan: se ejecutan **desde esta carpeta** y buscan la fuente compilada en `work/source`.
+Scripts de validación de la versión 5.5. Conservan la estructura relativa que esperan: se ejecutan **desde esta carpeta** y buscan la fuente compilada en `work/source`.
 
 Preparación y comandos completos: [docs/COMPILACION-Y-PRUEBAS.md](../docs/COMPILACION-Y-PRUEBAS.md).
 
@@ -27,6 +27,8 @@ Requisitos previos: la fuente integrada y compilada (`work/source/pokecristal.gb
 | `work/test-v44-changes.py` | Cambios de la 4.4 (tope en estado, iconos de ataque, barra de experiencia, respiración de Tito) | 4 |
 | `work/test-v45-routines.py` | Rutinas de la 5.0 con el arnés de CPU (objetos infinitos, eclosión, selector de la Superliga, huevos de 10 pasos) | 13 |
 | `work/test-v53-routines.py` | Mochila del sandbox (MO) y tiendas con piedras (datos y rutinas) | 5 |
+| `work/test-v55-routines.py` | Rutinas de la 5.5 (evolución por nivel, suelo de nivel, ataque de su tipo, Hada de Tito, Veneno, MT) | 35 |
+| `work/test-v55-story.py` | Historia de la 5.5 con el emulador (el otro protagonista por detrás, MT infinitas; también con `PLAYER_GENDER=1`) | 6 |
 | `work/test-v54-fixes.py` | Arreglos de los beta testers (usa los scripts de `work/beta54`) | 5 |
 | `work/test-v45-story.py` | Historia y mundo de la 5.0 con el emulador (aviso de Ulex, Joy, Elm, otro protagonista, Superliga, datos; se ejecuta también con `PLAYER_GENDER=1` para jugar como chica) | 28 |
 | `work/story_helper.py` | Ayudante: banderas de evento, mochila, equipo y lectura estable de memoria | |

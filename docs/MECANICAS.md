@@ -1,4 +1,4 @@
-# Mecánicas y reglas vigentes (v5.4)
+# Mecánicas y reglas vigentes (v5.5)
 
 Descripción de la ROM normal. Los datos numéricos se contrastaron con la fuente integrada (`engine/pokemon/v2_balance.asm`, `data/moves/moves.asm`, `data/pokemon/evos_attacks.asm`). Cuando una regla depende del emulador o de la semilla, se indica.
 
@@ -23,10 +23,10 @@ Descripción de la ROM normal. Los datos numéricos se contrastaron con la fuent
 ## Tipos y movimientos
 
 - **Tipo Hada**, con actualización de los tipos de las especies correspondientes y ajustes de efectividades. Hada es inmune a Dragón. Acero resiste Fantasma y Siniestro, como en generaciones modernas.
-- **Movimientos nuevos**: Fuerza Lunar, Carantoña y Brillo Mágico, más nueve modernos que sustituyen a otros en el mismo ID ([tabla](MOVIMIENTOS-SUSTITUIDOS.md)).
+- **Movimientos nuevos**: Fuerza Lunar, Carantoña y Brillo Mágico, más trece modernos que sustituyen a otros en el mismo ID (cuatro de ellos de tipo Veneno) ([tabla](MOVIMIENTOS-SUSTITUIDOS.md)).
 - **Movimientos iniciales aleatorios**: cuatro distintos, con al menos uno de daño directo utilizable. En los hitos de aprendizaje por nivel se ofrecen movimientos aleatorios.
-- **Recordador de Tito**: consulta las tablas originales de movimientos hasta el nivel actual y respeta los identificadores sustituidos.
-- **MT y MO**: las 50 MT tienen contenidos aleatorios únicos; las siete MO conservan sus movimientos.
+- **Recordador de Tito**: consulta las tablas originales de movimientos hasta el nivel actual y respeta los identificadores sustituidos. A los Pokémon de tipo Hada les ofrece además Viento Hada (nivel 5), Encanto (10), Luz Lunar (20), Brillo Mágico (30), Carantoña (40) y Fuerza Lunar (50).
+- **MT y MO**: las 50 MT tienen contenidos aleatorios únicos y **no se gastan al usarlas** (desde la 5.5); las siete MO conservan sus movimientos.
 
 ## Límites de nivel y dificultad
 
@@ -34,7 +34,7 @@ Ver [NIVELES-Y-EVOLUCIONES.md](NIVELES-Y-EVOLUCIONES.md) para la tabla completa.
 
 - El límite sigue al **primer líder pendiente** en el orden de progresión, aunque se visiten los gimnasios en otro orden.
 - Con ocho medallas de Johto el límite es 65 hasta superar la Liga. Con las dieciséis medallas es 95. **Rojo exige las dieciséis medallas y tiene seis Pokémon al nivel 95.** Al derrotarlo se desbloquea el nivel 100 (el equipo de Rojo no está al 100).
-- Salvajes y entrenadores no bajan del nivel del líder anterior menos tres, con excepciones para rutas iniciales (29, 30 y 31) y encuentros de nivel especial.
+- Salvajes (en hierba, al pescar y en árboles) y entrenadores no bajan del **nivel del último líder derrotado**, con excepciones para rutas iniciales (29, 30 y 31) y encuentros de nivel especial. Desde la 5.5, además, salen evolucionados hasta donde su nivel lo permite, y desde la sexta medalla todos conocen un ataque de daño de su tipo.
 - Líderes y Alto Mando suben 5 niveles; progresión revisada entre Johto y Kanto y objetos equipados útiles.
 - Una partida actualizada no pierde los niveles que ya tuviera por encima de un nuevo tope.
 

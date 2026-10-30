@@ -1,0 +1,145 @@
+{
+  "passed": 35,
+  "tests": [
+    {
+      "name": "wild and trainer Pokemon evolve as far as their level allows (22 cases)",
+      "passed": true
+    },
+    {
+      "name": "before any badge the floor is 0",
+      "passed": true
+    },
+    {
+      "name": "with the first badge the floor is the first leader's level (19), not three below",
+      "passed": true
+    },
+    {
+      "name": "with two badges it is the second leader's level (24)",
+      "passed": true
+    },
+    {
+      "name": "a badge won out of order does not raise the floor",
+      "passed": true
+    },
+    {
+      "name": "with all eight Johto badges the floor is the last Johto leader level (53)",
+      "passed": true
+    },
+    {
+      "name": "a wild Pokemon below the floor is raised to the last leader's level and evolved to match (Totodile 12 -> Croconaw 19)",
+      "passed": true
+    },
+    {
+      "name": "a wild Pokemon above the floor keeps its level and still evolves (Totodile 30 -> Feraligatr)",
+      "passed": true
+    },
+    {
+      "name": "before any badge nothing changes",
+      "passed": true
+    },
+    {
+      "name": "a wild Pokemon with no attack of its type gets one (every type checked, three times each)",
+      "passed": true
+    },
+    {
+      "name": "a Pokemon that already has one keeps its moves",
+      "passed": true
+    },
+    {
+      "name": "with only five badges nothing is added",
+      "passed": true
+    },
+    {
+      "name": "with six badges it is added",
+      "passed": true
+    },
+    {
+      "name": "the wild hook does nothing in a trainer battle",
+      "passed": true
+    },
+    {
+      "name": "a dual-type Pokemon gets a move of either type",
+      "passed": true
+    },
+    {
+      "name": "a trainer's Pokemon gets a move of its own type from the sixth badge on",
+      "passed": true
+    },
+    {
+      "name": "a trainer's Pokemon keeps its moves before that",
+      "passed": true
+    },
+    {
+      "name": "Tito remembers Fairy moves for a Fairy-type Pokemon (Mr. Mime, level 60)",
+      "passed": true
+    },
+    {
+      "name": "only those its level allows at level 20",
+      "passed": true
+    },
+    {
+      "name": "moves it already knows are not offered again",
+      "passed": true
+    },
+    {
+      "name": "a Pokemon that is not Fairy type gets none",
+      "passed": true
+    },
+    {
+      "name": "wild encounters on Route 32 with one badge are all at least level 19",
+      "passed": true
+    },
+    {
+      "name": "and every one of them is evolved as far as its level allows",
+      "passed": true
+    },
+    {
+      "name": "fishing and tree encounters get the same floor and evolution (Totodile 12 with one badge -> Croconaw 19)",
+      "passed": true
+    },
+    {
+      "name": "with no badges Route 32 keeps its own levels",
+      "passed": true
+    },
+    {
+      "name": "no trainer party (795 parties checked) keeps a Pokemon that its level should have evolved",
+      "passed": true
+    },
+    {
+      "name": "with six badges every Pokemon in every trainer party has a damaging move of its own type",
+      "passed": true
+    },
+    {
+      "name": "with six badges every one of the 251 wild species is generated with a damaging move of its own type",
+      "passed": true
+    },
+    {
+      "name": "with five badges some are still generated without one",
+      "passed": true
+    },
+    {
+      "name": "POISON_JAB is a poison physical move of power 80 with a chance to poison",
+      "passed": true
+    },
+    {
+      "name": "CROSS_POISON is a poison physical move of power 70 with a chance to poison",
+      "passed": true
+    },
+    {
+      "name": "GUNK_SHOT is a poison physical move of power 120 with a chance to poison",
+      "passed": true
+    },
+    {
+      "name": "SLUDGE_WAVE is a poison special move of power 95 with a chance to poison",
+      "passed": true
+    },
+    {
+      "name": "the four new Poison moves have their own names",
+      "passed": true
+    },
+    {
+      "name": "TMs are never used up (no ConsumeTM)",
+      "passed": true
+    }
+  ]
+}

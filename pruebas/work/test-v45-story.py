@@ -348,7 +348,7 @@ for _ in range(8):
     g.press('up', 8, hold=14)
 g.press('right', 8, hold=14)
 g.press('up', 8, hold=14)
-won = mash(g, lambda: g.event('EVENT_SUPER_BEAT_AZUL'), presses=700)
+won = mash(g, lambda: g.event('EVENT_SUPER_BEAT_AZUL'), presses=2200)
 check('beating Azul in the Super League opens his door and leaves no one dead',
       won and not g.event('EVENT_EXHIBITION_BATTLE') and g.mem('wPartyMon1HP', 2) != [0, 0])
 g.close()
