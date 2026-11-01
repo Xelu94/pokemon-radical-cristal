@@ -197,7 +197,7 @@ index 3c478b9..092adbc 100644
  
  ; Facings indexes (see data/sprites/facings.asm)
 diff --git a/constants/move_constants.asm b/constants/move_constants.asm
-index 4b09855..6806243 100644
+index 4b09855..6301c03 100644
 --- a/constants/move_constants.asm
 +++ b/constants/move_constants.asm
 @@ -257,8 +257,27 @@
@@ -228,6 +228,31 @@ index 4b09855..6806243 100644
  DEF CANNOT_MOVE EQU $ff
  
  ; Battle animations use the same constants as the moves up to this point
+@@ -290,3 +309,24 @@ DEF BATTLE_AFTERANIMS EQU const_value
+ 	const ANIM_SHAKE             ; 114
+ 	const ANIM_HIT_CONFUSION     ; 115
+ DEF NUM_BATTLE_ANIMS EQU const_value - 1
++DEF AQUA_JET EQU LOVELY_KISS ; 142: ACUA JET
++DEF SEED_BOMB EQU SPIDER_WEB ; 169: BOMBA GERMEN
++DEF EARTH_POWER EQU MIST ; 54: TIERRA VIVA
++DEF HYPER_VOICE EQU MEDITATE ; 96: VOZARRÓN
++DEF SHADOW_SNEAK EQU FRUSTRATION ; 218: SOMBRA VIL
++DEF POWER_GEM EQU SMOKESCREEN ; 108: JOYA DE LUZ
++DEF AQUA_TAIL EQU WITHDRAW ; 110: ACUA COLA
++DEF BULLET_PUNCH EQU DEFENSE_CURL ; 111: PUÑO BALA
++DEF ENERGY_BALL EQU KINESIS ; 134: ENERGIBOLA
++DEF SCALD EQU PSYWAVE ; 149: ESCALDAR
++DEF ZEN_HEADBUTT EQU MIND_READER ; 170: CABEZAZO ZEN
++DEF SIGNAL_BEAM EQU NIGHTMARE ; 171: RAYO SEÑAL
++DEF STONE_EDGE EQU SPITE ; 180: ROCA AFILADA
++DEF SHADOW_CLAW EQU FORESIGHT ; 193: GARRA UMBRÍA
++DEF AURA_SPHERE EQU LOCK_ON ; 199: ESFERA AURAL
++DEF DRAIN_PUNCH EQU PRESENT ; 217: PUÑO DRENAJE
++DEF DISCHARGE EQU PSYCH_UP ; 244: CHISPAZO
++DEF HEAT_WAVE EQU RAGE ; 99: ONDA ÍGNEA
++DEF BRAVE_BIRD EQU SONICBOOM ; 49: PÁJARO OSADO
++DEF AIR_SLASH EQU DISABLE ; 50: AIRE AFILADO
++DEF ICE_FANG EQU SAND_ATTACK ; 28: COLM. HIELO
 diff --git a/constants/npc_trade_constants.asm b/constants/npc_trade_constants.asm
 index f505bf9..939d708 100644
 --- a/constants/npc_trade_constants.asm
@@ -398,10 +423,24 @@ index 49fa661..5edc271 100644
 +DEF SPECIAL EQU %10000000
 +DEF STATUS EQU %11000000
 diff --git a/data/battle/ai/encore_moves.asm b/data/battle/ai/encore_moves.asm
-index 03e028b..cb1cd4b 100644
+index 03e028b..f632481 100644
 --- a/data/battle/ai/encore_moves.asm
 +++ b/data/battle/ai/encore_moves.asm
-@@ -21,7 +21,6 @@ EncoreMoves:
+@@ -5,13 +5,10 @@ EncoreMoves:
+ 	db WHIRLWIND
+ 	db LEER
+ 	db ROAR
+-	db DISABLE
+-	db MIST
+ 	db LEECH_SEED
+ 	db GROWTH
+ 	db POISONPOWDER
+ 	db STRING_SHOT
+-	db MEDITATE
+ 	db AGILITY
+ 	db TELEPORT
+ 	db SCREECH
+@@ -21,12 +18,9 @@ EncoreMoves:
  	db POISON_GAS
  	db SPLASH
  	db SHARPEN
@@ -409,11 +448,24 @@ index 03e028b..cb1cd4b 100644
  	db SUPER_FANG
  	db SUBSTITUTE
  	db TRIPLE_KICK
+-	db SPIDER_WEB
+-	db MIND_READER
+ 	db FLAME_WHEEL
+ 	db AEROBLAST
+ 	db COTTON_SPORE
 diff --git a/data/battle/ai/residual_moves.asm b/data/battle/ai/residual_moves.asm
-index c99ac0f..0a421c7 100644
+index c99ac0f..5c9d2ee 100644
 --- a/data/battle/ai/residual_moves.asm
 +++ b/data/battle/ai/residual_moves.asm
-@@ -10,7 +10,6 @@ ResidualMoves:
+@@ -1,7 +1,6 @@
+ ; AI_CAUTIOUS discourages these moves after the first turn.
+ 
+ ResidualMoves:
+-	db MIST
+ 	db LEECH_SEED
+ 	db POISONPOWDER
+ 	db STUN_SPORE
+@@ -10,7 +9,6 @@ ResidualMoves:
  	db BIDE
  	db POISON_GAS
  	db TRANSFORM
@@ -422,10 +474,31 @@ index c99ac0f..0a421c7 100644
  	db SPIKES
  	db -1 ; end
 diff --git a/data/battle/ai/stall_moves.asm b/data/battle/ai/stall_moves.asm
-index 22ba251..475884a 100644
+index 22ba251..4aa15c3 100644
 --- a/data/battle/ai/stall_moves.asm
 +++ b/data/battle/ai/stall_moves.asm
-@@ -31,7 +31,6 @@ StallMoves:
+@@ -6,20 +6,14 @@ StallMoves:
+ 	db TAIL_WHIP
+ 	db LEER
+ 	db GROWL
+-	db DISABLE
+-	db MIST
+ 	db COUNTER
+ 	db LEECH_SEED
+ 	db GROWTH
+ 	db STRING_SHOT
+-	db MEDITATE
+ 	db AGILITY
+-	db RAGE
+ 	db MIMIC
+ 	db SCREECH
+ 	db HARDEN
+-	db WITHDRAW
+-	db DEFENSE_CURL
+ 	db BARRIER
+ 	db LIGHT_SCREEN
+ 	db HAZE
+@@ -31,7 +25,6 @@ StallMoves:
  	db SPLASH
  	db ACID_ARMOR
  	db SHARPEN
@@ -58057,7 +58130,7 @@ index db7069d..d93d3e9 100644
  	mapsetup FadeToMapMusic
  	mapsetup LoadMapPalettes
 diff --git a/data/moves/animations.asm b/data/moves/animations.asm
-index f441d57..ad43512 100644
+index f441d57..a896933 100644
 --- a/data/moves/animations.asm
 +++ b/data/moves/animations.asm
 @@ -5,23 +5,23 @@ BattleAnimations::
@@ -58088,7 +58161,57 @@ index f441d57..ad43512 100644
  	dw BattleAnim_Slam
  	dw BattleAnim_VineWhip
  	dw BattleAnim_Stomp
-@@ -118,11 +118,11 @@ BattleAnimations::
+@@ -29,7 +29,7 @@ BattleAnimations::
+ 	dw BattleAnim_MegaKick
+ 	dw BattleAnim_JumpKick
+ 	dw BattleAnim_RollingKick
+-	dw BattleAnim_SandAttack
++	dw BattleAnim_Bite ; ICE_FANG, reused legacy ID28
+ 	dw BattleAnim_Headbutt
+ 	dw BattleAnim_HornAttack
+ 	dw BattleAnim_FuryAttack
+@@ -50,12 +50,12 @@ BattleAnimations::
+ 	dw BattleAnim_Roar
+ 	dw BattleAnim_Sing
+ 	dw BattleAnim_Supersonic
+-	dw BattleAnim_Sonicboom
+-	dw BattleAnim_Disable
++	dw BattleAnim_DrillPeck ; BRAVE_BIRD, reused legacy ID49
++	dw BattleAnim_WingAttack ; AIR_SLASH, reused legacy ID50
+ 	dw BattleAnim_Acid
+ 	dw BattleAnim_Ember
+ 	dw BattleAnim_Flamethrower
+-	dw BattleAnim_Mist
++	dw BattleAnim_Earthquake ; EARTH_POWER, reused legacy ID54
+ 	dw BattleAnim_WaterGun
+ 	dw BattleAnim_HydroPump
+ 	dw BattleAnim_Surf
+@@ -97,10 +97,10 @@ BattleAnimations::
+ 	dw BattleAnim_Confusion
+ 	dw BattleAnim_PsychicM
+ 	dw BattleAnim_Hypnosis
+-	dw BattleAnim_Meditate
++	dw BattleAnim_Supersonic ; HYPER_VOICE, reused legacy ID96
+ 	dw BattleAnim_Agility
+ 	dw BattleAnim_QuickAttack
+-	dw BattleAnim_Rage
++	dw BattleAnim_Flamethrower ; HEAT_WAVE, reused legacy ID99
+ 	dw BattleAnim_Teleport
+ 	dw BattleAnim_NightShade
+ 	dw BattleAnim_Mimic
+@@ -109,20 +109,20 @@ BattleAnimations::
+ 	dw BattleAnim_Recover
+ 	dw BattleAnim_Harden
+ 	dw BattleAnim_Minimize
+-	dw BattleAnim_Smokescreen
++	dw BattleAnim_Ancientpower ; POWER_GEM, reused legacy ID108
+ 	dw BattleAnim_ConfuseRay
+-	dw BattleAnim_Withdraw
+-	dw BattleAnim_DefenseCurl
++	dw BattleAnim_Waterfall ; AQUA_TAIL, reused legacy ID110
++	dw BattleAnim_MachPunch ; BULLET_PUNCH, reused legacy ID111
+ 	dw BattleAnim_Barrier
+ 	dw BattleAnim_LightScreen
  	dw BattleAnim_Haze
  	dw BattleAnim_Reflect
  	dw BattleAnim_FocusEnergy
@@ -58103,24 +58226,36 @@ index f441d57..ad43512 100644
  	dw BattleAnim_Lick
  	dw BattleAnim_Smog
  	dw BattleAnim_Sludge
-@@ -133,7 +133,7 @@ BattleAnimations::
+@@ -133,24 +133,24 @@ BattleAnimations::
  	dw BattleAnim_Swift
  	dw BattleAnim_SkullBash
  	dw BattleAnim_SpikeCannon
 -	dw BattleAnim_Constrict
 +	dw BattleAnim_Supersonic ; BUG_BUZZ, reused legacy ID132
  	dw BattleAnim_Amnesia
- 	dw BattleAnim_Kinesis
+-	dw BattleAnim_Kinesis
++	dw BattleAnim_GigaDrain ; ENERGY_BALL, reused legacy ID134
  	dw BattleAnim_Softboiled
-@@ -141,7 +141,7 @@ BattleAnimations::
+ 	dw BattleAnim_HiJumpKick
  	dw BattleAnim_Glare
  	dw BattleAnim_DreamEater
  	dw BattleAnim_PoisonGas
 -	dw BattleAnim_Barrage
 +	dw BattleAnim_Dragonbreath ; DRAGON_PULSE, reused legacy ID140
  	dw BattleAnim_LeechLife
- 	dw BattleAnim_LovelyKiss
+-	dw BattleAnim_LovelyKiss
++	dw BattleAnim_Waterfall ; AQUA_JET, reused legacy ID142
  	dw BattleAnim_SkyAttack
+ 	dw BattleAnim_Transform
+ 	dw BattleAnim_Bubble
+ 	dw BattleAnim_DizzyPunch
+ 	dw BattleAnim_Spore
+ 	dw BattleAnim_Flash
+-	dw BattleAnim_Psywave
++	dw BattleAnim_Bubblebeam ; SCALD, reused legacy ID149
+ 	dw BattleAnim_Splash
+ 	dw BattleAnim_AcidArmor
+ 	dw BattleAnim_Crabhammer
 @@ -160,8 +160,8 @@ BattleAnimations::
  	dw BattleAnim_Rest
  	dw BattleAnim_RockSlide
@@ -58132,7 +58267,17 @@ index f441d57..ad43512 100644
  	dw BattleAnim_TriAttack
  	dw BattleAnim_SuperFang
  	dw BattleAnim_Slash
-@@ -177,7 +177,7 @@ BattleAnimations::
+@@ -170,37 +170,37 @@ BattleAnimations::
+ 	dw BattleAnim_Sketch
+ 	dw BattleAnim_TripleKick
+ 	dw BattleAnim_Thief
+-	dw BattleAnim_SpiderWeb
+-	dw BattleAnim_MindReader
+-	dw BattleAnim_Nightmare
++	dw BattleAnim_RazorLeaf ; SEED_BOMB, reused legacy ID169
++	dw BattleAnim_Headbutt ; ZEN_HEADBUTT, reused legacy ID170
++	dw BattleAnim_Psybeam ; SIGNAL_BEAM, reused legacy ID171
+ 	dw BattleAnim_FlameWheel
  	dw BattleAnim_Snore
  	dw BattleAnim_Curse
  	dw BattleAnim_Flail
@@ -58141,7 +58286,10 @@ index f441d57..ad43512 100644
  	dw BattleAnim_Aeroblast
  	dw BattleAnim_CottonSpore
  	dw BattleAnim_Reversal
-@@ -187,7 +187,7 @@ BattleAnimations::
+-	dw BattleAnim_Spite
++	dw BattleAnim_RockSlide ; STONE_EDGE, reused legacy ID180
+ 	dw BattleAnim_PowderSnow
+ 	dw BattleAnim_Protect
  	dw BattleAnim_MachPunch
  	dw BattleAnim_ScaryFace
  	dw BattleAnim_FaintAttack
@@ -58150,6 +58298,41 @@ index f441d57..ad43512 100644
  	dw BattleAnim_BellyDrum
  	dw BattleAnim_SludgeBomb
  	dw BattleAnim_MudSlap
+ 	dw BattleAnim_Octazooka
+ 	dw BattleAnim_Spikes
+ 	dw BattleAnim_ZapCannon
+-	dw BattleAnim_Foresight
++	dw BattleAnim_Slash ; SHADOW_CLAW, reused legacy ID193
+ 	dw BattleAnim_DestinyBond
+ 	dw BattleAnim_PerishSong
+ 	dw BattleAnim_IcyWind
+ 	dw BattleAnim_Detect
+ 	dw BattleAnim_BoneRush
+-	dw BattleAnim_LockOn
++	dw BattleAnim_HiddenPower ; AURA_SPHERE, reused legacy ID199
+ 	dw BattleAnim_Outrage
+ 	dw BattleAnim_Sandstorm
+ 	dw BattleAnim_GigaDrain
+@@ -218,8 +218,8 @@ BattleAnimations::
+ 	dw BattleAnim_SleepTalk
+ 	dw BattleAnim_HealBell
+ 	dw BattleAnim_Return
+-	dw BattleAnim_Present
+-	dw BattleAnim_Frustration
++	dw BattleAnim_MegaPunch ; DRAIN_PUNCH, reused legacy ID217
++	dw BattleAnim_FaintAttack ; SHADOW_SNEAK, reused legacy ID218
+ 	dw BattleAnim_Safeguard
+ 	dw BattleAnim_PainSplit
+ 	dw BattleAnim_SacredFire
+@@ -245,7 +245,7 @@ BattleAnimations::
+ 	dw BattleAnim_SunnyDay
+ 	dw BattleAnim_Crunch
+ 	dw BattleAnim_MirrorCoat
+-	dw BattleAnim_PsychUp
++	dw BattleAnim_Thunderbolt ; DISCHARGE, reused legacy ID244
+ 	dw BattleAnim_Extremespeed
+ 	dw BattleAnim_Ancientpower
+ 	dw BattleAnim_ShadowBall
 @@ -253,10 +253,10 @@ BattleAnimations::
  	dw BattleAnim_RockSmash
  	dw BattleAnim_Whirlpool
@@ -58210,7 +58393,7 @@ index 4a47305..2965264 100644
  	db CRABHAMMER
  	db SLASH
 diff --git a/data/moves/descriptions.asm b/data/moves/descriptions.asm
-index 0a59a41..c3da174 100644
+index 0a59a41..22098f6 100644
 --- a/data/moves/descriptions.asm
 +++ b/data/moves/descriptions.asm
 @@ -252,10 +252,10 @@ MoveDescriptions::
@@ -58270,6 +58453,93 @@ index 0a59a41..c3da174 100644
  
  SlamDescription:
  	db   "Golpea con sus"
+@@ -375,8 +375,8 @@ RollingKickDescription:
+ 	next "y circular.@"
+ 
+ SandAttackDescription:
+-	db   "Baja la PRECISIÓN"
+-	next "arrojando arena.@"
++	db   "Colmillos helados"
++	next "que congelan.@"
+ 
+ HeadbuttDescription:
+ 	db   "Hace retroceder"
+@@ -459,12 +459,12 @@ SupersonicDescription:
+ 	next "causan confusión.@"
+ 
+ SonicboomDescription:
+-	db   "Siempre produce"
+-	next "20 PS de daño.@"
++	db   "Embiste con todo"
++	next "pero se hiere.@"
+ 
+ DisableDescription:
+-	db   "Desactiva ataque"
+-	next "más reciente.@"
++	db   "Corta con aire y"
++	next "hace retroceder.@"
+ 
+ AcidDescription:
+ 	db   "Ataque que puede"
+@@ -479,8 +479,8 @@ FlamethrowerDescription:
+ 	next "causar quemaduras.@"
+ 
+ MistDescription:
+-	db   "Evita reducción"
+-	next "de caract.@"
++	db   "Energía del suelo."
++	next "Baja la DEF.ESP.@"
+ 
+ WaterGunDescription:
+ 	db   "Rocía agua para"
+@@ -647,8 +647,8 @@ HypnosisDescription:
+ 	next "enemigo.@"
+ 
+ MeditateDescription:
+-	db   "Mejora el ATAQUE"
+-	next "de quien lo usa.@"
++	db   "Un grito potente"
++	next "que aturde.@"
+ 
+ AgilityDescription:
+ 	db   "Aumenta mucho"
+@@ -659,8 +659,8 @@ QuickAttackDescription:
+ 	next "golpear primero.@"
+ 
+ RageDescription:
+-	db   "Mejora el ATAQUE"
+-	next "si te hieren.@"
++	db   "Ola de aire ígneo"
++	next "que puede quemar.@"
+ 
+ TeleportDescription:
+ 	db   "Sirve para huir"
+@@ -695,19 +695,19 @@ MinimizeDescription:
+ 	next "de EVASIÓN.@"
+ 
+ SmokescreenDescription:
+-	db   "Baja la PRECISIÓN"
+-	next "del enemigo.@"
++	db   "Rayos de joyas"
++	next "relucientes.@"
+ 
+ ConfuseRayDescription:
+ 	db   "Provoca confusión.@"
+ 
+ WithdrawDescription:
+-	db   "Mejora la DEFENSA"
+-	next "de quien lo usa.@"
++	db   "Azota con la cola"
++	next "envuelta en agua.@"
+ 
+ DefenseCurlDescription:
+-	db   "Mejora la DEFENSA"
+-	next "de quien lo usa.@"
++	db   "Puñetazo duro que"
++	next "golpea primero.@"
+ 
+ BarrierDescription:
+ 	db   "Aumenta bastante"
 @@ -730,24 +730,24 @@ FocusEnergyDescription:
  	next "de golpe crítico.@"
  
@@ -58301,7 +58571,7 @@ index 0a59a41..c3da174 100644
  
  LickDescription:
  	db   "Ataque que puede"
-@@ -790,8 +790,8 @@ SpikeCannonDescription:
+@@ -790,16 +790,16 @@ SpikeCannonDescription:
  	next "fuego 2-5 veces.@"
  
  ConstrictDescription:
@@ -58312,7 +58582,17 @@ index 0a59a41..c3da174 100644
  
  AmnesiaDescription:
  	db   "Aumenta bastante"
-@@ -822,8 +822,8 @@ PoisonGasDescription:
+ 	next "tu DEFENSA ESP.@"
+ 
+ KinesisDescription:
+-	db   "Baja la PRECISIÓN"
+-	next "del enemigo.@"
++	db   "Esfera de energía"
++	next "que baja DEF.ESP.@"
+ 
+ SoftboiledDescription:
+ 	db   "Restaura la mitad"
+@@ -822,16 +822,16 @@ PoisonGasDescription:
  	next "al enemigo.@"
  
  BarrageDescription:
@@ -58323,6 +58603,27 @@ index 0a59a41..c3da174 100644
  
  LeechLifeDescription:
  	db   "Roba la mitad del"
+ 	next "daño producido.@"
+ 
+ LovelyKissDescription:
+-	db   "Puede dormir al"
+-	next "enemigo.@"
++	db   "Chorro veloz que"
++	next "golpea primero.@"
+ 
+ SkyAttackDescription:
+ 	db   "1er turno: Prepara"
+@@ -858,8 +858,8 @@ FlashDescription:
+ 	next "baja la PRECISIÓN.@"
+ 
+ PsywaveDescription:
+-	db   "Ataque con poder"
+-	next "variable.@"
++	db   "Agua hirviendo que"
++	next "puede quemar.@"
+ 
+ SplashDescription:
+ 	db   "No tiene ningún"
 @@ -898,12 +898,12 @@ HyperFangDescription:
  	next "causar retirada.@"
  
@@ -58340,6 +58641,29 @@ index 0a59a41..c3da174 100644
  
  TriAttackDescription:
  	db   "Dispara tres tipos"
+@@ -938,16 +938,16 @@ ThiefDescription:
+ 	next "robar un objeto.@"
+ 
+ SpiderWebDescription:
+-	db   "Impide huir o"
+-	next "cambiar.@"
++	db   "Lanza bombas de"
++	next "semillas duras.@"
+ 
+ MindReaderDescription:
+-	db   "Garantiza el éxito"
+-	next "del próximo golpe.@"
++	db   "Cabezazo mental"
++	next "que intimida.@"
+ 
+ NightmareDescription:
+-	db   "El dormido pierde"
+-	next "1/4 PS por turno.@"
++	db   "Rayo extraño que"
++	next "puede confundir.@"
+ 
+ FlameWheelDescription:
+ 	db   "Ataque que puede"
 @@ -966,8 +966,8 @@ FlailDescription:
  	next "tienes pocos PS.@"
  
@@ -58351,6 +58675,17 @@ index 0a59a41..c3da174 100644
  
  AeroblastDescription:
  	db   "Alta probabilidad"
+@@ -982,8 +982,8 @@ ReversalDescription:
+ 	next "tienes pocos PS.@"
+ 
+ SpiteDescription:
+-	db   "Baja PP del último"
+-	next "ataque del rival.@"
++	db   "Lanza rocas"
++	next "afiladas al rival.@"
+ 
+ PowderSnowDescription:
+ 	db   "Ataque que puede"
 @@ -1006,8 +1006,8 @@ FaintAttackDescription:
  	next "falla nunca.@"
  
@@ -58362,6 +58697,56 @@ index 0a59a41..c3da174 100644
  
  BellyDrumDescription:
  	db   "Reduce tus PS para"
+@@ -1034,8 +1034,8 @@ ZapCannonDescription:
+ 	next "paraliza siempre.@"
+ 
+ ForesightDescription:
+-	db   "Anula ataques que"
+-	next "bajan PRECISIÓN.@"
++	db   "Garra de sombra"
++	next "de gran filo.@"
+ 
+ DestinyBondDescription:
+ 	db   "El enemigo se"
+@@ -1058,8 +1058,8 @@ BoneRushDescription:
+ 	next "de 2 a 5 veces.@"
+ 
+ LockOnDescription:
+-	db   "Garantiza el éxito"
+-	next "del sig. ataque.@"
++	db   "Esfera de aura que"
++	next "no falla nunca.@"
+ 
+ OutrageDescription:
+ 	db   "Dura 2 ó 3 turnos"
+@@ -1130,12 +1130,12 @@ ReturnDescription:
+ 	next "la lealtad.@"
+ 
+ PresentDescription:
+-	db   "Bomba que puede"
+-	next "restaurar PS.@"
++	db   "Puñetazo que roba"
++	next "PS al rival.@"
+ 
+ FrustrationDescription:
+-	db   "Basado en la falta"
+-	next "de lealtad.@"
++	db   "Ataca desde la"
++	next "sombra primero.@"
+ 
+ SafeguardDescription:
+ 	db   "Evita problemas"
+@@ -1238,8 +1238,8 @@ MirrorCoatDescription:
+ 	next "ESPECIAL.@"
+ 
+ PsychUpDescription:
+-	db   "Copia los cambios"
+-	next "de car. del rival.@"
++	db   "Descarga eléctrica"
++	next "paraliza a veces.@"
+ 
+ ExtremespeedDescription:
+ 	db   "Un primer golpe"
 @@ -1268,3 +1268,15 @@ WhirlpoolDescription:
  BeatUpDescription:
  	db   "Ataque de todo el"
@@ -58379,7 +58764,7 @@ index 0a59a41..c3da174 100644
 +	db   "Puede bajar el"
 +	next "ATAQUE del rival.@"
 diff --git a/data/moves/moves.asm b/data/moves/moves.asm
-index 6f1b44a..274c99a 100644
+index 6f1b44a..4a5304e 100644
 --- a/data/moves/moves.asm
 +++ b/data/moves/moves.asm
 @@ -4,265 +4,270 @@ MACRO move
@@ -58681,7 +59066,7 @@ index 6f1b44a..274c99a 100644
 +	move MEGA_KICK, EFFECT_NORMAL_HIT, 120, NORMAL, PHYSICAL, 75, 5, 0
 +	move JUMP_KICK, EFFECT_JUMP_KICK, 70, FIGHTING, PHYSICAL, 95, 25, 0
 +	move ROLLING_KICK, EFFECT_FLINCH_HIT, 60, FIGHTING, PHYSICAL, 85, 15, 30
-+	move SAND_ATTACK, EFFECT_ACCURACY_DOWN, 0, GROUND, STATUS, 100, 15, 0
++	move ICE_FANG, EFFECT_FREEZE_HIT, 65, ICE, PHYSICAL, 95, 15, 10
 +	move HEADBUTT, EFFECT_FLINCH_HIT, 70, NORMAL, PHYSICAL, 100, 15, 30
 +	move HORN_ATTACK, EFFECT_NORMAL_HIT, 65, NORMAL, PHYSICAL, 100, 25, 0
 +	move FURY_ATTACK, EFFECT_MULTI_HIT, 15, NORMAL, PHYSICAL, 85, 20, 0
@@ -58702,12 +59087,12 @@ index 6f1b44a..274c99a 100644
 +	move ROAR, EFFECT_FORCE_SWITCH, 0, NORMAL, STATUS, 100, 20, 0
 +	move SING, EFFECT_SLEEP, 0, NORMAL, STATUS, 55, 15, 0
 +	move SUPERSONIC, EFFECT_CONFUSE, 0, NORMAL, STATUS, 55, 20, 0
-+	move SONICBOOM, EFFECT_STATIC_DAMAGE, 20, NORMAL, SPECIAL, 90, 20, 0
-+	move DISABLE, EFFECT_DISABLE, 0, NORMAL, STATUS, 55, 20, 0
++	move BRAVE_BIRD, EFFECT_RECOIL_HIT, 120, FLYING, PHYSICAL, 100, 15, 0
++	move AIR_SLASH, EFFECT_FLINCH_HIT, 75, FLYING, SPECIAL, 95, 15, 30
 +	move ACID, EFFECT_DEFENSE_DOWN_HIT, 40, POISON, SPECIAL, 100, 30, 10
 +	move EMBER, EFFECT_BURN_HIT, 40, FIRE, SPECIAL, 100, 25, 10
 +	move FLAMETHROWER, EFFECT_BURN_HIT, 95, FIRE, SPECIAL, 100, 15, 10
-+	move MIST, EFFECT_MIST, 0, ICE, STATUS, 100, 30, 0
++	move EARTH_POWER, EFFECT_SP_DEF_DOWN_HIT, 90, GROUND, SPECIAL, 100, 10, 10
 +	move WATER_GUN, EFFECT_NORMAL_HIT, 40, WATER, SPECIAL, 100, 25, 0
 +	move HYDRO_PUMP, EFFECT_NORMAL_HIT, 120, WATER, SPECIAL, 80, 5, 0
 +	move SURF, EFFECT_NORMAL_HIT, 95, WATER, SPECIAL, 100, 15, 0
@@ -58749,10 +59134,10 @@ index 6f1b44a..274c99a 100644
 +	move CONFUSION, EFFECT_CONFUSE_HIT, 50, PSYCHIC_TYPE, SPECIAL, 100, 25, 10
 +	move PSYCHIC_M, EFFECT_SP_DEF_DOWN_HIT, 90, PSYCHIC_TYPE, SPECIAL, 100, 10, 10
 +	move HYPNOSIS, EFFECT_SLEEP, 0, PSYCHIC_TYPE, STATUS, 60, 20, 0
-+	move MEDITATE, EFFECT_ATTACK_UP, 0, PSYCHIC_TYPE, STATUS, 100, 40, 0
++	move HYPER_VOICE, EFFECT_NORMAL_HIT, 90, NORMAL, SPECIAL, 100, 10, 0
 +	move AGILITY, EFFECT_SPEED_UP_2, 0, PSYCHIC_TYPE, STATUS, 100, 30, 0
 +	move QUICK_ATTACK, EFFECT_PRIORITY_HIT, 40, NORMAL, PHYSICAL, 100, 30, 0
-+	move RAGE, EFFECT_RAGE, 20, NORMAL, PHYSICAL, 100, 20, 0
++	move HEAT_WAVE, EFFECT_BURN_HIT, 95, FIRE, SPECIAL, 90, 10, 10
 +	move TELEPORT, EFFECT_TELEPORT, 0, PSYCHIC_TYPE, STATUS, 100, 20, 0
 +	move NIGHT_SHADE, EFFECT_LEVEL_DAMAGE, 1, GHOST, SPECIAL, 100, 15, 0
 +	move MIMIC, EFFECT_MIMIC, 0, NORMAL, STATUS, 100, 10, 0
@@ -58761,10 +59146,10 @@ index 6f1b44a..274c99a 100644
 +	move RECOVER, EFFECT_HEAL, 0, NORMAL, STATUS, 100, 20, 0
 +	move HARDEN, EFFECT_DEFENSE_UP, 0, NORMAL, STATUS, 100, 30, 0
 +	move MINIMIZE, EFFECT_EVASION_UP, 0, NORMAL, STATUS, 100, 20, 0
-+	move SMOKESCREEN, EFFECT_ACCURACY_DOWN, 0, NORMAL, STATUS, 100, 20, 0
++	move POWER_GEM, EFFECT_NORMAL_HIT, 80, ROCK, SPECIAL, 100, 20, 0
 +	move CONFUSE_RAY, EFFECT_CONFUSE, 0, GHOST, STATUS, 100, 10, 0
-+	move WITHDRAW, EFFECT_DEFENSE_UP, 0, WATER, STATUS, 100, 40, 0
-+	move DEFENSE_CURL, EFFECT_DEFENSE_CURL, 0, NORMAL, STATUS, 100, 40, 0
++	move AQUA_TAIL, EFFECT_NORMAL_HIT, 90, WATER, PHYSICAL, 90, 10, 0
++	move BULLET_PUNCH, EFFECT_PRIORITY_HIT, 40, STEEL, PHYSICAL, 100, 30, 0
 +	move BARRIER, EFFECT_DEFENSE_UP_2, 0, PSYCHIC_TYPE, STATUS, 100, 30, 0
 +	move LIGHT_SCREEN, EFFECT_LIGHT_SCREEN, 0, PSYCHIC_TYPE, STATUS, 100, 30, 0
 +	move HAZE, EFFECT_RESET_STATS, 0, ICE, STATUS, 100, 30, 0
@@ -58787,7 +59172,7 @@ index 6f1b44a..274c99a 100644
 +	move SPIKE_CANNON, EFFECT_MULTI_HIT, 20, NORMAL, PHYSICAL, 100, 15, 0
 +	move BUG_BUZZ, EFFECT_SP_DEF_DOWN_HIT, 90, BUG, SPECIAL, 100, 10, 10
 +	move AMNESIA, EFFECT_SP_DEF_UP_2, 0, PSYCHIC_TYPE, STATUS, 100, 20, 0
-+	move KINESIS, EFFECT_ACCURACY_DOWN, 0, PSYCHIC_TYPE, STATUS, 80, 15, 0
++	move ENERGY_BALL, EFFECT_SP_DEF_DOWN_HIT, 90, GRASS, SPECIAL, 100, 10, 10
 +	move SOFTBOILED, EFFECT_HEAL, 0, NORMAL, STATUS, 100, 10, 0
 +	move HI_JUMP_KICK, EFFECT_JUMP_KICK, 85, FIGHTING, PHYSICAL, 90, 20, 0
 +	move GLARE, EFFECT_PARALYZE, 0, NORMAL, STATUS, 75, 30, 0
@@ -58795,14 +59180,14 @@ index 6f1b44a..274c99a 100644
 +	move POISON_GAS, EFFECT_POISON, 0, POISON, STATUS, 55, 40, 0
 +	move DRAGON_PULSE, EFFECT_NORMAL_HIT, 85, DRAGON, SPECIAL, 100, 10, 0
 +	move LEECH_LIFE, EFFECT_LEECH_HIT, 20, BUG, PHYSICAL, 100, 15, 0
-+	move LOVELY_KISS, EFFECT_SLEEP, 0, NORMAL, STATUS, 75, 10, 0
++	move AQUA_JET, EFFECT_PRIORITY_HIT, 40, WATER, PHYSICAL, 100, 20, 0
 +	move SKY_ATTACK, EFFECT_SKY_ATTACK, 140, FLYING, PHYSICAL, 90, 5, 0
 +	move TRANSFORM, EFFECT_TRANSFORM, 0, NORMAL, STATUS, 100, 10, 0
 +	move BUBBLE, EFFECT_SPEED_DOWN_HIT, 20, WATER, SPECIAL, 100, 30, 10
 +	move DIZZY_PUNCH, EFFECT_CONFUSE_HIT, 70, NORMAL, PHYSICAL, 100, 10, 20
 +	move SPORE, EFFECT_SLEEP, 0, GRASS, STATUS, 100, 15, 0
 +	move FLASH, EFFECT_ACCURACY_DOWN, 0, NORMAL, STATUS, 70, 20, 0
-+	move PSYWAVE, EFFECT_PSYWAVE, 1, PSYCHIC_TYPE, SPECIAL, 80, 15, 0
++	move SCALD, EFFECT_BURN_HIT, 80, WATER, SPECIAL, 100, 15, 30
 +	move SPLASH, EFFECT_SPLASH, 0, NORMAL, STATUS, 100, 40, 0
 +	move ACID_ARMOR, EFFECT_DEFENSE_UP_2, 0, POISON, STATUS, 100, 40, 0
 +	move CRABHAMMER, EFFECT_NORMAL_HIT, 90, WATER, PHYSICAL, 85, 10, 0
@@ -58822,9 +59207,9 @@ index 6f1b44a..274c99a 100644
 +	move SKETCH, EFFECT_SKETCH, 0, NORMAL, STATUS, 100, 1, 0
 +	move TRIPLE_KICK, EFFECT_TRIPLE_KICK, 10, FIGHTING, PHYSICAL, 90, 10, 0
 +	move THIEF, EFFECT_THIEF, 40, DARK, PHYSICAL, 100, 10, 100
-+	move SPIDER_WEB, EFFECT_MEAN_LOOK, 0, BUG, STATUS, 100, 10, 0
-+	move MIND_READER, EFFECT_LOCK_ON, 0, NORMAL, STATUS, 100, 5, 0
-+	move NIGHTMARE, EFFECT_NIGHTMARE, 0, GHOST, STATUS, 100, 15, 0
++	move SEED_BOMB, EFFECT_NORMAL_HIT, 80, GRASS, PHYSICAL, 100, 15, 0
++	move ZEN_HEADBUTT, EFFECT_FLINCH_HIT, 80, PSYCHIC_TYPE, PHYSICAL, 90, 15, 20
++	move SIGNAL_BEAM, EFFECT_CONFUSE_HIT, 75, BUG, SPECIAL, 100, 15, 10
 +	move FLAME_WHEEL, EFFECT_FLAME_WHEEL, 60, FIRE, PHYSICAL, 100, 25, 10
 +	move SNORE, EFFECT_SNORE, 40, NORMAL, SPECIAL, 100, 15, 30
 +	move CURSE, EFFECT_CURSE, 0, CURSE_TYPE, STATUS, 100, 10, 0
@@ -58833,7 +59218,7 @@ index 6f1b44a..274c99a 100644
 +	move AEROBLAST, EFFECT_NORMAL_HIT, 100, FLYING, SPECIAL, 95, 5, 0
 +	move COTTON_SPORE, EFFECT_SPEED_DOWN_2, 0, GRASS, STATUS, 85, 40, 0
 +	move REVERSAL, EFFECT_REVERSAL, 1, FIGHTING, PHYSICAL, 100, 15, 0
-+	move SPITE, EFFECT_SPITE, 0, GHOST, STATUS, 100, 10, 0
++	move STONE_EDGE, EFFECT_NORMAL_HIT, 100, ROCK, PHYSICAL, 80, 5, 0
 +	move POWDER_SNOW, EFFECT_FREEZE_HIT, 40, ICE, SPECIAL, 100, 25, 10
 +	move PROTECT, EFFECT_PROTECT, 0, NORMAL, STATUS, 100, 10, 0
 +	move MACH_PUNCH, EFFECT_PRIORITY_HIT, 40, FIGHTING, PHYSICAL, 100, 30, 0
@@ -58846,13 +59231,13 @@ index 6f1b44a..274c99a 100644
 +	move OCTAZOOKA, EFFECT_ACCURACY_DOWN_HIT, 65, WATER, SPECIAL, 85, 10, 50
 +	move SPIKES, EFFECT_SPIKES, 0, GROUND, STATUS, 100, 20, 0
 +	move ZAP_CANNON, EFFECT_PARALYZE_HIT, 100, ELECTRIC, SPECIAL, 50, 5, 100
-+	move FORESIGHT, EFFECT_FORESIGHT, 0, NORMAL, STATUS, 100, 40, 0
++	move SHADOW_CLAW, EFFECT_NORMAL_HIT, 70, GHOST, PHYSICAL, 100, 15, 0
 +	move DESTINY_BOND, EFFECT_DESTINY_BOND, 0, GHOST, STATUS, 100, 5, 0
 +	move PERISH_SONG, EFFECT_PERISH_SONG, 0, NORMAL, STATUS, 100, 5, 0
 +	move ICY_WIND, EFFECT_SPEED_DOWN_HIT, 55, ICE, SPECIAL, 95, 15, 100
 +	move DETECT, EFFECT_PROTECT, 0, FIGHTING, STATUS, 100, 5, 0
 +	move BONE_RUSH, EFFECT_MULTI_HIT, 25, GROUND, PHYSICAL, 80, 10, 0
-+	move LOCK_ON, EFFECT_LOCK_ON, 0, NORMAL, STATUS, 100, 5, 0
++	move AURA_SPHERE, EFFECT_ALWAYS_HIT, 80, FIGHTING, SPECIAL, 100, 20, 0
 +	move OUTRAGE, EFFECT_RAMPAGE, 90, DRAGON, PHYSICAL, 100, 15, 0
 +	move SANDSTORM, EFFECT_SANDSTORM, 0, ROCK, STATUS, 100, 10, 0
 +	move GIGA_DRAIN, EFFECT_LEECH_HIT, 60, GRASS, SPECIAL, 100, 5, 0
@@ -58870,8 +59255,8 @@ index 6f1b44a..274c99a 100644
 +	move SLEEP_TALK, EFFECT_SLEEP_TALK, 0, NORMAL, STATUS, 100, 10, 0
 +	move HEAL_BELL, EFFECT_HEAL_BELL, 0, NORMAL, STATUS, 100, 5, 0
 +	move RETURN, EFFECT_RETURN, 1, NORMAL, PHYSICAL, 100, 20, 0
-+	move PRESENT, EFFECT_PRESENT, 1, NORMAL, PHYSICAL, 90, 15, 0
-+	move FRUSTRATION, EFFECT_FRUSTRATION, 1, NORMAL, PHYSICAL, 100, 20, 0
++	move DRAIN_PUNCH, EFFECT_LEECH_HIT, 75, FIGHTING, PHYSICAL, 100, 10, 0
++	move SHADOW_SNEAK, EFFECT_PRIORITY_HIT, 40, GHOST, PHYSICAL, 100, 30, 0
 +	move SAFEGUARD, EFFECT_SAFEGUARD, 0, NORMAL, STATUS, 100, 25, 0
 +	move PAIN_SPLIT, EFFECT_PAIN_SPLIT, 0, NORMAL, STATUS, 100, 20, 0
 +	move SACRED_FIRE, EFFECT_SACRED_FIRE, 100, FIRE, PHYSICAL, 95, 5, 50
@@ -58897,7 +59282,7 @@ index 6f1b44a..274c99a 100644
 +	move SUNNY_DAY, EFFECT_SUNNY_DAY, 0, FIRE, STATUS, 90, 5, 0
 +	move CRUNCH, EFFECT_SP_DEF_DOWN_HIT, 80, DARK, PHYSICAL, 100, 15, 20
 +	move MIRROR_COAT, EFFECT_MIRROR_COAT, 1, PSYCHIC_TYPE, SPECIAL, 100, 20, 0
-+	move PSYCH_UP, EFFECT_PSYCH_UP, 0, NORMAL, STATUS, 100, 10, 0
++	move DISCHARGE, EFFECT_PARALYZE_HIT, 80, ELECTRIC, SPECIAL, 100, 15, 30
 +	move EXTREMESPEED, EFFECT_PRIORITY_HIT, 80, NORMAL, PHYSICAL, 100, 5, 0
 +	move ANCIENTPOWER, EFFECT_ALL_UP_HIT, 60, ROCK, SPECIAL, 100, 5, 10
 +	move SHADOW_BALL, EFFECT_SP_DEF_DOWN_HIT, 80, GHOST, SPECIAL, 100, 15, 20
@@ -58910,7 +59295,7 @@ index 6f1b44a..274c99a 100644
 +	move PLAY_ROUGH, EFFECT_ATTACK_DOWN_HIT, 90, FAIRY, PHYSICAL, 90, 10, 10
  	assert_table_length NUM_ATTACKS
 diff --git a/data/moves/names.asm b/data/moves/names.asm
-index 4f49366..6b71e17 100644
+index 4f49366..2e9a08a 100644
 --- a/data/moves/names.asm
 +++ b/data/moves/names.asm
 @@ -3,23 +3,23 @@ MoveNames::
@@ -58941,7 +59326,57 @@ index 4f49366..6b71e17 100644
  	li "PORTAZO"
  	li "LÁTIGO CEPA"
  	li "PISOTÓN"
-@@ -116,11 +116,11 @@ MoveNames::
+@@ -27,7 +27,7 @@ MoveNames::
+ 	li "MEGA PATADA"
+ 	li "PATADA SALTO"
+ 	li "PATADA GIRO"
+-	li "ATAQUE ARENA"
++	li "COLM. HIELO"
+ 	li "GOLPE CABEZA"
+ 	li "CORNADA"
+ 	li "ATAQUE FURIA"
+@@ -48,12 +48,12 @@ MoveNames::
+ 	li "RUGIDO"
+ 	li "CANTO"
+ 	li "SUPERSÓNICO"
+-	li "BOMBA SÓNICA"
+-	li "ANULACIÓN"
++	li "PÁJARO OSADO"
++	li "AIRE AFILADO"
+ 	li "ÁCIDO"
+ 	li "ASCUAS"
+ 	li "LANZALLAMAS"
+-	li "NEBLINA"
++	li "TIERRA VIVA"
+ 	li "PISTOLA AGUA"
+ 	li "HIDRO BOMBA"
+ 	li "SURF"
+@@ -95,10 +95,10 @@ MoveNames::
+ 	li "CONFUSIÓN"
+ 	li "PSÍQUICO"
+ 	li "HIPNOSIS"
+-	li "MEDITACIÓN"
++	li "VOZARRÓN"
+ 	li "AGILIDAD"
+ 	li "AT. RÁPIDO"
+-	li "FURIA"
++	li "ONDA ÍGNEA"
+ 	li "TELETRANSP"
+ 	li "TINIEBLAS"
+ 	li "MIMÉTICO"
+@@ -107,20 +107,20 @@ MoveNames::
+ 	li "RECUPERACIÓN"
+ 	li "FORTALEZA"
+ 	li "REDUCCIÓN"
+-	li "PANTALLAHUMO"
++	li "JOYA DE LUZ"
+ 	li "RAYO CONFUSO"
+-	li "REFUGIO"
+-	li "RIZO DEFENSA"
++	li "ACUA COLA"
++	li "PUÑO BALA"
+ 	li "BARRERA"
+ 	li "PANTALLA LUZ"
  	li "NIEBLA"
  	li "REFLEJO"
  	li "FOCO ENERGÍA"
@@ -58956,24 +59391,36 @@ index 4f49366..6b71e17 100644
  	li "LENGÜETAZO"
  	li "POLUCIÓN"
  	li "RESIDUOS"
-@@ -131,7 +131,7 @@ MoveNames::
+@@ -131,24 +131,24 @@ MoveNames::
  	li "RAPIDEZ"
  	li "CABEZAZO"
  	li "CLAVO CAÑÓN"
 -	li "RESTRICCIÓN"
 +	li "ZUMBIDO"
  	li "AMNESIA"
- 	li "KINÉTICO"
+-	li "KINÉTICO"
++	li "ENERGIBOLA"
  	li "AMORTIGUADOR"
-@@ -139,7 +139,7 @@ MoveNames::
+ 	li "PAT. S. ALTA"
  	li "DESLUMBRAR"
  	li "COME SUEÑOS"
  	li "GAS VENENOSO"
 -	li "PRESA"
 +	li "PULSO DRAGÓN"
  	li "CHUPA VIDAS"
- 	li "BESO AMOROSO"
+-	li "BESO AMOROSO"
++	li "ACUA JET"
  	li "ATAQUE AÉREO"
+ 	li "TRANSFORM"
+ 	li "BURBUJA"
+ 	li "PUÑO-MAREO"
+ 	li "ESPORA"
+ 	li "DESTELLO"
+-	li "PSICO-ONDA"
++	li "ESCALDAR"
+ 	li "SALPICADURA"
+ 	li "ARMAD. ÁCIDA"
+ 	li "MARTILLAZO"
 @@ -158,8 +158,8 @@ MoveNames::
  	li "DESCANSO"
  	li "AVALANCHA"
@@ -58985,7 +59432,17 @@ index 4f49366..6b71e17 100644
  	li "TRI-ATAQUE"
  	li "SÚPER DIENTE"
  	li "CUCHILLADA"
-@@ -175,7 +175,7 @@ MoveNames::
+@@ -168,37 +168,37 @@ MoveNames::
+ 	li "ESQUEMA"
+ 	li "TRIPLEPATADA"
+ 	li "LADRÓN"
+-	li "TELARAÑA"
+-	li "TELÉPATA"
+-	li "PESADILLA"
++	li "BOMBA GERMEN"
++	li "CABEZAZO ZEN"
++	li "RAYO SEÑAL"
+ 	li "RUEDA FUEGO"
  	li "RONQUIDO"
  	li "MALDICIÓN"
  	li "AZOTE"
@@ -58994,7 +59451,10 @@ index 4f49366..6b71e17 100644
  	li "AEROCHORRO"
  	li "ESPORAGODÓN"
  	li "INVERSIÓN"
-@@ -185,7 +185,7 @@ MoveNames::
+-	li "RENCOR"
++	li "ROCA AFILADA"
+ 	li "NIEVE POLVO"
+ 	li "PROTECCIÓN"
  	li "ULTRA PUÑO"
  	li "CARA SUSTO"
  	li "FINTA"
@@ -59003,6 +59463,41 @@ index 4f49366..6b71e17 100644
  	li "TAMBOR"
  	li "BOMBA LODO"
  	li "BOFETÓN-LODO"
+ 	li "PULPOCAÑÓN"
+ 	li "PÚAS"
+ 	li "ELECTROCAÑÓN"
+-	li "PROFECÍA"
++	li "GARRA UMBRÍA"
+ 	li "MISMODESTINO"
+ 	li "CANTO MORTAL"
+ 	li "VIENTO HIELO"
+ 	li "DETECCIÓN"
+ 	li "ATAQUE ÓSEO"
+-	li "FIJAR BLANCO"
++	li "ESFERA AURAL"
+ 	li "ENFADO"
+ 	li "TORM. ARENA"
+ 	li "GIGA-DRENADO"
+@@ -216,8 +216,8 @@ MoveNames::
+ 	li "SONÁMBULO"
+ 	li "CAMPANA CURA"
+ 	li "RETROCESO"
+-	li "PRESENTE"
+-	li "FRUSTRACIÓN"
++	li "PUÑO DRENAJE"
++	li "SOMBRA VIL"
+ 	li "VELO SAGRADO"
+ 	li "DIVIDE DOLOR"
+ 	li "FUEGOSAGRADO"
+@@ -243,7 +243,7 @@ MoveNames::
+ 	li "DÍA SOLEADO"
+ 	li "TRITURAR"
+ 	li "MANTO ESPEJO"
+-	li "MÁS PSIQUE"
++	li "CHISPAZO"
+ 	li "VEL. EXTREMA"
+ 	li "PODER PASADO"
+ 	li "BOLA SOMBRA"
 @@ -251,4 +251,7 @@ MoveNames::
  	li "GOLPE ROCA"
  	li "TORBELLINO"
@@ -59012,7 +59507,7 @@ index 4f49366..6b71e17 100644
 +	li "CARANTOÑA"
  	assert_list_length NUM_ATTACKS
 diff --git a/data/moves/tmhm_moves.asm b/data/moves/tmhm_moves.asm
-index ce23362..4ba2abc 100644
+index ce23362..8ac9857 100644
 --- a/data/moves/tmhm_moves.asm
 +++ b/data/moves/tmhm_moves.asm
 @@ -6,9 +6,57 @@ TMHMMoves:
@@ -59025,7 +59520,7 @@ index ce23362..4ba2abc 100644
 +; V3: fixed randomized TM contents, seed 20261016. HMs below stay original.
 +	db 37 ; TM01
 +	db 194 ; TM02
-+	db 150 ; TM03
++	db 142 ; TM03
 +	db 137 ; TM04
 +	db 177 ; TM05
 +	db 182 ; TM06
@@ -59035,15 +59530,15 @@ index ce23362..4ba2abc 100644
 +	db 118 ; TM10
 +	db 47 ; TM11
 +	db 28 ; TM12
-+	db 189 ; TM13
++	db 54 ; TM13
 +	db 157 ; TM14
 +	db 225 ; TM15
 +	db 140 ; TM16
 +	db 63 ; TM17
-+	db 141 ; TM18
++	db 217 ; TM18
 +	db 73 ; TM19
 +	db 14 ; TM20
-+	db 45 ; TM21
++	db 244 ; TM21
 +	db 253 ; TM22
 +	db 203 ; TM23
 +	db 215 ; TM24
@@ -59055,24 +59550,24 @@ index ce23362..4ba2abc 100644
 +	db 175 ; TM30
 +	db 17 ; TM31
 +	db 183 ; TM32
-+	db 1 ; TM33
++	db 171 ; TM33
 +	db 228 ; TM34
 +	db 161 ; TM35
-+	db 125 ; TM36
++	db 49 ; TM36
 +	db 96 ; TM37
-+	db 151 ; TM38
++	db 180 ; TM38
 +	db 109 ; TM39
-+	db 178 ; TM40
++	db 193 ; TM40
 +	db 239 ; TM41
 +	db 226 ; TM42
 +	db 97 ; TM43
 +	db 158 ; TM44
 +	db 105 ; TM45
 +	db 124 ; TM46
-+	db 33 ; TM47
++	db 134 ; TM47
 +	db 115 ; TM48
 +	db 212 ; TM49
-+	db 112 ; TM50
++	db 199 ; TM50
  	assert_table_length NUM_TMS
  
  ; HMs
@@ -76148,6 +76643,19 @@ index ff7f07a..6e73f93 100644
  
  ; BUG: Team Rocket battle music is not used for Executives or Scientists (see docs/bugs_and_glitches.md)
  	ld de, MUSIC_ROCKET_BATTLE
+diff --git a/engine/battle_anims/core.asm b/engine/battle_anims/core.asm
+index 7271ffa..42ab21c 100644
+--- a/engine/battle_anims/core.asm
++++ b/engine/battle_anims/core.asm
+@@ -262,8 +262,6 @@ InitBattleAnimBuffer:
+ 	or a
+ 	jr nz, .no_sub
+ 	ld a, [wFXAnimID]
+-	cp KINESIS
+-	jr z, .do_sub
+ 	cp SOFTBOILED
+ 	jr z, .do_sub
+ 	cp MILK_DRINK
 diff --git a/engine/debug/nuzlocke_sandbox.asm b/engine/debug/nuzlocke_sandbox.asm
 new file mode 100644
 index 0000000..ff981c2
@@ -79565,10 +80073,12 @@ index 0000000..4b0ff3a
 +POPS
 diff --git a/engine/events/tito_xeluis.asm b/engine/events/tito_xeluis.asm
 new file mode 100644
-index 0000000..f00340a
+index 0000000..49403aa
 --- /dev/null
 +++ b/engine/events/tito_xeluis.asm
-@@ -0,0 +1,810 @@
+@@ -0,0 +1,1096 @@
++DEF NUM_TITO_TRADE_CITIES EQU 22
++
 +SECTION "Tito Xeluis services", ROMX
 +
 +TitoXeluisServices::
@@ -79610,8 +80120,13 @@ index 0000000..f00340a
 +	cp 2
 +	jr z, .superleague
 +	cp 3
++	jr z, .partners
++	cp 4
 +	jp z, .again
 +	ret
++.partners
++	call TitoTradePartners
++	jp .again
 +.superleague
 +	ld a, 2
 +	ld [wScriptVar], a
@@ -79659,14 +80174,15 @@ index 0000000..f00340a
 +	db "MÁS / SALIR@"
 +.MoreMenuHeader:
 +	db MENU_BACKUP_TILES
-+	menu_coords 0, 0, 19, 9
++	menu_coords 0, 0, 19, 11
 +	dw .MoreMenuData
 +	db 1
 +.MoreMenuData:
 +	db STATICMENU_CURSOR
-+	db 4
++	db 5
 +	db "EVOLUCIONES@"
 +	db "SUPERLIGA@"
++	db "TRUEQUES@"
 +	db "VOLVER@"
 +	db "SALIR@"
 +.Hello:
@@ -79819,6 +80335,247 @@ index 0000000..f00340a
 +	pop hl
 +	jp PlaceString
 +
++TitoTradePartners:
++; Lists everyone the player can still trade with and where: TITO in his Pokemon
++; Centers (all of them once he has been beaten) and the six trading NPCs.
++	call TitoBuildTradeList
++	ld a, [wTitoReminderMoves]
++	and a
++	jr z, .none
++	call FadeToMenu
++	call ClearBGPalettes
++	call ClearScreen
++	call DelayFrame
++	ld b, SCGB_DIPLOMA
++	call GetSGBLayout
++	call SetDefaultBGPAndOBP
++	ld hl, .Choose
++	call PrintText
++	ld hl, .MenuHeader
++	call LoadMenuHeader
++	xor a
++	ld [wMenuScrollPosition], a
++	ld [wWhichIndexSet], a
++	inc a
++	ld [wMenuCursorPosition], a
++	call InitScrollingMenu
++	call ScrollingMenu
++	call ExitMenu
++	jp CloseSubmenu
++.none
++	ld hl, .Nobody
++	jp PrintText
++.Choose:
++	text "Aún puedes cambiar"
++	line "con (T: es TITO):"
++	done
++.Nobody:
++	text "Ya no te queda"
++	line "nadie con quien"
++	cont "intercambiar."
++	done
++.MenuHeader:
++	db MENU_BACKUP_TILES
++	menu_coords 1, 1, 19, 11
++	dw .MenuData
++	db 1
++.MenuData:
++	db SCROLLINGMENU_DISPLAY_ARROWS
++	db 5, 0
++	db SCROLLINGMENU_ITEMS_NORMAL
++	dbw 0, wTitoReminderMoves
++	dba .PrintRow
++	dba NULL
++	dba NULL
++.PrintRow:
++	push de
++	ld a, [wMenuSelection]
++	cp NUM_TITO_TRADE_CITIES + 1
++	jr nc, .npc
++; "T:" and the name of the landmark of his Pokemon Center
++	call TitoTradeCityLandmark
++	ld e, a
++	farcall GetLandmarkName
++	ld hl, wStringBuffer1
++	ld de, wStringBuffer2 + 2
++	ld bc, 16
++	call CopyBytes
++; the names use a hard space to split lines in the location sign
++	ld hl, wStringBuffer2 + 2
++	ld c, 16
++.spaces
++	ld a, [hl]
++	cp '¯'
++	jr nz, .keep
++	ld [hl], ' '
++.keep
++	inc hl
++	dec c
++	jr nz, .spaces
++	ld a, '@'
++	ld [wStringBuffer2 + 18], a
++	ld a, 'T'
++	ld [wStringBuffer2], a
++	ld a, ':'
++	ld [wStringBuffer2 + 1], a
++	ld de, wStringBuffer2
++	pop hl
++	jp PlaceString
++.npc
++	sub NUM_TITO_TRADE_CITIES + 1
++	ld e, a
++	ld d, 0
++	ld hl, .NPCNames
++	add hl, de
++	add hl, de
++	ld a, [hli]
++	ld d, [hl]
++	ld e, a
++	pop hl
++	jp PlaceString
++.NPCNames:
++	dw .Mike
++	dw .Kyle
++	dw .Tim
++	dw .Emy
++	dw .Kim
++	dw .Forest
++.Mike: db "MIKE:ALMACÉN@"
++.Kyle: db "KYLE:CD. MALVA@"
++.Tim: db "TIM:CD. OLIVO@"
++.Emy: db "EMY:CD. ENDRINO@"
++.Kim: db "KIM:RUTA 14@"
++.Forest: db "FOREST:CENTRAL@"
++
++TitoTradeCityLandmark:
++; A = city number 1-22. Returns A = the landmark of that Pokemon Center.
++	push bc
++	push hl
++	dec a
++	ld c, a
++	ld b, 0
++	ld hl, TitoTradeCityMaps
++	add hl, bc
++	add hl, bc
++	ld a, [hli]
++	ld b, a
++	ld c, [hl]
++	call GetWorldMapLocation
++	pop hl
++	pop bc
++	ret
++
++TitoTradeCityMaps:
++	MACRO tito_map_id
++		db GROUP_\1, MAP_\1
++	ENDM
++	tito_map_id AZALEA_POKECENTER_1F
++	tito_map_id BLACKTHORN_POKECENTER_1F
++	tito_map_id CELADON_POKECENTER_1F
++	tito_map_id CERULEAN_POKECENTER_1F
++	tito_map_id CHERRYGROVE_POKECENTER_1F
++	tito_map_id CIANWOOD_POKECENTER_1F
++	tito_map_id CINNABAR_POKECENTER_1F
++	tito_map_id ECRUTEAK_POKECENTER_1F
++	tito_map_id FUCHSIA_POKECENTER_1F
++	tito_map_id GOLDENROD_POKECENTER_1F
++	tito_map_id INDIGO_PLATEAU_POKECENTER_1F
++	tito_map_id LAVENDER_POKECENTER_1F
++	tito_map_id MAHOGANY_POKECENTER_1F
++	tito_map_id OLIVINE_POKECENTER_1F
++	tito_map_id PEWTER_POKECENTER_1F
++	tito_map_id ROUTE_10_POKECENTER_1F
++	tito_map_id ROUTE_32_POKECENTER_1F
++	tito_map_id SAFFRON_POKECENTER_1F
++	tito_map_id SILVER_CAVE_POKECENTER_1F
++	tito_map_id VERMILION_POKECENTER_1F
++	tito_map_id VIOLET_POKECENTER_1F
++	tito_map_id VIRIDIAN_POKECENTER_1F
++
++TitoBuildTradeList:
++; wTitoReminderMoves = count, then one code per partner: 1-22 TITO's cities,
++; 23-28 the NPCs Mike, Kyle, Tim, Emy, Kim and Forest. Ends with -1.
++	xor a
++	ld [wTitoReminderMoves], a
++	ld a, 1
++.cities
++	push af
++	ld de, EVENT_BEAT_TITO_XELUIS
++	ld b, CHECK_FLAG
++	call EventFlagAction
++	jr nz, .city_free
++	pop af
++	push af
++	call TitoTradeCityLandmark
++	ld e, a
++	ld d, 0
++	ld hl, EVENT_TITO_TRADE_BASE
++	add hl, de
++	ld d, h
++	ld e, l
++	ld b, CHECK_FLAG
++	call EventFlagAction
++	jr nz, .city_used
++.city_free
++	pop af
++	push af
++	call TitoAddTradeCode
++.city_used
++	pop af
++	inc a
++	cp NUM_TITO_TRADE_CITIES + 1
++	jr nz, .cities
++.npcs
++	ld e, 0
++.npc_loop
++	ld a, e
++	cp 6
++	jr z, .end
++	ld hl, .NPCIndexes
++	ld d, 0
++	add hl, de
++	ld c, [hl]
++	push de
++	ld hl, wTradeFlags
++	ld b, CHECK_FLAG
++	predef SmallFarFlagAction
++	ld a, c
++	pop de
++	and a
++	jr nz, .npc_next
++	ld a, e
++	add NUM_TITO_TRADE_CITIES + 1
++	call TitoAddTradeCode
++.npc_next
++	inc e
++	jr .npc_loop
++.end
++	ld a, [wTitoReminderMoves]
++	inc a
++	ld c, a
++	ld b, 0
++	ld hl, wTitoReminderMoves
++	add hl, bc
++	ld [hl], -1
++	ret
++.NPCIndexes:
++	db NPC_TRADE_MIKE, NPC_TRADE_KYLE, NPC_TRADE_TIM, NPC_TRADE_EMY, NPC_TRADE_KIM, NPC_TRADE_FOREST
++
++TitoAddTradeCode:
++; A = code. Preserves DE.
++	push de
++	ld d, a
++	ld a, [wTitoReminderMoves]
++	inc a
++	ld [wTitoReminderMoves], a
++	ld c, a
++	ld b, 0
++	ld hl, wTitoReminderMoves
++	add hl, bc
++	ld [hl], d
++	pop de
++	ret
++
 +TitoBuildReminderMoves::
 +; Only original moves at/below the selected mon's current level, excluding
 +; moves already known. Random starting moves never overwrite these tables.
@@ -79864,7 +80621,7 @@ index 0000000..f00340a
 +	pop hl
 +	jr .next
 +.done
-+	call TitoOfferFairyMoves
++	call TitoOfferModernMoves
 +	ld a, [wTitoReminderMoves]
 +	inc a
 +	ld c, a
@@ -79912,18 +80669,12 @@ index 0000000..f00340a
 +.skip
 +	ret
 +
-+TitoOfferFairyMoves:
-+; Fairy-type Pokemon rarely learn Fairy moves, so Tito also remembers these for them.
++TitoOfferModernMoves:
++; The modern moves of this ROM are taught by no original learnset, so Tito also
++; remembers them for every Pokemon that has their type, from the listed level on.
 +	ld a, [wCurPartySpecies]
 +	ld [wCurSpecies], a
 +	call GetBaseData
-+	ld a, [wBaseType1]
-+	cp FAIRY
-+	jr z, .fairy
-+	ld a, [wBaseType2]
-+	cp FAIRY
-+	ret nz
-+.fairy
 +	ld hl, .Moves
 +.next
 +	ld a, [hli]
@@ -79932,20 +80683,63 @@ index 0000000..f00340a
 +	ld b, a
 +	ld a, [hli]
 +	ld d, a
++	ld a, [hli]
++	ld c, a
 +	ld a, [wCurPartyLevel]
 +	cp b
 +	jr c, .next
++	ld a, [wBaseType1]
++	cp c
++	jr z, .offer
++	ld a, [wBaseType2]
++	cp c
++	jr nz, .next
++.offer
 +	push hl
 +	call TitoOfferReminderMove
 +	pop hl
 +	jr .next
 +.Moves:
-+	db  5, FAIRY_WIND
-+	db 10, CHARM
-+	db 20, MOONLIGHT
-+	db 30, DAZZLING_GLEAM
-+	db 40, PLAY_ROUGH
-+	db 50, MOONBLAST
++; level, move, type
++	db  5, FAIRY_WIND, FAIRY
++	db 10, CHARM, FAIRY
++	db 20, MOONLIGHT, FAIRY
++	db 30, DAZZLING_GLEAM, FAIRY
++	db 40, PLAY_ROUGH, FAIRY
++	db 50, MOONBLAST, FAIRY
++	db 24, POISON_JAB, POISON
++	db 30, CROSS_POISON, POISON
++	db 38, SLUDGE_WAVE, POISON
++	db 48, GUNK_SHOT, POISON
++	db 28, X_SCISSOR, BUG
++	db 30, SIGNAL_BEAM, BUG
++	db 40, BUG_BUZZ, BUG
++	db 30, DRAGON_CLAW, DRAGON
++	db 40, DRAGON_PULSE, DRAGON
++	db 25, NIGHT_SLASH, DARK
++	db 35, DARK_PULSE, DARK
++	db 15, BULLET_PUNCH, STEEL
++	db 30, IRON_HEAD, STEEL
++	db 38, FLASH_CANNON, STEEL
++	db 12, AQUA_JET, WATER
++	db 30, SCALD, WATER
++	db 40, AQUA_TAIL, WATER
++	db 24, SEED_BOMB, GRASS
++	db 34, ENERGY_BALL, GRASS
++	db 36, DISCHARGE, ELECTRIC
++	db 28, DRAIN_PUNCH, FIGHTING
++	db 36, AURA_SPHERE, FIGHTING
++	db 28, ZEN_HEADBUTT, PSYCHIC_TYPE
++	db 12, SHADOW_SNEAK, GHOST
++	db 26, SHADOW_CLAW, GHOST
++	db 30, POWER_GEM, ROCK
++	db 44, STONE_EDGE, ROCK
++	db 40, EARTH_POWER, GROUND
++	db 32, AIR_SLASH, FLYING
++	db 50, BRAVE_BIRD, FLYING
++	db 38, HYPER_VOICE, NORMAL
++	db 36, HEAT_WAVE, FIRE
++	db 30, ICE_FANG, ICE
 +	db 0
 +
 +TitoHasAllBadges::
@@ -80393,14 +81187,14 @@ index aac674f..5be0afb 100644
  
 diff --git a/engine/events/ulex.asm b/engine/events/ulex.asm
 new file mode 100644
-index 0000000..26af913
+index 0000000..34a95f4
 --- /dev/null
 +++ b/engine/events/ulex.asm
-@@ -0,0 +1,394 @@
+@@ -0,0 +1,369 @@
 +SECTION "Ulex encounters", ROMX
 +
-+; Sixteen independently persistent disguises. A second encounter is locked
-+; until another badge is earned, even when Kanto gyms are done out of order.
++; Sixteen independently persistent disguises, each fought once. There is no badge
++; lock between encounters: he is always there when the player reaches his spot.
 +UlexCanBattle::
 +	xor a
 +	ld [wUlexDidBattle], a
@@ -80409,20 +81203,7 @@ index 0000000..26af913
 +	call CountSetBits
 +	ld a, [wNumSetBits]
 +	ld [wUlexBadgeCount], a
-+	ld e, a
-+	ld d, 0
-+	ld hl, EVENT_ULEX_BADGE_BASE
-+	add hl, de
-+	ld d, h
-+	ld e, l
-+	ld b, CHECK_FLAG
-+	call EventFlagAction
-+	ld a, c
-+	and a
-+	ld a, 0
-+	jr nz, .done
-+	inc a
-+.done
++	ld a, 1
 +	ld [wScriptVar], a
 +	ret
 +
@@ -80668,7 +81449,6 @@ index 0000000..26af913
 +UlexBattleScript::
 +	faceplayer
 +	callasm UlexCanBattle
-+	iffalse .WaitForBadge
 +	applymovementlasttalked .Spin
 +	loadmem wUlexRevealLoading, 1
 +	variablesprite SPRITE_COPYCAT, SPRITE_ROCKET
@@ -80712,12 +81492,6 @@ index 0000000..26af913
 +	writetext .LossText
 +	waitbutton
 +.Done
-+	closetext
-+	end
-+.WaitForBadge
-+	opentext
-+	writetext .WaitText
-+	waitbutton
 +	closetext
 +	end
 +.Refused
@@ -80769,11 +81543,6 @@ index 0000000..26af913
 +	text "."
 +	line "¡Chao wachin!"
 +	para "Te dejo a ZURULLO."
-+	done
-+.WaitText
-+	text "Ahora no toca."
-+	line "Gana otra medalla"
-+	cont "y sigue tu camino."
 +	done
 +.FullText
 +	text "No cabe la MT."
@@ -86820,7 +87589,7 @@ index 467e1aa..636e9c2 100644
  .GotTyrogue:
  	writetext MountMortarB1FKiyoGotTyrogueText
 diff --git a/maps/NewBarkTown.asm b/maps/NewBarkTown.asm
-index ca9d86b..cec963e 100644
+index ca9d86b..595a416 100644
 --- a/maps/NewBarkTown.asm
 +++ b/maps/NewBarkTown.asm
 @@ -2,6 +2,8 @@
@@ -86848,7 +87617,7 @@ index ca9d86b..cec963e 100644
  
  NewBarkTownNoop1Scene:
  	end
-@@ -123,8 +134,195 @@ NewBarkTownRivalScript:
+@@ -123,8 +134,233 @@ NewBarkTownRivalScript:
  	playsound SFX_TACKLE
  	applymovement PLAYER, NewBarkTown_RivalShovesYouOutMovement
  	applymovement NEWBARKTOWN_RIVAL, NewBarkTown_RivalReturnsToTheShadowsMovement
@@ -86883,7 +87652,8 @@ index ca9d86b..cec963e 100644
 +	appear NEWBARKTOWN_OTHER_GIRL
 +	applymovement NEWBARKTOWN_OTHER_GIRL, NewBarkTownOtherRunsToYouMovement
 +	turnobject PLAYER, RIGHT
-+	sjump NewBarkTownOtherAmbushScript
++	setevent EVENT_OTHER_AMBUSH_NEW_BARK
++	sjump NewBarkTownOtherAmbushGirl
 +
 +.BoyRuns:
 +	; the player is a girl: Gold (the boy) runs up
@@ -86897,7 +87667,8 @@ index ca9d86b..cec963e 100644
 +	appear NEWBARKTOWN_OTHER_BOY
 +	applymovement NEWBARKTOWN_OTHER_BOY, NewBarkTownOtherRunsToYouMovement
 +	turnobject PLAYER, RIGHT
-+	sjump NewBarkTownOtherAmbushScript
++	setevent EVENT_OTHER_AMBUSH_NEW_BARK
++	sjump NewBarkTownOtherAmbushBoy
 +
 +NewBarkTownOtherRunsToYouMovement:
 +	big_step LEFT
@@ -86911,11 +87682,12 @@ index ca9d86b..cec963e 100644
 +	setevent EVENT_OTHER_SCENE_ACTIVE
 +	setevent EVENT_OTHER_AMBUSH_NEW_BARK
 +	readmem wPlayerGender
-+	iftrue .BoyAmbushes
++	iftrue NewBarkTownOtherAmbushBoyStart
 +	; the player is a boy: Cristal (the girl) ambushes
 +	setval NEWBARKTOWN_OTHER_GIRL
 +	callasm MoveObjectToPlayerFront
 +	appear NEWBARKTOWN_OTHER_GIRL
++NewBarkTownOtherAmbushGirl:
 +	faceobject NEWBARKTOWN_OTHER_GIRL, PLAYER
 +	showemote EMOTE_SHOCK, PLAYER, 15
 +	playmusic MUSIC_RIVAL_ENCOUNTER
@@ -86939,11 +87711,22 @@ index ca9d86b..cec963e 100644
 +	waitsfx
 +	verbosegiveitem MAX_POTION
 +	closetext
++	readvar VAR_XCOORD
++	ifequal 1, .GirlLeaveWest
 +	readvar VAR_FACING
 +	ifequal DOWN, .GirlLeaveDown
 +	ifequal UP, .GirlLeaveUp
 +	ifequal LEFT, .GirlLeaveLeft
 +	applymovement NEWBARKTOWN_OTHER_GIRL, NewBarkTownOtherLeaveRightMovement
++	sjump .GirlGone
++.GirlLeaveWest:
++	; she ran up from behind: she goes on towards Route 29 along the next row
++	readvar VAR_YCOORD
++	ifequal 8, .GirlWestRow8
++	applymovement NEWBARKTOWN_OTHER_GIRL, NewBarkTownOtherLeaveWestFromRow9Movement
++	sjump .GirlGone
++.GirlWestRow8:
++	applymovement NEWBARKTOWN_OTHER_GIRL, NewBarkTownOtherLeaveWestFromRow8Movement
 +	sjump .GirlGone
 +.GirlLeaveDown:
 +	applymovement NEWBARKTOWN_OTHER_GIRL, NewBarkTownOtherLeaveDownMovement
@@ -86957,11 +87740,12 @@ index ca9d86b..cec963e 100644
 +	disappear NEWBARKTOWN_OTHER_GIRL
 +	sjump NewBarkTownOtherAmbushEnd
 +
-+.BoyAmbushes:
++NewBarkTownOtherAmbushBoyStart:
 +	; the player is a girl: Gold (the boy) ambushes
 +	setval NEWBARKTOWN_OTHER_BOY
 +	callasm MoveObjectToPlayerFront
 +	appear NEWBARKTOWN_OTHER_BOY
++NewBarkTownOtherAmbushBoy:
 +	faceobject NEWBARKTOWN_OTHER_BOY, PLAYER
 +	showemote EMOTE_SHOCK, PLAYER, 15
 +	playmusic MUSIC_RIVAL_ENCOUNTER
@@ -86985,11 +87769,22 @@ index ca9d86b..cec963e 100644
 +	waitsfx
 +	verbosegiveitem MAX_POTION
 +	closetext
++	readvar VAR_XCOORD
++	ifequal 1, .BoyLeaveWest
 +	readvar VAR_FACING
 +	ifequal DOWN, .BoyLeaveDown
 +	ifequal UP, .BoyLeaveUp
 +	ifequal LEFT, .BoyLeaveLeft
 +	applymovement NEWBARKTOWN_OTHER_BOY, NewBarkTownOtherLeaveRightMovement
++	sjump .BoyGone
++.BoyLeaveWest:
++	; she ran up from behind: she goes on towards Route 29 along the next row
++	readvar VAR_YCOORD
++	ifequal 8, .BoyWestRow8
++	applymovement NEWBARKTOWN_OTHER_BOY, NewBarkTownOtherLeaveWestFromRow9Movement
++	sjump .BoyGone
++.BoyWestRow8:
++	applymovement NEWBARKTOWN_OTHER_BOY, NewBarkTownOtherLeaveWestFromRow8Movement
 +	sjump .BoyGone
 +.BoyLeaveDown:
 +	applymovement NEWBARKTOWN_OTHER_BOY, NewBarkTownOtherLeaveDownMovement
@@ -87007,6 +87802,18 @@ index ca9d86b..cec963e 100644
 +NewBarkTownOtherAmbushDone:
  	end
  
++NewBarkTownOtherLeaveWestFromRow8Movement:
++	step DOWN
++	step LEFT
++	step LEFT
++	step_end
++
++NewBarkTownOtherLeaveWestFromRow9Movement:
++	step UP
++	step LEFT
++	step LEFT
++	step_end
++
 +NewBarkTownOtherLeaveDownMovement:
 +	step DOWN
 +	step DOWN
@@ -87044,7 +87851,7 @@ index ca9d86b..cec963e 100644
  NewBarkTownSign:
  	jumptext NewBarkTownSignText
  
-@@ -292,6 +490,8 @@ NewBarkTown_MapEvents:
+@@ -292,6 +528,8 @@ NewBarkTown_MapEvents:
  	def_coord_events
  	coord_event  1,  8, SCENE_NEWBARKTOWN_TEACHER_STOPS_YOU, NewBarkTown_TeacherStopsYouScene1
  	coord_event  1,  9, SCENE_NEWBARKTOWN_TEACHER_STOPS_YOU, NewBarkTown_TeacherStopsYouScene2
@@ -87053,7 +87860,7 @@ index ca9d86b..cec963e 100644
  
  	def_bg_events
  	bg_event  8,  8, BGEVENT_READ, NewBarkTownSign
-@@ -303,3 +503,5 @@ NewBarkTown_MapEvents:
+@@ -303,3 +541,5 @@ NewBarkTown_MapEvents:
  	object_event  6,  8, SPRITE_TEACHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 1, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, NewBarkTownTeacherScript, -1
  	object_event 12,  9, SPRITE_FISHER, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, NewBarkTownFisherScript, -1
  	object_event  3,  2, SPRITE_RIVAL, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, NewBarkTownRivalScript, EVENT_RIVAL_NEW_BARK_TOWN

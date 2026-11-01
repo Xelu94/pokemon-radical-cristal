@@ -1,0 +1,33 @@
+{
+  "passed": 7,
+  "tests": [
+    {
+      "name": "TRUEQUES opens a list that starts with the first TITO city",
+      "passed": true
+    },
+    {
+      "name": "and the prompt tells what T: means",
+      "passed": true
+    },
+    {
+      "name": "all 22 Tito cities are listed with readable names (no garbage glyphs)",
+      "passed": true
+    },
+    {
+      "name": "and the six NPCs with where to find them",
+      "passed": true
+    },
+    {
+      "name": "every row fits the menu (17 columns or fewer)",
+      "passed": true
+    },
+    {
+      "name": "a used city and a finished NPC trade leave the list (21 TITO cities, five NPCs)",
+      "passed": true
+    },
+    {
+      "name": "leaving the list returns to TITO's menu",
+      "passed": true
+    }
+  ]
+}

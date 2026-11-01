@@ -1,0 +1,13 @@
+{
+  "passed": 2,
+  "tests": [
+    {
+      "name": "row 8: after the first fight the other protagonist is gone (no sprite left on the map, pressing A starts no dialogue)",
+      "passed": true
+    },
+    {
+      "name": "row 9: after the first fight the other protagonist is gone (no sprite left on the map, pressing A starts no dialogue)",
+      "passed": true
+    }
+  ]
+}

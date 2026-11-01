@@ -8,11 +8,26 @@ Origen de los errores: la revisión del autor del proyecto (documentos «Arreglo
 
 | Versión | Errores corregidos | Gravedad máxima |
 |---|---|---|
+| 5.6 | 2 | Sprite fantasma |
 | 5.4 | 6 (todos hallados por los beta testers) | Reinicio de consola |
 | 5.3 | 8 | Reinicio de consola |
 | 5.2 | 2 | Pérdida de reto mal anunciada |
 | 5.1 | 4 | Gráficos corruptos |
 | 5.0 | 2 | Gráficos |
+
+## 5.6
+
+### E-5.6-1 · Ulex pedía otra medalla antes de poder combatir
+- **Síntoma:** el Ulex de antes del Lago de la Furia (Ruta 43) y el de antes de la Ruta Helada (Ruta 44) decían «Ahora no toca. Gana otra medalla y sigue tu camino», aunque la medalla siguiente (Fredo, Débora) quedaba más atrás en el recorrido.
+- **Causa:** `UlexCanBattle` permitía un solo combate por cantidad de medallas; los dos Ulex caían con la misma cuenta.
+- **Solución:** se quita el cerrojo; cada ubicación se combate una vez (su bandera de ubicación sigue ocultando al Ulex derrotado).
+- **Prueba:** `test-v56-routines.py` (con todas las banderas de hito puestas sigue pudiéndose combatir).
+
+### E-5.6-2 · El otro protagonista se quedaba en el mapa tras la primera pelea
+- **Síntoma:** tras ganar o perder la primera emboscada, el sprite de GOLD/CRISTAL seguía en Pueblo Primavera y al hablarle salía «Evento de objeto.».
+- **Causa:** la 5.5 creaba el objeto (`appear`) al correr hacia el jugador y otra vez en el guion de la emboscada; el `disappear` final solo borraba una de las dos copias.
+- **Solución:** el guion se divide: la ruta antigua hace `appear` y la nueva salta a `NewBarkTownOtherAmbushGirl/Boy` sin repetirlo. Al terminar, el personaje corre hacia la Ruta 29 por la fila contigua y desaparece.
+- **Prueba:** `test-v56-story.py` (ninguna estructura de objeto con su sprite tras la pelea, como chico y como chica; falla con la ROM 5.5).
 
 ## 5.4
 

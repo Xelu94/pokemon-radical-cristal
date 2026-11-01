@@ -21,7 +21,7 @@ Si eres chico, la otra es **CRISTAL**; si eres chica, el otro es **GOLD**. Lleva
 | Guarida Dragón (piso B1), tras hablar con Plata | Plata se va y aparece | RATICATE, ALAKAZAM, SNORLAX, TAUROS, ARCANINE (48) |
 | Centro Pokémon de la Meseta Añil, la primera vez que entras (hace falta un hueco en el equipo) | El último combate; te da un huevo y se va por la puerta | RATICATE, ALAKAZAM, SNORLAX, TAUROS, ARCANINE (60), DRAGONITE (62) |
 
-Los niveles se elevan al mínimo del tope vigente, como los de cualquier entrenador. Las tres primeras emboscadas se activan una sola vez. En cada una, al terminar el combate (aunque lo pierdas) ella cura a todo tu equipo, te da una MÁX. POCIÓN y se marcha.
+Los niveles se elevan al mínimo del tope vigente, como los de cualquier entrenador. Las tres primeras emboscadas se activan una sola vez. En cada una, al terminar el combate (aunque lo pierdas) ella cura a todo tu equipo, te da una MÁX. POCIÓN y se marcha (en la de Pueblo Primavera corre hacia la Ruta 29 y desaparece).
 
 Diálogos de la primera emboscada (los de las otras dos son variantes):
 

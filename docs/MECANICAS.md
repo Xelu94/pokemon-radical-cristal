@@ -1,4 +1,4 @@
-# Mecánicas y reglas vigentes (v5.5)
+# Mecánicas y reglas vigentes (v5.6)
 
 Descripción de la ROM normal. Los datos numéricos se contrastaron con la fuente integrada (`engine/pokemon/v2_balance.asm`, `data/moves/moves.asm`, `data/pokemon/evos_attacks.asm`). Cuando una regla depende del emulador o de la semilla, se indica.
 
@@ -23,9 +23,9 @@ Descripción de la ROM normal. Los datos numéricos se contrastaron con la fuent
 ## Tipos y movimientos
 
 - **Tipo Hada**, con actualización de los tipos de las especies correspondientes y ajustes de efectividades. Hada es inmune a Dragón. Acero resiste Fantasma y Siniestro, como en generaciones modernas.
-- **Movimientos nuevos**: Fuerza Lunar, Carantoña y Brillo Mágico, más trece modernos que sustituyen a otros en el mismo ID (cuatro de ellos de tipo Veneno) ([tabla](MOVIMIENTOS-SUSTITUIDOS.md)).
+- **Movimientos nuevos**: Fuerza Lunar, Carantoña y Brillo Mágico, más treinta y cuatro modernos que sustituyen a otros en el mismo ID (cuatro de tipo Veneno y veintiuno de otros tipos, como Acua Jet o Energibola) ([tabla](MOVIMIENTOS-SUSTITUIDOS.md)).
 - **Movimientos iniciales aleatorios**: cuatro distintos, con al menos uno de daño directo utilizable. En los hitos de aprendizaje por nivel se ofrecen movimientos aleatorios.
-- **Recordador de Tito**: consulta las tablas originales de movimientos hasta el nivel actual y respeta los identificadores sustituidos. A los Pokémon de tipo Hada les ofrece además Viento Hada (nivel 5), Encanto (10), Luz Lunar (20), Brillo Mágico (30), Carantoña (40) y Fuerza Lunar (50).
+- **Recordador de Tito**: consulta las tablas originales de movimientos hasta el nivel actual y respeta los identificadores sustituidos. Además ofrece los ataques modernos añadidos por este proyecto (de Hada, Veneno, Agua, Planta, Eléctrico…) a cualquier Pokémon con ese tipo y el nivel suficiente: 39 ataques en 18 tipos (p. ej. Hada: Viento Hada 5, Encanto 10, Luz Lunar 20, Brillo Mágico 30, Carantoña 40, Fuerza Lunar 50; Agua: Acua Jet 12, Escaldar 30, Acua Cola 40).
 - **MT y MO**: las 50 MT tienen contenidos aleatorios únicos y **no se gastan al usarlas** (desde la 5.5); las siete MO conservan sus movimientos.
 
 ## Límites de nivel y dificultad
@@ -53,7 +53,7 @@ Ver [NIVELES-Y-EVOLUCIONES.md](NIVELES-Y-EVOLUCIONES.md) para la tabla completa.
 
 - Presente en 22 Centros Pokémon, con nombre, menús, diálogos, retrato de combate y sprite de mapa propios. Antes de empezar, explica las reglas Nuzlocke en un diálogo inicial.
 - **Intercambio**: uno completado por ciudad antes de derrotarlo. Eliges libremente un Pokémon vivo y ves la especie exacta ofrecida (potencia comparable, mismo nivel) antes de confirmar. Cancelar no consume el intercambio.
-- Servicios gratuitos: consulta de límites de nivel, recordador de movimientos y guía de evoluciones modificadas.
+- Servicios gratuitos: consulta de límites de nivel, recordador de movimientos y guía de evoluciones modificadas, y (MÁS → TRUEQUES) una lista de con quién puedes intercambiar aún y dónde: él mismo en sus ciudades (todas tras vencerle) y Mike, Kyle, Tim, Emy, Kim y Forest.
 - **Jefe extra** tras vencer a Rojo: Charizard, Tyranitar, Dragonite, Gengar, Scizor y Mewtwo, todos shiny al nivel 100, con movimientos aleatorios y objetos. Se puede repetir el combate; la muerte permanente sigue aplicándose.
 - Solo vencer a Tito desbloquea intercambios ilimitados en todos sus centros.
 - Los intercambios genéricos de otros NPC usan la misma propuesta y confirmación, pero solo se completa uno por NPC; se puede preguntar y cancelar sin penalización.
@@ -62,7 +62,7 @@ Ver [NIVELES-Y-EVOLUCIONES.md](NIVELES-Y-EVOLUCIONES.md) para la tabla completa.
 
 - Dieciséis encuentros independientes en las rutas 31, 32, 34, 37, 41, 39, 43, 44, 6, 8, 11, 12, 14, 15, 17 y 25.
 - Se presenta con un disfraz de NPC según la ruta (cazabichos, pescador, chica, joven, marinero, motorista…). Tras su giro se muestra siempre como recluta Rocket.
-- Equipos aleatorios shiny al límite de nivel vigente, de tres, cuatro o cinco Pokémon según la etapa. **Excepción:** el primer Ulex (Ruta 31, antes de ninguna medalla) saca sus tres Pokémon al nivel 15 en lugar de 19; los demás encuentros no cambian. Hace falta otra medalla entre encuentros y cada ubicación se consume una vez. Puedes volver a una ubicación pendiente tras progresar; en Kanto admite otro orden.
+- Equipos aleatorios shiny al límite de nivel vigente, de tres, cuatro o cinco Pokémon según la etapa. **Excepción:** el primer Ulex (Ruta 31, antes de ninguna medalla) saca sus tres Pokémon al nivel 15 en lugar de 19; los demás encuentros no cambian. Desde la 5.6 no hay cerrojo por medallas: cada ubicación se combate **una vez**, en cuanto lo encuentras, en el orden que recorras las rutas.
 - **Victoria sin nuevas muertes**: una MT aleatoria. **Si hay una nueva muerte**, roba otro Pokémon vivo y entrega a ZURULLO, un Rattata de nivel 5 que solo conoce Salpicadura; en ese caso no hay MT.
 - Los combates rechazados no gastan el encuentro. Los resultados reales se registran antes de recargar el mapa.
 

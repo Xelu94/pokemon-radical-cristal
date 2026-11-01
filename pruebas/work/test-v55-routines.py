@@ -279,7 +279,8 @@ def party_now(cls, tid, badges):
 
 
 parties = unevolved = no_stab = 0
-for cls in range(1, 100):
+num_classes = len(re.findall(r'^\s+trainerclass \w+', (root / 'constants/trainer_constants.asm').read_text(encoding='utf8'), re.M))
+for cls in range(1, num_classes + 1):
     for tid in range(1, 12):
         before = party_now(cls, tid, 0)
         if not before:

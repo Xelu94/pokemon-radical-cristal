@@ -1,0 +1,77 @@
+{
+  "passed": 18,
+  "tests": [
+    {
+      "name": "the 21 new modern moves have the intended effect, power, type, category and PP",
+      "passed": true
+    },
+    {
+      "name": "and their own Spanish names (and the junk ones are gone)",
+      "passed": true
+    },
+    {
+      "name": "no TM teaches Splash, Tackle, Growl or Pound any more and every TM is a different move",
+      "passed": true
+    },
+    {
+      "name": "several TMs now teach the modern moves",
+      "passed": true
+    },
+    {
+      "name": "Tito remembers every modern move of its type for all 251 species at level 100 (39 moves in 18 types)",
+      "passed": true
+    },
+    {
+      "name": "at level 15 a Water Pokemon is offered Aqua Jet but not Scald or Aqua Tail",
+      "passed": true
+    },
+    {
+      "name": "modern moves of other types are not offered (Charmander gets no Water move)",
+      "passed": true
+    },
+    {
+      "name": "the moves added in earlier versions are in the table too (Gengar: Poison Jab; Dragonite: Dragon Claw; Tyranitar: Dark Pulse)",
+      "passed": true
+    },
+    {
+      "name": "the 22 Tito Pokemon Centers map to 22 different landmarks",
+      "passed": true
+    },
+    {
+      "name": "at the start 28 partners can be traded with (22 TITO cities and six NPCs)",
+      "passed": true
+    },
+    {
+      "name": "a city whose trade is used is left out",
+      "passed": true
+    },
+    {
+      "name": "an NPC whose trade is done is left out (Kyle)",
+      "passed": true
+    },
+    {
+      "name": "all six NPCs done leaves only TITO",
+      "passed": true
+    },
+    {
+      "name": "once TITO is beaten every one of his cities is available again",
+      "passed": true
+    },
+    {
+      "name": "everything used leaves the list empty",
+      "passed": true
+    },
+    {
+      "name": "Ulex can always be fought: no badge lock any more",
+      "passed": true
+    },
+    {
+      "name": "even with every milestone flag set",
+      "passed": true
+    },
+    {
+      "name": "and the \"gana otra medalla\" text is gone",
+      "passed": true
+    }
+  ]
+}

@@ -130,3 +130,12 @@ La base (motor, mapas, gráficos y textos de Pokémon Cristal en español) proce
 - **Veneno.** Cuatro IDs reutilizados (`POISON_JAB` = Agarre, `CROSS_POISON` = Atadura, `GUNK_SHOT` = Conversión, `SLUDGE_WAVE` = Conversión2) con animaciones reutilizadas de `BattleAnimations`; se quitó Conversión de las listas de la IA.
 - **Emboscada por detrás.** Dos eventos de coordenadas en Pueblo Primavera (1, 8) y (1, 9) para la escena `SCENE_NEWBARKTOWN_NOOP`; el objeto del otro protagonista se coloca con `moveobject` a la derecha del jugador, corre con `big_step` y entra en el guion de emboscada existente.
 
+## Cambios de la 5.6
+
+- **Ulex.** `UlexCanBattle` solo calcula `wUlexBadgeCount` (lo usa el nivel blando del primer Ulex) y devuelve siempre «puede combatir»; se quitan `.WaitForBadge` y su texto.
+- **Ataques modernos.** `newmoves` (21 IDs reutilizados, constantes alias `DEF AQUA_JET EQU LOVELY_KISS`…) en `constants/move_constants.asm`, `data/moves/{moves,names,descriptions,animations}.asm`; las listas de la IA (`data/battle/ai`) pierden los nombres antiguos y `engine/battle_anims/core.asm` pierde el caso especial de Kinético. `MIMIC`, `SKETCH`, `SWEET_SCENT`, `SPLASH`, `MINIMIZE`, `TELEPORT` y `FLASH` no se tocaron porque el motor depende de su ID.
+- **MT.** `data/moves/tmhm_moves.asm` apunta a IDs nuevos en diez MT.
+- **Recordador.** `TitoOfferModernMoves` sustituye a `TitoOfferFairyMoves`: una tabla `nivel, ataque, tipo` de 39 filas.
+- **Trueques.** `TitoTradePartners` / `TitoBuildTradeList` (`engine/events/tito_xeluis.asm`): lista de códigos 1-22 (ciudades de Tito, con `GetWorldMapLocation` sobre `TitoTradeCityMaps`) y 23-28 (los seis PNJ, con `wTradeFlags`). Los nombres de ciudad salen de `GetLandmarkName`, que **debe llamarse con `farcall`** porque lee de su propio banco. Un menú que empiece en la columna 0 no se dibuja: se usa `menu_coords 1, 1, 19, 11`.
+- **Emboscada.** `NewBarkTownOtherAmbushScript` se parte en la parte común (`NewBarkTownOtherAmbushGirl` / `…Boy`), a la que entra también la emboscada «por detrás» sin repetir `appear`; los saltos locales pasan a etiquetas globales.
+

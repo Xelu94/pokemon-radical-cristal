@@ -2,7 +2,7 @@
 
 ## Actualizar dentro de esta familia
 
-Las actualizaciones de las versiones de este proyecto (v3 → v4 → v4.1 → v4.2 → v4.3 → v4.4 → v5.0 → v5.1 → v5.2 → v5.3 → v5.4 → v5.5) permiten **continuar el guardado interno del juego** (el `.sav` o la memoria de batería del emulador): no hace falta partida nueva.
+Las actualizaciones de las versiones de este proyecto (v3 → v4 → v4.1 → v4.2 → v4.3 → v4.4 → v5.0 → v5.1 → v5.2 → v5.3 → v5.4 → v5.5 → v5.6) permiten **continuar el guardado interno del juego** (el `.sav` o la memoria de batería del emulador): no hace falta partida nueva.
 
 Procedimiento:
 
@@ -13,7 +13,7 @@ Procedimiento:
 ## Qué se migra
 
 - **Mochila y PC**: la mochila pasa de 20 a 50 montones y el PC de 50 a 20, conservando los 70 espacios combinados. La migración es automática; se comprobó con guardados v3, tanto el principal como el de respaldo.
-- **Movimientos sustituidos**: los Pokémon que conocían uno de los trece movimientos antiguos (desde la 5.5: Agarre, Atadura, Conversión y Conversión2 incluidos) pasan a conocer el nuevo en el mismo ID ([tabla](MOVIMIENTOS-SUSTITUIDOS.md)).
+- **Movimientos sustituidos**: los Pokémon que conocían uno de los treinta y cuatro movimientos antiguos (desde la 5.5: Agarre, Atadura, Conversión y Conversión2; desde la 5.6: otros 21, p. ej. Fijar Blanco o Kinético) pasan a conocer el nuevo en el mismo ID ([tabla](MOVIMIENTOS-SUSTITUIDOS.md)).
 - **Niveles por encima de un nuevo tope**: no se pierden, pero el Pokémon no gana experiencia hasta que el tope lo supere.
 - **Recursos de partida nueva** (99 Master Balls, 99 caramelos raros infinitos, objetos equipados): solo se entregan en partidas nuevas. Los guardados existentes conservan las cantidades y montones que tuvieran y lo gastado no se regenera. Desde la 4.3 usar un caramelo raro no lo consume, así que los montones de un guardado anterior también pasan a ser infinitos.
 - **Tiendas y curas**: los objetos curativos que ya tenías se conservan. Las tiendas dejan de venderlos.

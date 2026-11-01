@@ -1,0 +1,125 @@
+{
+  "version": "5.6",
+  "fecha": "2026-11-01",
+  "normal_sha256": "68a4bde8b551af15ff4bc34cda03044ca843c4db87486f0e3c69c88f308abe60",
+  "sandbox_sha256": "94a5430de2d488113bf0b2a94f09514bf4a6e4c9f029a37317322bfb4eaedc93",
+  "passed": 298,
+  "groups": [
+    {
+      "name": "Tito services and maps",
+      "report": "v4-tito-tests.json",
+      "passed": 48
+    },
+    {
+      "name": "Tito rendered directions",
+      "report": "v42-tito-directions-tests.json",
+      "passed": 4
+    },
+    {
+      "name": "All Ulex routes and sandbox Items",
+      "report": "v42-fixes-tests.json",
+      "passed": 17
+    },
+    {
+      "name": "Ulex battles and sandbox UI",
+      "report": "v41-root-ui-tests.json",
+      "passed": 27
+    },
+    {
+      "name": "Battle calculations and storage",
+      "report": "v4-battle-tests.json",
+      "passed": 11
+    },
+    {
+      "name": "Real battle UI and capture",
+      "report": "v41-battle-ui-tests.json",
+      "passed": 4
+    },
+    {
+      "name": "Randomizer core",
+      "report": "v4-randomizer-tests.json",
+      "passed": 9
+    },
+    {
+      "name": "Offline randomizer UI",
+      "report": "v4-randomizer-ui-tests.json",
+      "passed": 4
+    },
+    {
+      "name": "v4.3 changes (Fly, Map Card, marts, League supplies, candies, bag)",
+      "report": "v43-changes-tests.json",
+      "passed": 14
+    },
+    {
+      "name": "v4.4 interface (level cap, move icons, exp bar, Tito idle)",
+      "report": "v44-changes-tests.json",
+      "passed": 4
+    },
+    {
+      "name": "v5.0 routines (infinite items, hatching, Super League picker, 10-step eggs)",
+      "report": "v45-routines-tests.json",
+      "passed": 14
+    },
+    {
+      "name": "v5.0 story and world (Ulex warning, Joy, Elm, other protagonist, Super League, data)",
+      "report": "v45-story-tests.json",
+      "passed": 28
+    },
+    {
+      "name": "v5.3 sandbox HMs and mart stones (data and routines)",
+      "report": "v53-routines-tests.json",
+      "passed": 5
+    },
+    {
+      "name": "v5.4 beta-tester fixes (Choice lock text, sprite list on connections)",
+      "report": "v54-fixes-tests.json",
+      "passed": 5
+    },
+    {
+      "name": "v5.5 routines (evolution by level, level floor, moves of their own type, Fairy moves for Tito, Poison moves)",
+      "report": "v55-routines-tests.json",
+      "passed": 35
+    },
+    {
+      "name": "v5.5 story (the other protagonist runs up from behind, TMs are not used up)",
+      "report": "v55-story-tests.json",
+      "passed": 6
+    },
+    {
+      "name": "v5.6 routines (modern moves and TMs, Tito reminder for all species, trade partners list, Ulex without lock)",
+      "report": "v56-routines-tests.json",
+      "passed": 18
+    },
+    {
+      "name": "v5.6 story (the other protagonist leaves and vanishes)",
+      "report": "v56-story-tests.json",
+      "passed": 2
+    },
+    {
+      "name": "v5.6 Tito TRUEQUES on the real map UI",
+      "report": "v56-tito-ui-tests.json",
+      "passed": 7
+    },
+    {
+      "name": "v5.0 story and world played as a girl (Gold ambushes, Cristal does not)",
+      "report": "v45-story-girl-tests.json",
+      "passed": 28
+    },
+    {
+      "name": "v5.5 story played as a girl (Gold runs up from behind)",
+      "report": "v55-story-girl-tests.json",
+      "passed": 6
+    },
+    {
+      "name": "v5.6 story played as a girl",
+      "report": "v56-story-girl-tests.json",
+      "passed": 2
+    }
+  ],
+  "limitaciones": [
+    "No equivale a una campaña completa.",
+    "Se omite la introducción en las pruebas de interfaz; en Ruta 17 se desactiva la gravedad solo en el montaje de prueba.",
+    "Las pruebas de combate de Ulex aumentan el daño para recorrer sus equipos; no evalúan el equilibrio completo.",
+    "Los combates de las pruebas de la v5.0 (Elm, emboscadas, Meseta Añil, sala de Azul) se juegan con un Mewtwo de estadísticas infladas; el combate contra el campeón de la Superliga no se juega entero: se comprueba su recompensa con un atajo."
+  ]
+}

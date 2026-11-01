@@ -2,6 +2,31 @@
 
 Formato por versión. Las versiones anteriores a la 4 no están documentadas en este paquete; solo se sabe que la actualización v3→v4 permite continuar el guardado.
 
+## 5.6 — Ulex sin cerrojo, despedida del rival, ataques modernos y trueques de Tito (1 de noviembre de 2026)
+
+Cinco cambios pedidos tras llegar a Ciudad Endrino con la 5.5. **298 comprobaciones agrupadas** ([evidencias/Validacion-v5.6.json](evidencias/Validacion-v5.6.json)): las 269 de la 5.5 más las nuevas de esta versión.
+
+**Errores corregidos**
+
+1. **Ulex te decía «gana otra medalla».** Había un solo combate por número de medallas, así que el Ulex de la Ruta 43 (Lago de la Furia) y el de la Ruta 44 (Ruta Helada) coincidían con la misma cuenta y no te dejaban pelear hasta ganar a Fredo o a Débora, que quedan más atrás. Se quita el cerrojo: cada Ulex se combate **una vez** (su ubicación se consume) en cuanto lo encuentras. Lo demás de Ulex no cambia.
+2. **GOLD o CRISTAL se quedaba en el mapa tras la primera pelea.** Con la emboscada «por detrás» de la 5.5, el personaje se creaba dos veces (una al correr y otra en el guion de la emboscada) y solo se borraba una copia: quedaba un sprite fantasma que, al hablarle, decía «Evento de objeto.». Ahora se crea una vez y, al terminar, **corre hacia la Ruta 29** por la fila de al lado y desaparece.
+
+**Mejoras**
+
+3. **21 ataques modernos en lugar de otros inservibles.** Se sustituyen, en el mismo ID, Fijar Blanco, Kinético, Más Psique, Telépata, Pesadilla, Rencor, Profecía, Presente, Neblina, Meditación, Pantallahumo, Refugio, Rizo Defensa, Psico-onda, Furia, Bomba Sónica, Anulación, Ataque Arena, Beso Amoroso, Telaraña y Frustración por Acua Jet, Bomba Germen, Tierra Viva, Vozarrón, Sombra Vil, Joya de Luz, Acua Cola, Puño Bala, Energibola, Escaldar, Cabezazo Zen, Rayo Señal, Roca Afilada, Garra Umbría, Esfera Aural, Puño Drenaje, Chispazo, Onda Ígnea, Pájaro Osado, Aire Afilado y Colmillo Hielo ([tabla](docs/MOVIMIENTOS-SUSTITUIDOS.md)). Se mantuvieron Mimético, Esquema, Dulce Aroma y Salpicadura porque el motor o un evento dependen de ellos.
+4. **MT renovadas.** Ninguna MT enseña ya Salpicadura, Placaje, Gruñido o Destructor; diez MT pasan a enseñar ataques modernos y las que ya apuntaban a un ataque sustituido enseñan el nuevo.
+5. **Tito recuerda los ataques modernos de cada tipo.** Todos los ataques añadidos (los de la 5.2 a la 5.6) pueden recordarse con Tito si el Pokémon tiene ese tipo y el nivel suficiente: 39 ataques en 18 tipos, comprobado con las 251 especies.
+6. **Tito: opción TRUEQUES** (MÁS → TRUEQUES). Lista con quién queda para intercambiar y dónde: **TITO** en cada una de sus ciudades (todas, una vez le has vencido) y Mike (Gran Almacén), Kyle (Ciudad Malva), Tim (Ciudad Olivo), Emy (Ciudad Endrino), Kim (Ruta 14) y Forest (Central Energía) mientras no hayas hecho su trueque.
+
+**Límites:** un Pokémon de un guardado antiguo que conociera uno de los 21 ataques sustituidos pasa a conocer el nuevo en el mismo ID (se comprobó el ID, no los PP guardados). Si dejas Esquema o Mimético en el equipo siguen siendo los de siempre. Las animaciones de los ataques nuevos reutilizan las de otros ataques.
+
+ROM de esta versión (reconstruida desde la base española aplicando el parche con RGBDS 1.0.0):
+
+| | SHA-256 |
+|---|---|
+| ROM normal (`Radical Cristal.gbc`) | `68a4bde8b551af15ff4bc34cda03044ca843c4db87486f0e3c69c88f308abe60` |
+| Sandbox | `94a5430de2d488113bf0b2a94f09514bf4a6e4c9f029a37317322bfb4eaedc93` |
+
 ## 5.5 — Más dificultad: niveles, evoluciones, ataques de su tipo y rival por detrás (30 de octubre de 2026)
 
 Siete cambios pedidos tras jugar la 5.4 hasta el evento Rocket de la Torre Radio. **269 comprobaciones agrupadas** ([evidencias/Validacion-v5.5.json](evidencias/Validacion-v5.5.json)): las 222 de la 5.4 más las nuevas de esta versión (rutinas y recorrido de historia, como chico y como chica).
