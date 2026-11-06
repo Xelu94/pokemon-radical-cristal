@@ -50,10 +50,12 @@ Salidas: `pokecristal.gbc` (ROM normal) y `pokecristal_debug.gbc` (sandbox), con
 >
 > La compilación de la fuente de la 4.2 sin cambios reprodujo también los hashes publicados de la 4.2.
 
-> **Verificado para la 5.6 (1 de noviembre de 2026):** el parche acumulado (324 archivos) aplicado sobre `base-espanola-verificada` y compilado desde cero con RGBDS 1.0.0 produjo exactamente:
+> **Verificado para la 5.7 (6 de noviembre de 2026):** el parche acumulado (324 archivos) aplicado sobre `base-espanola-verificada` y compilado desde cero con RGBDS 1.0.0 produjo exactamente:
 >
-> - ROM normal: `68a4bde8b551af15ff4bc34cda03044ca843c4db87486f0e3c69c88f308abe60`
-> - Sandbox: `94a5430de2d488113bf0b2a94f09514bf4a6e4c9f029a37317322bfb4eaedc93`
+> - ROM normal: `d7f6d1067171632c2f24c2c40520c2c7a66b9c75672d13f31dd4215a14eb46e0`
+> - Sandbox: `64b69a1ae2156bd47882a6e0f72443cc8823b1c246b909aa476c8e44e82eaf04`
+
+> **Verificado para la 5.6 (1 de noviembre de 2026):** ROM normal `68a4bde8b551af15ff4bc34cda03044ca843c4db87486f0e3c69c88f308abe60`; sandbox `94a5430de2d488113bf0b2a94f09514bf4a6e4c9f029a37317322bfb4eaedc93`.
 
 > **Verificado para la 5.5 (30 de octubre de 2026):** ROM normal `b5530aa12dd945ae99ffb2045d4927c32e9077d9d0dbb899d21cfa3deb5738e8`; sandbox `ec31d24151faf0a4dc80640d35aa93f426c8ce5277aac907a3b922dca2ddc050`.
 
@@ -109,9 +111,9 @@ python work/validate-v50-release.py
 
 `validate-v50-release.py` ejecuta todos los grupos, comprueba el número esperado de comprobaciones de cada uno y genera `work/v50-validation.json`. Las pruebas de PyBoy usan la ROM compilada y sus símbolos; las de navegador usan el randomizador y no envían la ROM a ningún servidor.
 
-### Resultados de 5.6
+### Resultados de 5.7
 
-298 comprobaciones agrupadas, ejecutadas el 1 de noviembre de 2026 sobre las ROM de 5.6 (informes en [`evidencias/`](../evidencias); los ficheros `v4-*` y `v41-*` se regeneraron con esta compilación, y [`Validacion-v4.3.json`](../evidencias/Validacion-v4.3.json) conserva el resumen de la 4.3): (informes en [`evidencias/`](../evidencias)):
+310 comprobaciones agrupadas, ejecutadas el 6 de noviembre de 2026 sobre las ROM de 5.7 (informes en [`evidencias/`](../evidencias); los ficheros `v4-*` y `v41-*` se regeneraron con esta compilación, y [`Validacion-v4.3.json`](../evidencias/Validacion-v4.3.json) conserva el resumen de la 4.3): (informes en [`evidencias/`](../evidencias)):
 
 | Grupo | Informe | Comprobaciones |
 |---|---|---|
@@ -136,6 +138,8 @@ python work/validate-v50-release.py
 | Historia de la 5.6 (el otro protagonista se va y desaparece) | `v56-story-tests.json` | 2 |
 | Lo mismo jugando como chica | `v56-story-girl-tests.json` | 2 |
 | Opción TRUEQUES de Tito en la interfaz real | `v56-tito-ui-tests.json` | 7 |
+| Historia de la 5.7 (premio de la Superliga con equipo y PC llenos, trasera de Dark Lugia) | `v57-story-tests.json` | 6 |
+| Lo mismo jugando como chica | `v57-story-girl-tests.json` | 6 |
 | Los mismos recorridos jugando como chica (Gold embosca; Cristal no) | `v45-story-girl-tests.json` | 28 |
 
 Las comprobaciones nuevas de la 4.3: la partida nueva empieza con un montón de 99 caramelos y 6 montones en total, usar un caramelo sube el nivel sin gastarlo, el recuadro negro muestra los cuatro rótulos, la navegación derecha e izquierda recorre el círculo de bolsillos, VUELO aparece en el submenú solo con la MO, el anciano entrega el mapa por las dos filas de entrada, ninguna de las 34 tiendas vende curas ni queda vacía, y el oficial entrega 8/10/7 con ocho medallas.

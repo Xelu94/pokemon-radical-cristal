@@ -1,6 +1,6 @@
 # Resumen para portfolio
 
-**Radical Cristal — Tito Xeluis (v5.6)**
+**Radical Cristal — Tito Xeluis (v5.7)**
 
 Modificación personal de Pokémon Cristal para Game Boy Color, construida sobre la fuente española de MicaelAlighieri/pokecristal y el desensamblado de la comunidad pret/pokecrystal. Integra en el motor un Nuzlocke con muerte permanente y primera captura por zona, topes de nivel ligados a los líderes, física/especial por movimiento, tipo Hada, mochila reorganizada, aleatorización por restricciones y dos personajes propios: Tito Xeluis (intercambios, recordador de movimientos y jefe extra) y Ulex el Ladrón (16 encuentros disfrazados).
 

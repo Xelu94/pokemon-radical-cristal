@@ -8,12 +8,21 @@ Origen de los errores: la revisión del autor del proyecto (documentos «Arreglo
 
 | Versión | Errores corregidos | Gravedad máxima |
 |---|---|---|
+| 5.7 | 1 | Jugador encerrado |
 | 5.6 | 2 | Sprite fantasma |
 | 5.4 | 6 (todos hallados por los beta testers) | Reinicio de consola |
 | 5.3 | 8 | Reinicio de consola |
 | 5.2 | 2 | Pérdida de reto mal anunciada |
 | 5.1 | 4 | Gráficos corruptos |
 | 5.0 | 2 | Gráficos |
+
+## 5.7
+
+### E-5.7-1 · Encerrado en la sala de TITO con el equipo lleno
+- **Síntoma:** al vencer a TITO en la Superliga con seis Pokémon en el equipo, decía que liberases un hueco y volvieses a hablar con él, pero en esa sala no se puede cambiar el equipo ni abrir el PC.
+- **Causa:** `SuperTitoReward` comprobaba `VAR_PARTYCOUNT` y terminaba el guion sin salida.
+- **Solución:** `givepoke` ya envía el Pokémon al PC cuando el equipo está lleno. El guion mira el resultado (0 equipo, 1 PC, 2 sin sitio): con el equipo pone la carta (`givepokemail`), con el PC lo cuenta y lee la carta sin tocar a nadie del equipo y, sin sitio en ninguna parte, saca al jugador de la Superliga dejando el premio pendiente.
+- **Prueba:** `test-v57-story.py` (equipo lleno, equipo y PC llenos, hueco libre; falla con la ROM 5.6).
 
 ## 5.6
 

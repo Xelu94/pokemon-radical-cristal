@@ -58,7 +58,7 @@ Si la pierdes, queda cerrada hasta que vuelvas a ganar a Tito.
 - **Sin muertes.** En la Superliga tus Pokémon pueden debilitarse pero no mueren y no cuentan para la regla Nuzlocke.
 - Antes de entrar, el oficial del vestíbulo te da **99 RESTAU. TODO**.
 - **Si caes**, conservas todos tus Pokémon y se curan, pero pierdes todos los RESTAU. TODO (también los que tuvieras) y vuelves al Centro Pokémon de la Meseta. Para participar de nuevo hay que ganar otra vez a Tito.
-- **Si ganas**, Tito te da su CHARIZARD shiny nivel 100 con una carta (una sola vez; un segundo intento no repite el regalo).
+- **Si ganas**, Tito te da su CHARIZARD shiny nivel 100 con una carta (una sola vez; un segundo intento no repite el regalo). Con el equipo lleno el CHARIZARD va al PC; si tampoco hay sitio en el PC, Tito te saca de la Superliga y el premio te espera (las salas siguen superadas) hasta que vuelvas con un hueco libre.
 
 ### Retadores
 

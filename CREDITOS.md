@@ -27,7 +27,7 @@ Referencias personales aportadas por el autor, apoyo de generación de imágenes
 
 ## Sprite de Dark Lugia
 
-Los sprites frontal y trasero de Dark Lugia son arte de aficionado de **SageDeoxys** ([deviantart.com/sagedeoxys](https://www.deviantart.com/sagedeoxys)), publicado en DeviantArt; el autor del proyecto lo aportó como vídeo animado para usarlo en este juego. No se ha comprobado la licencia de uso de esa obra. Si SageDeoxys pide retirarlo, se sustituirá por otro gráfico (basta cambiar `gfx/pokemon/dark_lugia/front.png`). El frontal se redujo a 56×56 píxeles y cuatro colores (tres fotogramas de animación) y el trasero a 48×48 (se le quitó una marca roja de la barriga); no se distribuye el vídeo ni la imagen originales.
+El sprite frontal de Dark Lugia es arte de aficionado de **SageDeoxys** (la imagen trasera es, desde la 5.7, la de Lugia con la paleta de Dark Lugia) ([deviantart.com/sagedeoxys](https://www.deviantart.com/sagedeoxys)), publicado en DeviantArt; el autor del proyecto lo aportó como vídeo animado para usarlo en este juego. No se ha comprobado la licencia de uso de esa obra. Si SageDeoxys pide retirarlo, se sustituirá por otro gráfico (basta cambiar `gfx/pokemon/dark_lugia/front.png`). El frontal se redujo a 56×56 píxeles y cuatro colores (tres fotogramas de animación); no se distribuye el vídeo ni la imagen original.
 
 ## Herramientas
 

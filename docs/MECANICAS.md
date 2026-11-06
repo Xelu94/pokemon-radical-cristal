@@ -1,4 +1,4 @@
-# Mecánicas y reglas vigentes (v5.6)
+# Mecánicas y reglas vigentes (v5.7)
 
 Descripción de la ROM normal. Los datos numéricos se contrastaron con la fuente integrada (`engine/pokemon/v2_balance.asm`, `data/moves/moves.asm`, `data/pokemon/evos_attacks.asm`). Cuando una regla depende del emulador o de la semilla, se indica.
 

@@ -29,9 +29,11 @@ groups=[('Tito services and maps','test-v4-tito.py',True,'v4-tito-tests.json',48
         ('v5.6 routines (modern moves and TMs, Tito reminder for all species, trade partners list, Ulex without lock)','test-v56-routines.py',False,'v56-routines-tests.json',18),
         ('v5.6 story (the other protagonist leaves and vanishes)','test-v56-story.py',False,'v56-story-tests.json',2),
         ('v5.6 Tito TRUEQUES on the real map UI','test-v56-tito-ui.py',False,'v56-tito-ui-tests.json',7),
+        ('v5.7 story (Super League prize with a full party, Dark Lugia back picture)','test-v57-story.py',False,'v57-story-tests.json',6),
         ('v5.0 story and world played as a girl (Gold ambushes, Cristal does not)','test-v45-story.py',False,'v45-story-girl-tests.json',28,{'PLAYER_GENDER':'1'}),
         ('v5.5 story played as a girl (Gold runs up from behind)','test-v55-story.py',False,'v55-story-girl-tests.json',6,{'PLAYER_GENDER':'1'}),
-        ('v5.6 story played as a girl','test-v56-story.py',False,'v56-story-girl-tests.json',2,{'PLAYER_GENDER':'1'})]
+        ('v5.6 story played as a girl','test-v56-story.py',False,'v56-story-girl-tests.json',2,{'PLAYER_GENDER':'1'}),
+        ('v5.7 story played as a girl','test-v57-story.py',False,'v57-story-girl-tests.json',6,{'PLAYER_GENDER':'1'})]
 reports=[]
 for title,script,rom_arg,report,expected,*extra in groups:
     executable=str(node) if script.endswith('.cjs') else sys.executable
@@ -46,7 +48,7 @@ for title,script,rom_arg,report,expected,*extra in groups:
     reports.append({'name':title,'report':report,'passed':expected})
     print('PASS',title,expected,flush=True)
 digest=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
-summary={'version':'5.6','fecha':'2026-11-01','normal_sha256':digest(work/'source/pokecristal.gbc'),
+summary={'version':'5.7','fecha':'2026-11-06','normal_sha256':digest(work/'source/pokecristal.gbc'),
          'sandbox_sha256':digest(work/'source/pokecristal_debug.gbc'),'passed':sum(g['passed'] for g in reports),
          'groups':reports,'limitaciones':['No equivale a una campaña completa.',
          'Se omite la introducción en las pruebas de interfaz; en Ruta 17 se desactiva la gravedad solo en el montaje de prueba.',

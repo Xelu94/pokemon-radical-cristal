@@ -1,0 +1,29 @@
+{
+  "passed": 6,
+  "tests": [
+    {
+      "name": "full party: the Charizard goes to the PC, the prize is marked and the player leaves the Super League",
+      "passed": true
+    },
+    {
+      "name": "full party: the party kept its own held items (the letter is not attached to someone else)",
+      "passed": true
+    },
+    {
+      "name": "no room anywhere: the player is sent out instead of being locked in, and the prize is still pending",
+      "passed": true
+    },
+    {
+      "name": "room in the party: the Charizard joins it with the letter, as before",
+      "passed": true
+    },
+    {
+      "name": "the Dark Lugia back picture is exactly the Lugia back picture (same graphics, its own palette)",
+      "passed": true
+    },
+    {
+      "name": "and its colours are the four of the Dark Lugia palette",
+      "passed": true
+    }
+  ]
+}

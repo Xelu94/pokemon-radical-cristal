@@ -1,6 +1,6 @@
 # Pruebas portables
 
-Scripts de validación de la versión 5.6. Conservan la estructura relativa que esperan: se ejecutan **desde esta carpeta** y buscan la fuente compilada en `work/source`.
+Scripts de validación de la versión 5.7. Conservan la estructura relativa que esperan: se ejecutan **desde esta carpeta** y buscan la fuente compilada en `work/source`.
 
 Preparación y comandos completos: [docs/COMPILACION-Y-PRUEBAS.md](../docs/COMPILACION-Y-PRUEBAS.md).
 
@@ -27,6 +27,7 @@ Requisitos previos: la fuente integrada y compilada (`work/source/pokecristal.gb
 | `work/test-v44-changes.py` | Cambios de la 4.4 (tope en estado, iconos de ataque, barra de experiencia, respiración de Tito) | 4 |
 | `work/test-v45-routines.py` | Rutinas de la 5.0 con el arnés de CPU (objetos infinitos, eclosión, selector de la Superliga, huevos de 10 pasos) | 13 |
 | `work/test-v53-routines.py` | Mochila del sandbox (MO) y tiendas con piedras (datos y rutinas) | 5 |
+| `work/test-v57-story.py` | Historia de la 5.7 (premio de la Superliga con el equipo y el PC llenos, trasera de Dark Lugia; también con `PLAYER_GENDER=1`) | 6 |
 | `work/test-v56-routines.py` | Rutinas de la 5.6 (ataques modernos, MT, recordador, lista de trueques, Ulex) | 18 |
 | `work/test-v56-story.py` | Historia de la 5.6 (el otro protagonista desaparece; también con `PLAYER_GENDER=1`) | 2 |
 | `work/test-v56-tito-ui.py` | Opción TRUEQUES de Tito en la interfaz real | 7 |

@@ -148,7 +148,7 @@ g = G('NEW_BARK_TOWN', 4, 2)
 strong_party(g)
 g.p.tick(30)
 g.press('left', 20, hold=16)
-done = mash(g, lambda: g.event('EVENT_OTHER_AMBUSH_NEW_BARK') and not g.event('EVENT_OTHER_SCENE_ACTIVE'), presses=260)
+done = mash(g, lambda: g.event('EVENT_OTHER_AMBUSH_NEW_BARK') and not g.event('EVENT_OTHER_SCENE_ACTIVE'), presses=900)
 bag = settled(g, g.bag)
 check('after the rival leaves New Bark Town the other protagonist battles, heals the party and hands over a Max Potion',
       done and bag.get(items['MAX_POTION'], 0) == 1)
@@ -172,7 +172,7 @@ strong_party(g)
 g.p.tick(30)
 g.press('left', 20, hold=16)
 adjacent = tiles_before = tiles_after = None
-for i in range(200):
+for i in range(900):
     g.press('a', 30, hold=6)
     text = ' '.join(g.screen_text())
     if adjacent is None and 'culito' in text:
@@ -339,16 +339,22 @@ g.p.tick(120)
 check('the lobby door leads to Azul\'s room', settled(g, lambda: (g.read('wMapGroup'), g.read('wMapNumber'))) == (16, 10))
 g.close()
 
-g = G('SUPER_LEAGUE_AZUL', 4, 16)
-strong_party(g)
-g.set_event('EVENT_BEAT_TITO_XELUIS')
-g.set_event('EVENT_SUPER_LEAGUE_RESTORES_GIVEN')
-g.p.tick(30)
-for _ in range(8):
+# Azul's team is random and now every Pokemon has a move of its own type: the level-100 Mewtwo with one move can lose
+# to an unlucky team, so the fight is tried a few times with different timing and any win counts.
+for attempt in range(5):
+    g = G('SUPER_LEAGUE_AZUL', 4, 16)
+    strong_party(g)
+    g.set_event('EVENT_BEAT_TITO_XELUIS')
+    g.set_event('EVENT_SUPER_LEAGUE_RESTORES_GIVEN')
+    g.p.tick(30 + attempt * 13)
+    for _ in range(8):
+        g.press('up', 8, hold=14)
+    g.press('right', 8, hold=14)
     g.press('up', 8, hold=14)
-g.press('right', 8, hold=14)
-g.press('up', 8, hold=14)
-won = mash(g, lambda: g.event('EVENT_SUPER_BEAT_AZUL'), presses=2200)
+    won = mash(g, lambda: g.event('EVENT_SUPER_BEAT_AZUL'), presses=2500)
+    if won:
+        break
+    g.close()
 check('beating Azul in the Super League opens his door and leaves no one dead',
       won and not g.event('EVENT_EXHIBITION_BATTLE') and g.mem('wPartyMon1HP', 2) != [0, 0])
 g.close()

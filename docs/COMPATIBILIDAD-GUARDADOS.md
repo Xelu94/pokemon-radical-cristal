@@ -2,7 +2,7 @@
 
 ## Actualizar dentro de esta familia
 
-Las actualizaciones de las versiones de este proyecto (v3 → v4 → v4.1 → v4.2 → v4.3 → v4.4 → v5.0 → v5.1 → v5.2 → v5.3 → v5.4 → v5.5 → v5.6) permiten **continuar el guardado interno del juego** (el `.sav` o la memoria de batería del emulador): no hace falta partida nueva.
+Las actualizaciones de las versiones de este proyecto (v3 → v4 → v4.1 → v4.2 → v4.3 → v4.4 → v5.0 → v5.1 → v5.2 → v5.3 → v5.4 → v5.5 → v5.6 → v5.7) permiten **continuar el guardado interno del juego** (el `.sav` o la memoria de batería del emulador): no hace falta partida nueva.
 
 Procedimiento:
 

@@ -85153,29 +85153,23 @@ index 0000000..6d91bec
 +	endanim
 diff --git a/gfx/pokemon/dark_lugia/back.png b/gfx/pokemon/dark_lugia/back.png
 new file mode 100644
-index 0000000000000000000000000000000000000000..61625020ad092cafa92c49a4e29510da179db6f5
+index 0000000000000000000000000000000000000000..d71098ffd51ded0146d3772555c05e1a0f77babb
 GIT binary patch
-literal 1022
-zcmV<a0|ESrP)<h;3K|Lk000e1NJLTq001xm001xu0ssI2*kEqZ000BUNkl<Zc$}?S
-zyLIY75M8}PBMRk^666j<hC|VTDFb(4g^$d1V3pwTDWnwnz`*5dW`7cIjst_VJ9qE=
-zmtq`87m%VT>S|k7Yv<f~_>nLB;fN(gQ8?!!J1met7KEtDl(sp{df%&#cUY;%<2dr;
-z@=6a&U2Wwx`3UBgp=p}~tM)Lo+kD`Sy4psNsTZC>!%R;YQqPnCQ%z{tr52z8!PtDl
-z&^V6WX>SoIDXVo|ZTsQqGQ>KiMI-+U5gvv_;^ru;waWkm-Ea{v8esDHP`<RyAx;uI
-znVdd?2G(DJPdR~#vZRC@2%Cs*v3?TG#bg|KO2K*f3AquU+hUTf*y!D9A3_6~g})WF
-z!q|APuC|$&_$2bNZ4TXO&zK@mp#2v1mQ{&0Sx`@RvH18T0;_EftX|HRgz^BSPEb~B
-zywsicSS*_|dM_-6CWOO6kyVLoTiz9Oe!>z3iyZ~5M9A>kF_?$cg4S>r@-V9dZje*>
-z9ub~dn93^x5QhFlz62{s<>0KW*2>MT^uzH{;k-u4H>J1^$dlbws9W#G_xOKOa-Zoa
-z`l&KOqhgIin1wMs)k1`X(XjbMECn;7>`AJ;IO3i(+o>~g2rIA=n=j-^A}f{h7r^St
-zkwt(8AoBhCk%!Q)<iqL-%J;v&^5yHx8-oB_iZiv<gBQlZmQKdn_Z@+i*OxcO0rXOF
-zm0vTsO9z4v`A}RG4M<W&P!$tz{pn77oriMJ^r^-kfFzG|29NtgS*=%dlVKliTj4+u
-z-dT*uJ1B7H;pftzc~vHJd{VfaSuM(Uq0!Sm+j(9@c9+gKVlqWi<Z3|X((bfpaJf;|
-zPwyBqeF%G6Kmx^%33^<L5aX~W1qf}mYSxs|y_-xLG_OC6^Cx8$xhf&WH@pGDIHry=
-zhQ}`NBXxzqn38KJfUMguAZB;JISC1eMV86(an#dWq7a%;e~rUib+Oq#K2r;(-R497
-zEC_G1y%dM*s-V)imlSlTrUH$tK~D2!FDJbQ2~Or1hn+7OdLsa>MI_57UBYwe*)|9H
-zgAT>8(1Xf=)MC3FJW}o)5q)lTxRRzYY=?^kHF>EzXb0!dulE^Yug=7?X?xB6LLO*9
-z`-gPQ1r<B+-H+Qi!4#1RATA@HU++SgVB$MG?)m^F?m!^8D{iGUBz~vn_^Pi8U_0A3
-zsCk)N=>^5df7y^MpCbkEWG2iQbY=sJKxut<cx*MXCZ~hBB`DoU)TSGc59gs??Ee6A
-s0Zd*|R}0I2B}xOz`Q1Z7dFD5(UvwL%&L-7Vj{pDw07*qoM6N<$f}LdMT>t<8
+literal 709
+zcmV;$0y_PPP)<h;3K|Lk000e1NJLTq001xm001xu0ssI2*kEqZ0007vNkl<Zc%02x
+zyOqK)5M24u2%!ln!R`PuJ478o8PI_pLIxciB@muNO3}UZ!k$haOSabUZX!QhmPRwX
+z(n>-p1^)>dS4W~puvxjP1I-i%0HDaLm=39>uK|NXqMz}-yTnUH>}{kH5<(PtWoUrb
+z1b=kDPYh}yygeY-kI%FIQYU)vF805vgy1(Pxjo@SbKU!B;Ts>J1<V8aW`;xBLSoF7
+ztJ;u|K_T#nWT3qrh+L6ZlmrHWxfHUo+Z<ySDxQT=DMf=(^f)=;1Ic6OBadYe=NjVK
+zJ#<2bYiwJG(nLxD8zCJ7t^vR@UmI_9*El!VU0m4O&>fsbAvqXB^X_H3JUEivo`x-R
+zx<=A+D%4!}%Y5Bj_c5IGa%J|Fy6HIu|7vdsN>8N}ZX*l|m8;rj6I4iFCuy(cvFxtp
+z2(gJ#NC&lN&N4YhA==<@O6VFhp=P{7WE_e;mqHLidplrI8=SH~iRkuC1)rbYgTjcp
+zrj{dfUdL{8Y;Oln%jBf|GLW(R1%n`i?6W1-xJj0YF@9lPM)6A}wgEQF<QO&s$XNV>
+z_X^}|9LXjr%Y@~ZujMN^`T|2KMJ=7KEm-6k0F6qAGWz7~VWL7JTApY3FwUm@F(mvK
+z42f)hEF*&_u#us&^C)CAMv+%62dkJ$KCDo=s*Tg+pU49M8Qs=QU^53^K^-HHje+Ev
+z=GTaINVv?x5~9c}<D50wuh_H~F0*h{yn3PyJRMogJ-4#hpjmWDU^qV6uW!q+*0(=s
+zE7RHer*G60zg`O6y9@P>lAtQSekpn;XG4IHJ}}k^W2d-_D=lIP86pis_VVb5UtYWj
+rVX_o?g>%K2wU-$u8$+Iyhz5W!+I4hp<8F8-00000NkvXXu0mjf&n`RZ
 
 literal 0
 HcmV?d00001
@@ -90086,10 +90080,10 @@ index 0000000..94f3a27
 \ No newline at end of file
 diff --git a/maps/SuperLeagueTito.asm b/maps/SuperLeagueTito.asm
 new file mode 100644
-index 0000000..ffa829b
+index 0000000..3fd86e3
 --- /dev/null
 +++ b/maps/SuperLeagueTito.asm
-@@ -0,0 +1,146 @@
+@@ -0,0 +1,174 @@
 +SuperLeagueTito_MapScripts:
 +	def_scene_scripts
 +
@@ -90122,15 +90116,24 @@ index 0000000..ffa829b
 +SuperTitoReward:
 +	checkevent EVENT_SUPER_LEAGUE_BEAT_TITO
 +	iftrue .NoGift
-+	readvar VAR_PARTYCOUNT
-+	ifequal PARTY_LENGTH, .PartyFull
 +	writetext SuperTitoAfterText
 +	promptbutton
 +	setevent EVENT_FORCE_SHINY_GIFT
++	; 0: to the party, 1: to the PC, 2: no room anywhere
 +	givepoke CHARIZARD, 100
++	ifequal 2, .NoRoom
++	ifequal 1, .ToPC
++	clearevent EVENT_FORCE_SHINY_GIFT
 +	givepokemail SuperTitoMail
++	setevent EVENT_SUPER_LEAGUE_BEAT_TITO
++	writetext SuperTitoLetterText
++	waitbutton
++	sjump .NoGift
++.ToPC:
 +	clearevent EVENT_FORCE_SHINY_GIFT
 +	setevent EVENT_SUPER_LEAGUE_BEAT_TITO
++	writetext SuperTitoPCText
++	waitbutton
 +	writetext SuperTitoLetterText
 +	waitbutton
 +.NoGift:
@@ -90151,10 +90154,20 @@ index 0000000..ffa829b
 +	warp INDIGO_PLATEAU_POKECENTER_1F, 6, 10
 +	end
 +
-+.PartyFull:
-+	writetext SuperTitoPartyFullText
++.NoRoom:
++	; Neither the party nor the PC has room. Leave the Super League instead of getting
++	; stuck here; the rooms stay beaten and the prize is still waiting for the next visit.
++	clearevent EVENT_FORCE_SHINY_GIFT
++	writetext SuperTitoNoRoomText
 +	waitbutton
 +	closetext
++	callasm RemoveAllFullRestores
++	clearevent EVENT_SUPER_LEAGUE_RESTORES_GIVEN
++	special HealParty
++	playsound SFX_WARP_TO
++	special FadeOutToWhite
++	waitsfx
++	warp INDIGO_PLATEAU_POKECENTER_1F, 6, 10
 +	end
 +
 +SuperTitoMail:
@@ -90197,7 +90210,7 @@ index 0000000..ffa829b
 +	done
 +
 +SuperTitoLetterText:
-+	text "Lleva una carta:"
++	text "Su carta dice:"
 +
 +	para "“Eres el puto amo,"
 +	line "has conseguido"
@@ -90216,11 +90229,20 @@ index 0000000..ffa829b
 +	cont "CENTRO #MON."
 +	done
 +
-+SuperTitoPartyFullText:
++SuperTitoPCText:
 +	text "Tienes el equipo"
-+	line "lleno. Libera un"
-+	cont "hueco y vuelve a"
-+	cont "hablar conmigo."
++	line "lleno: CHARIZARD"
++	cont "SHINY va a tu PC."
++	done
++
++SuperTitoNoRoomText:
++	text "No tienes hueco ni"
++	line "en el equipo ni en"
++	cont "el PC. Libera uno"
++
++	para "y vuelve a entrar"
++	line "a la SUPERLIGA: tu"
++	cont "premio te espera."
 +	done
 +
 +SuperLeagueTito_MapEvents:

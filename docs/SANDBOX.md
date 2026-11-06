@@ -17,6 +17,7 @@ El sandbox es una **compilación separada** (`pokecristal_debug` en el Makefile)
 | SHA-256 de 5.4 | `91845e52c2afee9f0f6e0425f15fc62e7685aff5c116284cceee768ac00e67c1` | `4afbf8921e51f9086bbb5412f9d43f7ede1b1271c1aff42d9ff5ec106d9d2020` |
 | SHA-256 de 5.5 | `b5530aa12dd945ae99ffb2045d4927c32e9077d9d0dbb899d21cfa3deb5738e8` | `ec31d24151faf0a4dc80640d35aa93f426c8ce5277aac907a3b922dca2ddc050` |
 | SHA-256 de 5.6 | `68a4bde8b551af15ff4bc34cda03044ca843c4db87486f0e3c69c88f308abe60` | `94a5430de2d488113bf0b2a94f09514bf4a6e4c9f029a37317322bfb4eaedc93` |
+| SHA-256 de 5.7 | `d7f6d1067171632c2f24c2c40520c2c7a66b9c75672d13f31dd4215a14eb46e0` | `64b69a1ae2156bd47882a6e0f72443cc8823b1c246b909aa476c8e44e82eaf04` |
 
 El hash del sandbox figura en `evidencias/Validacion-v4.3.json` (4.3), `evidencias/Validacion-v4.4.json` (4.4) y `evidencias/Validacion-v5.0.json` (5.0). El catálogo de destinos incluye desde la 5.0 los seis mapas de la Superliga (394 destinos) y corresponde a la compilación probada; no se adjunta ninguna ROM sandbox.
 

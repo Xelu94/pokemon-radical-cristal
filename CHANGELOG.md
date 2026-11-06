@@ -2,6 +2,27 @@
 
 Formato por versión. Las versiones anteriores a la 4 no están documentadas en este paquete; solo se sabe que la actualización v3→v4 permite continuar el guardado.
 
+## 5.7 — Dark Lugia por detrás y el premio de la Superliga con el equipo lleno (6 de noviembre de 2026)
+
+Dos cambios pedidos tras pasar el juego completo con la 5.6, incluida la Superliga. **310 comprobaciones agrupadas** ([evidencias/Validacion-v5.7.json](evidencias/Validacion-v5.7.json)): las 298 de la 5.6 más 12 nuevas (6 jugando como chico y 6 como chica).
+
+**Errores corregidos**
+
+1. **Quedabas encerrado al vencer a TITO en la Superliga con el equipo lleno.** El campeón te decía «Libera un hueco y vuelve a hablar conmigo», pero en esa sala no se puede liberar ningún hueco (ni abrir el PC), así que no había salida útil. Ahora el CHARIZARD SHINY se entrega **siempre**: va al equipo con su carta si hay hueco y, si no, **al PC** (te lo cuenta y te lee la carta). Si ni el equipo ni el PC tienen sitio, TITO te lo dice y **te saca de la Superliga** (al Centro Pokémon de la Meseta Añil) sin quitarte el premio: las salas siguen superadas y el CHARIZARD te espera cuando vuelvas a entrar con un hueco libre.
+
+**Mejoras**
+
+2. **Imagen trasera de Dark Lugia = la de Lugia, con la paleta de Dark Lugia.** La trasera anterior (un recorte del arte de aficionado) se veía muy cortada. Ahora usa exactamente los gráficos traseros de LUGIA y los cuatro colores de Dark Lugia. El frontal no cambia.
+
+**Límites:** si todo el PC está lleno y sales sin el premio, hay que volver a entrar en la Superliga y recorrer sus salas (ya superadas) hasta TITO. Los combates largos de las pruebas de historia se ajustaron a los rivales actuales.
+
+ROM de esta versión (reconstruida desde la base española aplicando el parche con RGBDS 1.0.0):
+
+| | SHA-256 |
+|---|---|
+| ROM normal (`Radical Cristal.gbc`) | `d7f6d1067171632c2f24c2c40520c2c7a66b9c75672d13f31dd4215a14eb46e0` |
+| Sandbox | `64b69a1ae2156bd47882a6e0f72443cc8823b1c246b909aa476c8e44e82eaf04` |
+
 ## 5.6 — Ulex sin cerrojo, despedida del rival, ataques modernos y trueques de Tito (1 de noviembre de 2026)
 
 Cinco cambios pedidos tras llegar a Ciudad Endrino con la 5.5. **298 comprobaciones agrupadas** ([evidencias/Validacion-v5.6.json](evidencias/Validacion-v5.6.json)): las 269 de la 5.5 más las nuevas de esta versión.
