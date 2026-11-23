@@ -79875,19 +79875,23 @@ index 770c0a8..5952423 100644
  ; EVENT_WELCOMED_TO_POKECOM_CENTER is never set
 diff --git a/engine/events/super_league.asm b/engine/events/super_league.asm
 new file mode 100644
-index 0000000..4b0ff3a
+index 0000000..477c253
 --- /dev/null
 +++ b/engine/events/super_league.asm
-@@ -0,0 +1,192 @@
+@@ -0,0 +1,249 @@
 +; The Super League: strong random opponents, the Full Restore loss rule and its scripts.
++
++DEF NUM_SUPER_LEGENDS EQU 11
 +
 +PUSHS
 +SECTION "Super League", ROMX
 +
 +SuperLeagueRandomizeSpecies::
 +; Called for every Pokemon of a party read with TRAINERTYPE_NORMAL. The four Super League
-+; trainers get a random, fully evolved species with a base stat total of at least 450 that
-+; is not already in the party, instead of the placeholder stored in the party data.
++; trainers replace the placeholder stored in the party data: the first slots get a random,
++; fully evolved, non-legendary species with a base stat total of at least 500 that is not
++; already in the party; Azul, Lance and Rojo get a different legendary in their last three
++; slots, and Ulex gets two legendaries and Dark Lugia as his last Pokemon.
 +	ld a, [wOtherTrainerClass]
 +	ld b, a
 +	ld a, [wOtherTrainerID]
@@ -79906,6 +79910,48 @@ index 0000000..4b0ff3a
 +	inc hl
 +	jr .check
 +.match
++	ld a, [wOTPartyCount]
++	ld e, a ; slot
++	ld a, b
++	cp ULEX
++	jr nz, .others
++	ld a, e
++	cp 5
++	jr z, .dark_lugia
++	cp 3
++	jr nc, .legend
++	jr .pick
++.others
++	ld a, e
++	cp 3
++	jr c, .pick
++.legend
++	ld a, NUM_SUPER_LEGENDS
++	call RandomRange
++	ld e, a
++	ld d, 0
++	ld hl, .Legends
++	add hl, de
++	ld d, [hl]
++	ld a, [wOTPartyCount]
++	and a
++	jr z, .accept_legend
++	ld c, a
++	ld hl, wOTPartySpecies
++.legend_dupes
++	ld a, [hli]
++	cp d
++	jr z, .legend
++	dec c
++	jr nz, .legend_dupes
++.accept_legend
++	ld a, d
++	ld [wCurPartySpecies], a
++	ret
++.dark_lugia
++	ld a, DARK_LUGIA
++	ld [wCurPartySpecies], a
++	ret
 +.pick
 +	call Random
 +	and a
@@ -79927,6 +79973,15 @@ index 0000000..4b0ff3a
 +	dec c
 +	jr nz, .dupes
 +.no_dupes
++	; not one of the legendaries
++	ld hl, .Legends
++	ld b, NUM_SUPER_LEGENDS
++.legendary
++	ld a, [hli]
++	cp d
++	jr z, .pick
++	dec b
++	jr nz, .legendary
 +	; fully evolved: its evolution list is empty
 +	ld a, d
 +	dec a
@@ -79942,7 +79997,7 @@ index 0000000..4b0ff3a
 +	and a
 +	jr nz, .pick
 +	call GetBaseData
-+	; base stat total >= 450
++	; base stat total >= 500
 +	ld hl, wBaseStats
 +	ld b, 6
 +	ld de, 0
@@ -79956,17 +80011,19 @@ index 0000000..4b0ff3a
 +	dec b
 +	jr nz, .sum
 +	ld a, d
-+	cp HIGH(450)
++	cp HIGH(500)
 +	jr c, .pick
 +	jr nz, .accept
 +	ld a, e
-+	cp LOW(450)
++	cp LOW(500)
 +	jr c, .pick
 +.accept
 +	ld a, [wCurSpecies]
 +	ld [wCurPartySpecies], a
 +	ret
 +
++.Legends:
++	db ARTICUNO, ZAPDOS, MOLTRES, MEWTWO, MEW, RAIKOU, ENTEI, SUICUNE, LUGIA, HO_OH, CELEBI
 +.Trainers:
 +	db CHAMPION, LANCE_SUPER
 +	db RED, RED_SUPER
@@ -84158,16 +84215,19 @@ index 5d38904..de07800 100644
  InitPartyMenuLayout:
 diff --git a/engine/pokemon/progression_tuning.asm b/engine/pokemon/progression_tuning.asm
 new file mode 100644
-index 0000000..ac3407b
+index 0000000..9f96733
 --- /dev/null
 +++ b/engine/pokemon/progression_tuning.asm
-@@ -0,0 +1,307 @@
+@@ -0,0 +1,580 @@
 +; Difficulty tuning that grows with the player's progress: wild and trainer Pokemon
 +; are fully evolved for their level, and from the sixth badge on every one of them
 +; knows an attack of its own type.
 +
 +DEF STONE_EVOLUTION_LEVEL EQU 32
-+DEF STAB_MIN_BADGES EQU 6
++DEF COMPETITIVE_MIN_BADGES EQU 4
++DEF UTILITY_MIN_BADGES EQU 7
++DEF MIN_MOVE_ACCURACY EQU 216 ; 85 percent
++DEF NUM_UTILITY_MOVES EQU 13
 +
 +PUSHS
 +SECTION "Progression tuning", ROMX
@@ -84301,20 +84361,20 @@ index 0000000..ac3407b
 +	ret
 +
 +StabForWild::
-+; Called at the end of RandomizeFourMoves with DE = the four moves. Only a wild
-+; Pokemon after the sixth badge; its types are in wBaseType1 and wBaseType2.
++; Called at the end of RandomizeFourMoves with DE = the four moves. Only a wild Pokemon
++; from the fourth badge on; its types and stats are in wBaseData.
 +	ld a, [wBattleMode]
 +	dec a ; WILD_BATTLE
 +	ret nz
 +	call CountBadges
-+	cp STAB_MIN_BADGES
++	cp COMPETITIVE_MIN_BADGES
 +	ret c
-+	jp EnsureStabMove
++	jp BuildCompetitiveSet
 +
 +StabForTrainer::
 +; Called by RandomizeTrainerMon with DE = MON_MOVES of the party struct.
 +	call CountBadges
-+	cp STAB_MIN_BADGES
++	cp COMPETITIVE_MIN_BADGES
 +	ret c
 +	push de
 +	ld a, e
@@ -84327,7 +84387,7 @@ index 0000000..ac3407b
 +	ld [wCurSpecies], a
 +	call GetBaseData
 +	pop de
-+	jp EnsureStabMove
++	jp BuildCompetitiveSet
 +
 +CountBadges:
 +; Returns A = badges earned in Johto and Kanto. Preserves DE.
@@ -84350,89 +84410,359 @@ index 0000000..ac3407b
 +	pop de
 +	ret
 +
-+EnsureStabMove:
-+; DE = the four moves, wBaseType1/2 = the Pokemon's types. If none of the moves is a
-+; damaging attack of its own type, the fourth one becomes one. Preserves DE.
-+	ld h, d
-+	ld l, e
-+	ld c, NUM_MOVES
-+.have
-+	ld a, [hli]
-+	and a
-+	jr z, .empty
++BuildCompetitiveSet:
++; DE = the four moves. From the fourth badge on a Pokemon gets a set that gets better with
++; every badge: its best attacks of its own type, a coverage attack and, from the seventh
++; badge, a set-up, recovery or status move. A slot that finds nothing keeps its random move.
++	ld c, 0
++.slot
 +	push bc
-+	push hl
-+	call MoveIsStab
-+	pop hl
++	call PickCompetitiveMove
 +	pop bc
-+	ret z
-+.empty
-+	dec c
-+	jr nz, .have
-+.roll
++	inc c
++	ld a, c
++	cp NUM_MOVES
++	jr nz, .slot
++	ret
++
++PickCompetitiveMove:
++; DE = the four moves, C = the slot to fill (0 and 1: own types, 2: coverage, 3: utility
++; or a second coverage attack). Attacks need a minimum power that rises with the badges.
++	push bc
++	call CountBadges
++	pop bc
++	ld b, a
++	ld a, c
++	cp 3
++	jr nz, .attack
++	ld a, b
++	cp UTILITY_MIN_BADGES
++	jp nc, PickUtilityMove
++.attack
++	ld a, b
++	sub COMPETITIVE_MIN_BADGES
++	ld b, a
++	add a
++	add a
++	add b ; 5 * (badges - 4)
++	add 60
++	cp 91
++	jr c, .capped
++	ld a, 90
++.capped
++	ld b, a
++	ld a, c
++	and a
++	ld a, b
++	jr z, .threshold
++	sub 10 ; the other slots ask for ten less
++.threshold
++	ld b, a
++.pass
++	call .scan
++	ret c
++	ld a, b
++	bit 7, c
++	jr nz, .any_lower
++	; first the Pokemon's better category, asking for ten less each time down to power 50
++	sub 10
++	cp 50
++	jr nc, .retry
++	set 7, c ; then any category from power 50
++	ld b, 50
++	jr .pass
++.any_lower
++	sub 10
++	cp 40
++	ret c
++.retry
++	ld b, a
++	jr .pass
++.scan
 +	call Random
 +	and a
-+	jr z, .roll
++	jr z, .scan
 +	cp NUM_ATTACKS + 1
-+	jr nc, .roll
-+	ld b, a ; B = candidate
-+	ld c, NUM_ATTACKS ; C = candidates left
++	jr nc, .scan
++	ld h, a
++	ld l, NUM_ATTACKS
 +.try
-+	ld a, b
-+	call MoveAllowed
-+	jr nz, .next
-+	ld a, b
-+	push bc
-+	call MoveIsStab
-+	pop bc
-+	jr nz, .next
-+	ld h, d
-+	ld l, e
-+	ld a, [hli]
-+	cp b
-+	jr z, .next
-+	ld a, [hli]
-+	cp b
-+	jr z, .next
-+	ld a, [hli]
-+	cp b
-+	jr z, .next
-+	ld a, [hl]
-+	cp b
-+	jr z, .next
-+	ld [hl], b
-+	ret
-+.next
-+	inc b
-+	ld a, b
++	push hl
++	ld a, h
++	call CandidateFits
++	pop hl
++	jr z, .found
++	inc h
++	ld a, h
 +	cp NUM_ATTACKS + 1
 +	jr c, .in_range
-+	ld b, 1
++	ld h, 1
 +.in_range
-+	dec c
++	dec l
++	jr nz, .try
++	and a
++	ret
++.found
++	ld b, h
++	ld a, c
++	and 3
++	add e
++	ld l, a
++	ld a, d
++	adc 0
++	ld h, a
++	ld [hl], b
++	scf
++	ret
++
++CandidateFits:
++; A = move, B = minimum power, C = slot (bit 7: any category), DE = the four moves.
++; Z if it is a good pick: of the category the Pokemon is better at (first pass) and of the
++; type the slot asks for, allowed, not already known, strong enough and accurate.
++; The cheap checks come first because most of the 254 moves are rejected by them.
++; Preserves BC and DE.
++	push bc
++	ld b, a
++	call .pointer
++	ld a, BANK(Moves)
++	call GetFarByte
++	ld c, a ; type and category
++	ld hl, sp + 0
++	bit 7, [hl]
++	jr nz, .category_ok
++	ld a, [wBaseAttack]
++	ld h, a
++	ld a, [wBaseSpecialAttack]
++	cp h
++	ld a, PHYSICAL
++	jr c, .lean
++	ld a, SPECIAL
++.lean
++	ld h, a
++	ld a, c
++	and %11000000
++	cp h
++	jr nz, .below
++.category_ok
++	ld hl, sp + 0
++	ld a, [hl]
++	and 3
++	ld l, a ; slot kind
++	ld a, c
++	and TYPE_MASK
++	ld h, a ; the move's type
++	ld a, l
++	and a
++	jr z, .own_first
++	dec a
++	jr z, .own_second
++	ld a, [wBaseType1]
++	cp h
++	jr z, .below
++	ld a, [wBaseType2]
++	cp h
++	jr z, .below
++	jr .type_ok
++.own_first
++	ld a, [wBaseType1]
++	cp h
++	jr nz, .below
++	jr .type_ok
++.own_second
++	ld a, [wBaseType2]
++	cp h
++	jr nz, .below
++.type_ok
++	ld a, b
++	call MoveAllowed
++	jr nz, .below
++	ld a, b
++	call CompetitiveAllowed
++	jr nz, .below
++	ld a, b
++	call MoveInSet
++	jr z, .below
++	call .pointer
++	dec hl ; power
++	ld a, BANK(Moves)
++	call GetFarByte
++	ld c, a
++	inc hl
++	inc hl ; accuracy
++	ld a, BANK(Moves)
++	call GetFarByte
++	cp MIN_MOVE_ACCURACY
++	jr c, .below
++	ld hl, sp + 1
++	ld a, c
++	cp [hl] ; minimum power
++	jr c, .below
++	pop bc
++	xor a
++	ret
++.below
++	pop bc
++	or 1
++	ret
++.pointer
++; B = move. HL = its type byte in the move table, 7 * (move - 1) bytes from the start.
++	ld a, b
++	dec a
++	ld c, a
++	ld l, a
++	ld h, 0
++	add hl, hl
++	add hl, hl
++	add hl, hl
++	ld a, l
++	sub c
++	ld l, a
++	ld a, h
++	sbc 0
++	ld h, a
++	ld a, l
++	add LOW(Moves + MOVE_TYPE)
++	ld l, a
++	ld a, h
++	adc HIGH(Moves + MOVE_TYPE)
++	ld h, a
++	ret
++
++MoveInSet:
++; A = move, DE = the four moves. Z if it is one of them. Preserves BC and DE.
++	push bc
++	ld b, a
++	push de
++	ld a, [de]
++	cp b
++	jr z, .found
++	inc de
++	ld a, [de]
++	cp b
++	jr z, .found
++	inc de
++	ld a, [de]
++	cp b
++	jr z, .found
++	inc de
++	ld a, [de]
++	cp b
++	jr z, .found
++	pop de
++	pop bc
++	or 1
++	ret
++.found
++	pop de
++	pop bc
++	xor a
++	ret
++
++PickUtilityMove:
++; DE = the four moves. The fourth one becomes a set-up, recovery or status move that fits
++; the Pokemon (set-up moves for its better attacking stat).
++	ld a, NUM_UTILITY_MOVES
++	call RandomRange
++	ld c, a
++	ld b, NUM_UTILITY_MOVES
++.try
++	ld hl, UtilityMoves
++	ld a, c
++	add a
++	add l
++	ld l, a
++	ld a, h
++	adc 0
++	ld h, a
++	ld a, [hli]
++	push af
++	ld a, [hl]
++	call UtilityRoleFits
++	jr nz, .skip
++	pop af
++	push af
++	call MoveInSet
++	jr z, .skip
++	pop af
++	ld h, d
++	ld l, e
++	inc hl
++	inc hl
++	inc hl
++	ld [hl], a
++	ret
++.skip
++	pop af
++	inc c
++	ld a, c
++	cp NUM_UTILITY_MOVES
++	jr c, .next
++	ld c, 0
++.next
++	dec b
 +	jr nz, .try
 +	ret
 +
-+MoveIsStab:
-+; A = move. Z if it deals damage and has one of the Pokemon's types.
-+	dec a
-+	ld hl, Moves + MOVE_POWER
-+	ld bc, MOVE_LENGTH
-+	call AddNTimes
-+	ld a, BANK(Moves)
-+	call GetFarByte
++UtilityRoleFits:
++; A = 0 for any Pokemon, 1 for physical attackers, 2 for special attackers. Z if it fits.
 +	and a
-+	jr z, .no
-+	inc hl ; MOVE_TYPE
-+	ld a, BANK(Moves)
-+	call GetFarByte
-+	and TYPE_MASK
-+	ld b, a
-+	ld a, [wBaseType1]
-+	cp b
 +	ret z
-+	ld a, [wBaseType2]
++	push bc
++	ld c, a
++	ld a, [wBaseAttack]
++	ld b, a
++	ld a, [wBaseSpecialAttack]
 +	cp b
++	ld a, 1
++	jr c, .lean
++	ld a, 2
++.lean
++	cp c
++	pop bc
++	ret
++
++UtilityMoves:
++	db SWORDS_DANCE, 1
++	db AGILITY, 0
++	db RECOVER, 0
++	db SUBSTITUTE, 0
++	db TOXIC, 0
++	db THUNDER_WAVE, 0
++	db PROTECT, 0
++	db REFLECT, 1
++	db LIGHT_SCREEN, 2
++	db AMNESIA, 2
++	db SPORE, 0
++	db MILK_DRINK, 0
++	db SOFTBOILED, 0
++
++CompetitiveAllowed:
++; A = move. Z if it is fit for a competitive set: no recharge, two-turn or locking attacks.
++	cp HYPER_BEAM
++	jr z, .no
++	cp SOLARBEAM
++	jr z, .no
++	cp SKULL_BASH
++	jr z, .no
++	cp SKY_ATTACK
++	jr z, .no
++	cp FLY
++	jr z, .no
++	cp DIG
++	jr z, .no
++	cp FUTURE_SIGHT
++	jr z, .no
++	cp THRASH
++	jr z, .no
++	cp OUTRAGE
++	jr z, .no
++	cp PETAL_DANCE
++	jr z, .no
++	cp ROLLOUT
++	jr z, .no
++	cp FURY_CUTTER
++	jr z, .no
++	xor a
 +	ret
 +.no
 +	or 1
@@ -85153,23 +85483,25 @@ index 0000000..6d91bec
 +	endanim
 diff --git a/gfx/pokemon/dark_lugia/back.png b/gfx/pokemon/dark_lugia/back.png
 new file mode 100644
-index 0000000000000000000000000000000000000000..d71098ffd51ded0146d3772555c05e1a0f77babb
+index 0000000000000000000000000000000000000000..bd7093ddf5cbfeae6b661d1b82005e42d9fa9022
 GIT binary patch
-literal 709
-zcmV;$0y_PPP)<h;3K|Lk000e1NJLTq001xm001xu0ssI2*kEqZ0007vNkl<Zc%02x
-zyOqK)5M24u2%!ln!R`PuJ478o8PI_pLIxciB@muNO3}UZ!k$haOSabUZX!QhmPRwX
-z(n>-p1^)>dS4W~puvxjP1I-i%0HDaLm=39>uK|NXqMz}-yTnUH>}{kH5<(PtWoUrb
-z1b=kDPYh}yygeY-kI%FIQYU)vF805vgy1(Pxjo@SbKU!B;Ts>J1<V8aW`;xBLSoF7
-ztJ;u|K_T#nWT3qrh+L6ZlmrHWxfHUo+Z<ySDxQT=DMf=(^f)=;1Ic6OBadYe=NjVK
-zJ#<2bYiwJG(nLxD8zCJ7t^vR@UmI_9*El!VU0m4O&>fsbAvqXB^X_H3JUEivo`x-R
-zx<=A+D%4!}%Y5Bj_c5IGa%J|Fy6HIu|7vdsN>8N}ZX*l|m8;rj6I4iFCuy(cvFxtp
-z2(gJ#NC&lN&N4YhA==<@O6VFhp=P{7WE_e;mqHLidplrI8=SH~iRkuC1)rbYgTjcp
-zrj{dfUdL{8Y;Oln%jBf|GLW(R1%n`i?6W1-xJj0YF@9lPM)6A}wgEQF<QO&s$XNV>
-z_X^}|9LXjr%Y@~ZujMN^`T|2KMJ=7KEm-6k0F6qAGWz7~VWL7JTApY3FwUm@F(mvK
-z42f)hEF*&_u#us&^C)CAMv+%62dkJ$KCDo=s*Tg+pU49M8Qs=QU^53^K^-HHje+Ev
-z=GTaINVv?x5~9c}<D50wuh_H~F0*h{yn3PyJRMogJ-4#hpjmWDU^qV6uW!q+*0(=s
-zE7RHer*G60zg`O6y9@P>lAtQSekpn;XG4IHJ}}k^W2d-_D=lIP86pis_VVb5UtYWj
-rVX_o?g>%K2wU-$u8$+Iyhz5W!+I4hp<8F8-00000NkvXXu0mjf&n`RZ
+literal 807
+zcmV+?1K9kDP)<h;3K|Lk000e1NJLTq001xm001xu0ssI2*kEqZ0008+Nkl<Zc%0ps
+zJCfos5QZgcF5=J*If8uy$RIQ~7>;3XU_zV?H^4_A#G#L(ExU)_M$h&l?M`hM0d@)L
+z<L`&ml1eG@lWZk^n61Qr2_&CZ75g`*`iMePZyNdtU+PWMetnwb0s8j1*k_9p)Kbba
+z-(~rlzC2%#_?@m&75m%cBBg!l2nvaLy@^SPEMJeqUCduVwsE-kLuW2eMNJaaN~wP6
+z@NpdO@If+kC0P6QX$`o@S$4i2HOB!~y=lsPr!iSACXjN6Blxl2G?WP<DIt)UnM{#9
+zp`(=29G9dpj<X*8_i2IDYjj(g4%-vH(d7L1TSxnvZt;QS9H;%z1$DBDltiK0QS_)$
+zuThawxvZWG4`*cBER*x5#u-U>I_kCf3T5shM6Jws=(WT4gy({US(b&!XlNr`+O*F?
+zOvr(7X@SO2X@&uKL`e%YdTCr$Dl$;{Ofk;3mE~&_D<+VX(o>zO!7#{t?I)2Hs-MT!
+z;7Bza<%7q+x4HI22|PVgEU;Dd02&$cP$ms48jzIIQ*}Td{}CYE2EoSU>gbk64{AV#
+zF^4%7ay4>R<FpfK;2_uJcA%=*FQO@VJ3MPPb74)JYVLgfKz@JqL&yJntKe~tDGxKb
+z{sc%VMQ6V~F0M-!D-9==mH`2Tr&IBS4tU4k3HfcsIbyc2oeJDdxoE_D_Tj%_QDgyn
+z6Se4=v4}EIsSi)bp$l9s4qf=2Lg1^^AW|!)<F``EntC8lKXeGn&(MHERk7Ey348<#
+zcxb?&Z8&UC=j##W0bLi>@o$ANT<`)A-k14qiterO(4agT4etMVUgiYT#G#FbM>=n2
+zq`el%P|7_&gq-C7Sz-tgaZ<P{^k)<J)b%&&O*0O6&W8Ox!W>F7B@5AjU(C$HKLd}@
+z?)aI01DTRCvlk-QHF7D_OC5p|4B}VCo=Icw725qU-o<iy*(rvo68+Gfug9@qZQV4#
+l==(C?Sv?3$aGG|B^b5oW{K9<+tD67-002ovPDHLkV1k+IetrM|
 
 literal 0
 HcmV?d00001
@@ -91443,6 +91775,61 @@ index 0000000..9071693
 +    parser.add_argument("--seed", type=int, default=20261013)
 +    args = parser.parse_args()
 +    Randomizer(args.seed).run()
+diff --git a/tools/build_dark_lugia_back.py b/tools/build_dark_lugia_back.py
+new file mode 100644
+index 0000000..100c987
+--- /dev/null
++++ b/tools/build_dark_lugia_back.py
+@@ -0,0 +1,49 @@
++"""Builds gfx/pokemon/dark_lugia/back.png (48x48, the four Dark Lugia colours) from the back view supplied by the
++project author: a 60x60 pixel-art sprite enlarged to 1024x1024.
++
++The 60x60 art is sampled at the centre of each enlarged pixel, reduced to the four palette colours, and then shrunk
++to 48x48 by coverage: a target pixel is black when at least 35 % of it is black (so outlines survive), white when at
++least 55 % of it is white, and otherwise the more covered of the two purples.
++Usage: build_dark_lugia_back.py <image>"""
++import sys
++from pathlib import Path
++from PIL import Image
++
++PAL = [(255, 255, 255), (99, 82, 140), (66, 41, 90), (0, 0, 0)]
++REF = [(255, 255, 255), (100, 79, 136), (62, 44, 90), (0, 0, 0)]
++SOURCE, TARGET = 60, 48
++
++
++def nearest(c):
++    return min(range(4), key=lambda i: sum((c[k] - REF[i][k]) ** 2 for k in range(3)))
++
++
++def main():
++    src = Image.open(sys.argv[1]).convert('RGB')
++    step = src.size[0] / SOURCE
++    idx = [[nearest(src.getpixel((int((x + 0.5) * step), int((y + 0.5) * step)))) for x in range(SOURCE)] for y in range(SOURCE)]
++    scale = SOURCE / TARGET
++    out = Image.new('RGB', (TARGET, TARGET))
++    for ty in range(TARGET):
++        for tx in range(TARGET):
++            x0, x1, y0, y1 = tx * scale, (tx + 1) * scale, ty * scale, (ty + 1) * scale
++            cover = [0.0] * 4
++            for sy in range(int(y0), min(SOURCE, int(y1) + 1)):
++                for sx in range(int(x0), min(SOURCE, int(x1) + 1)):
++                    w = (min(x1, sx + 1) - max(x0, sx)) * (min(y1, sy + 1) - max(y0, sy))
++                    if w > 0:
++                        cover[idx[sy][sx]] += w
++            total = sum(cover)
++            cover = [c / total for c in cover]
++            if cover[3] >= 0.35:
++                k = 3
++            elif cover[0] >= 0.55:
++                k = 0
++            else:
++                k = max((1, 2), key=lambda i: cover[i]) if max(cover[1], cover[2]) > 0 else 0
++            out.putpixel((tx, ty), PAL[k])
++    out.save(Path('gfx/pokemon/dark_lugia') / 'back.png')
++
++
++if __name__ == '__main__':
++    main()
 diff --git a/tools/build_dark_lugia_sprite.py b/tools/build_dark_lugia_sprite.py
 new file mode 100644
 index 0000000..ed8bdfb

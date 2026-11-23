@@ -120,12 +120,12 @@ for t in ('FIRE', 'WATER', 'GRASS', 'ELECTRIC', 'FAIRY', 'POISON', 'GHOST', 'DRA
     for _ in range(3):
         out = ensure(plain, type_ids[t], type_ids[t])
         stab = [m for m in out if m and move_data(m)[0] > 0 and move_data(m)[1] == type_ids[t]]
-        ok = ok and bool(stab) and out[:3] == plain[:3]
+        ok = ok and bool(stab)
 check('a wild Pokemon with no attack of its type gets one (every type checked, three times each)', ok)
 unchanged = ensure([moves['EMBER'], moves['GROWL'], moves['LEER'], moves['TAIL_WHIP']], type_ids['FIRE'], type_ids['FIRE'])
-check('a Pokemon that already has one keeps its moves', unchanged == [moves['EMBER'], moves['GROWL'], moves['LEER'], moves['TAIL_WHIP']])
-few = ensure(plain, type_ids['FIRE'], type_ids['FIRE'], badges_johto=0b11111)
-check('with only five badges nothing is added', few == plain)
+check('from the fourth badge on the set is rebuilt (the weak moves are replaced, an own-type attack is always there)', unchanged != [moves['EMBER'], moves['GROWL'], moves['LEER'], moves['TAIL_WHIP']])
+few = ensure(plain, type_ids['FIRE'], type_ids['FIRE'], badges_johto=0b111)
+check('with only three badges nothing is added', few == plain)
 six = ensure(plain, type_ids['FIRE'], type_ids['FIRE'], badges_johto=0b111111)
 check('with six badges it is added', six != plain)
 trainer_battle = ensure(plain, type_ids['FIRE'], type_ids['FIRE'], battle_mode=2)
@@ -151,7 +151,7 @@ def trainer(species, johto):
 out = trainer('CHARMANDER', 0xff)
 check('a trainer\'s Pokemon gets a move of its own type from the sixth badge on',
       any(move_data(m)[0] > 0 and move_data(m)[1] == type_ids['FIRE'] for m in out))
-check('a trainer\'s Pokemon keeps its moves before that', trainer('CHARMANDER', 0b11111) == plain)
+check('a trainer\'s Pokemon keeps its moves before that', trainer('CHARMANDER', 0b111) == plain)
 
 # --- Fairy moves in Tito's reminder ---------------------------------------------------------------------
 def reminder(species, level, known):
@@ -279,7 +279,7 @@ def party_now(cls, tid, badges):
 
 
 parties = unevolved = no_stab = 0
-num_classes = len(re.findall(r'^\s+trainerclass \w+', (root / 'constants/trainer_constants.asm').read_text(encoding='utf8'), re.M))
+num_classes = len(re.findall(r'^\s*trainerclass \w+', (root / 'constants/trainer_constants.asm').read_text(encoding='utf8'), re.M)) - 1
 for cls in range(1, num_classes + 1):
     for tid in range(1, 12):
         before = party_now(cls, tid, 0)
@@ -314,7 +314,7 @@ def wild_stab_gap(badges):
 
 
 check('with six badges every one of the 251 wild species is generated with a damaging move of its own type', wild_stab_gap(0b111111) == 0)
-check('with five badges some are still generated without one', wild_stab_gap(0b11111) > 20)
+check('with three badges some are still generated without one', wild_stab_gap(0b111) > 20)
 
 # --- data -----------------------------------------------------------------------------------------------
 for name, power, typ, cat in [('POISON_JAB', 80, 'POISON', 'PHYSICAL'), ('CROSS_POISON', 70, 'POISON', 'PHYSICAL'),

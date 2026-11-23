@@ -1,5 +1,5 @@
 {
-  "passed": 6,
+  "passed": 8,
   "tests": [
     {
       "name": "full party: the Charizard goes to the PC, the prize is marked and the player leaves the Super League",
@@ -18,11 +18,19 @@
       "passed": true
     },
     {
-      "name": "the Dark Lugia back picture is exactly the Lugia back picture (same graphics, its own palette)",
+      "name": "the Dark Lugia back picture is 48x48 and uses only the four Dark Lugia colours",
       "passed": true
     },
     {
-      "name": "and its colours are the four of the Dark Lugia palette",
+      "name": "and the built 2bpp data is exactly that picture",
+      "passed": true
+    },
+    {
+      "name": "and the ROM carries that picture (the packed data sits at DarkLugiaBackpic)",
+      "passed": true
+    },
+    {
+      "name": "it is no longer the Lugia picture",
       "passed": true
     }
   ]

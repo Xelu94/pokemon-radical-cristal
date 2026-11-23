@@ -2,6 +2,30 @@
 
 Formato por versión. Las versiones anteriores a la 4 no están documentadas en este paquete; solo se sabe que la actualización v3→v4 permite continuar el guardado.
 
+## 5.8 — Curva de ataques, Superliga más dura y randomizador descargable (23 de noviembre de 2026)
+
+Cuatro cambios pedidos tras pasar el juego completo con la 5.7. **346 comprobaciones agrupadas** ([evidencias/Validacion-v5.8.json](evidencias/Validacion-v5.8.json)): las 310 de la 5.7 más las nuevas de esta versión.
+
+1. **Curva de dificultad de los ataques desde la cuarta medalla.** Los Pokémon salvajes y los de entrenador dejan de llevar cuatro ataques al azar y reciben un conjunto competitivo que mejora con cada medalla (Johto y Kanto sumadas):
+   - **1.er ataque:** de su primer tipo, con potencia mínima 60 con 4 medallas, +5 por medalla hasta 90 con 10.
+   - **2.º ataque:** de su segundo tipo (o otro de su único tipo), diez puntos de potencia menos.
+   - **3.er ataque:** de cobertura, de un tipo que no es el suyo.
+   - **4.º ataque:** otro de cobertura hasta la sexta medalla; **desde la séptima**, un movimiento de apoyo que le sirva (Danza Espada, Agilidad, Recuperación, Sustituto, Tóxico, Onda Trueno, Protección, Reflejo, Pantalla Luz, Amnesia, Espora, Batido, Amortiguador).
+   - Los ataques son de la categoría en la que el Pokémon es mejor (físico o especial) siempre que el tipo lo permita, nunca tienen menos de 85 % de precisión y no llevan ataques de recarga, de dos turnos ni de bloqueo. Si un tipo no tiene ataques tan fuertes, se pide diez menos (hasta potencia 40).
+   - Sustituye a la regla de la 5.5 «un ataque de su tipo desde la sexta medalla» (el primer ataque ya es de su tipo desde la cuarta).
+2. **Superliga más dura.** Azul, Lance y Rojo llevan tres Pokémon totalmente evolucionados con al menos 500 de estadísticas base (antes 450) y **tres legendarios distintos** (Articuno, Zapdos, Moltres, Mewtwo, Mew, Raikou, Entei, Suicune, Lugia, Ho-Oh o Celebi). **Ulex** lleva tres Pokémon fuertes, dos legendarios y **Dark Lugia como último**. Tito conserva su equipo.
+3. **Randomizador descargable.** `Randomizador.html` se publica como archivo de la Release (junto a la ROM) con un enlace directo en el README; sigue funcionando sin conexión y la CI lo prueba con la ROM de la Release.
+4. **Imagen trasera de Dark Lugia nueva**, la que aportó el autor del proyecto (arte de 60×60 píxeles). Se pasa a los 48×48 de una imagen trasera con los cuatro colores de Dark Lugia, conservando los contornos negros (`tools/build_dark_lugia_back.py`). Sustituye a la de la 5.7, que era la de Lugia. El frontal no cambia.
+
+**Límites:** crear los conjuntos al empezar un combate (sobre todo los equipos de seis de la Superliga) hace que el juego se quede una fracción de segundo parado (hasta unos 0,8 s con todas las medallas). La imagen trasera de Dark Lugia pierde algo de detalle fino al reducirse un 20 %. La dificultad sube de forma notable: ahora hay que llevar un equipo con resistencias y cobertura.
+
+ROM de esta versión (reconstruida desde la base española aplicando el parche con RGBDS 1.0.0):
+
+| | SHA-256 |
+|---|---|
+| ROM normal (`Radical Cristal.gbc`) | `fac843af81fa454cac9da3e0b83cc25b2124360307c6f22aefe94b20863f1f6b` |
+| Sandbox | `041686b12456aaf0ef27abd9443ef0f8edfcbd48ad82150078320b962ab1844c` |
+
 ## 5.7 — Dark Lugia por detrás y el premio de la Superliga con el equipo lleno (6 de noviembre de 2026)
 
 Dos cambios pedidos tras pasar el juego completo con la 5.6, incluida la Superliga. **310 comprobaciones agrupadas** ([evidencias/Validacion-v5.7.json](evidencias/Validacion-v5.7.json)): las 298 de la 5.6 más 12 nuevas (6 jugando como chico y 6 como chica).

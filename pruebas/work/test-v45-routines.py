@@ -181,9 +181,9 @@ for run in range(300):
     r.run('SuperLeagueRandomizeSpecies', setup_pick)
     mon = r.p.memory[addr('wCurPartySpecies')]
     name = species[mon - 1]
-    assert mon <= 251 and name not in has_evolution and bst[name] >= 450, (run, name, bst[name])
+    assert mon <= 251 and name not in has_evolution and bst[name] >= 500, (run, name, bst[name])
     chosen.append(mon)
-check('300 Super League picks are fully evolved, at least 450 base total and never Dark Lugia', len(set(chosen)) > 40)
+check('300 Super League picks (the first slots) are fully evolved, at least 500 base total and never Dark Lugia', len(set(chosen)) > 20)
 
 
 def setup_other(r_):

@@ -59,10 +59,24 @@ Cuando se genera un Pokémon salvaje o de entrenador, evoluciona hasta donde su 
 - Una especie con **una o dos evoluciones por piedra** pasa a la primera desde el **nivel 32** (Pikachu → Raichu, Gloom → Vileplume).
 - Eevee y las familias con muchas piedras no cambian, igual que las evoluciones por intercambio o amistad que no se convirtieron a nivel.
 
-### Ataque de su tipo (5.5)
+### Curva de ataques (5.8)
 
-Con **seis o más medallas** (Johto y Kanto sumadas), todo Pokémon salvaje o de entrenador conoce al menos un ataque de daño de uno de sus tipos. Si no lo tiene al generarse, el cuarto movimiento se sustituye por uno aleatorio que lo cumpla.
+Desde la **cuarta medalla** (Johto y Kanto sumadas), los ataques de los Pokémon salvajes y de entrenador se construyen al empezar el combate, con una potencia mínima que sube con las medallas:
 
+| Medallas | Potencia mínima del 1.er ataque | 4.º ataque |
+|---|---|---|
+| 4 | 60 | cobertura |
+| 5-6 | 65-70 | cobertura |
+| 7-9 | 75-85 | apoyo |
+| 10 o más | 90 | apoyo |
+
+1. **1.er ataque:** de su primer tipo. 2. **2.º ataque:** de su segundo tipo (o de nuevo del primero), diez de potencia menos. 3. **3.er ataque:** de cobertura (un tipo que no es el suyo). 4. **4.º ataque:** de cobertura hasta la sexta medalla; desde la séptima, un movimiento de apoyo que le valga (Danza Espada o Reflejo para los físicos, Pantalla Luz o Amnesia para los especiales, y Agilidad, Recuperación, Sustituto, Tóxico, Onda Trueno, Protección, Espora, Batido o Amortiguador para cualquiera).
+
+Los ataques son de la categoría (físico o especial) en la que el Pokémon es mejor, tienen al menos 85 % de precisión y se descartan los de recarga, los de dos turnos y los que bloquean al usuario. Si el tipo no tiene ataques tan fuertes, se baja la potencia de diez en diez hasta 40. Con menos de cuatro medallas los ataques siguen siendo aleatorios. Esto sustituye a la regla de la 5.5 «un ataque de su tipo desde la sexta medalla».
+
+### Superliga (5.8)
+
+Azul, Lance y Rojo llevan tres Pokémon totalmente evolucionados con 500 o más de estadísticas base y tres legendarios distintos; Ulex, tres Pokémon fuertes, dos legendarios y Dark Lugia el último. Los legendarios posibles son Articuno, Zapdos, Moltres, Mewtwo, Mew, Raikou, Entei, Suicune, Lugia, Ho-Oh y Celebi. Tito conserva su equipo fijo.
 ## Evoluciones modificadas
 
 Las evoluciones por intercambio o amistad se sustituyen por nivel o piedra para que todas sean accesibles en un Nuzlocke sin red. Datos de `data/pokemon/evos_attacks.asm`.

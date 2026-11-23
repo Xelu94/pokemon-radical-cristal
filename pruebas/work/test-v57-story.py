@@ -1,6 +1,6 @@
 """v5.7 changes played in the emulator: the Super League champion's prize when the party is full (it goes to the PC,
 or, with no room anywhere, the player is sent out of the room with the prize still waiting), and the Dark Lugia
-back sprite being Lugia's."""
+back sprite being the one supplied by the author."""
 import json
 import os
 import re
@@ -107,11 +107,25 @@ def blob(name, size):
     return rom[off:off + size]
 
 
-size = len(Path('work/source/gfx/pokemon/lugia/back.2bpp.lz').read_bytes())
-check('the Dark Lugia back picture is exactly the Lugia back picture (same graphics, its own palette)',
-      blob('DarkLugiaBackpic', size) == blob('LugiaBackpic', size))
-pal = Path('work/source/gfx/pokemon/dark_lugia/back.png')
-check('and its colours are the four of the Dark Lugia palette', pal.exists())
+from PIL import Image
+png = Image.open('work/source/gfx/pokemon/dark_lugia/back.png').convert('RGB')
+shade = {(255, 255, 255): 0, (99, 82, 140): 1, (66, 41, 90): 2, (0, 0, 0): 3}
+check('the Dark Lugia back picture is 48x48 and uses only the four Dark Lugia colours',
+      png.size == (48, 48) and set(png.getdata()) <= set(shade))
+expected = bytearray()
+for tx in range(6):          # the pictures are built with --columns: tiles go down each column first
+    for ty in range(6):
+        for row in range(8):
+            lo = hi = 0
+            for col in range(8):
+                v = shade[png.getpixel((tx * 8 + col, ty * 8 + row))]
+                lo = (lo << 1) | (v & 1)
+                hi = (hi << 1) | (v >> 1)
+            expected += bytes([lo, hi])
+check('and the built 2bpp data is exactly that picture', bytes(expected) == Path('work/source/gfx/pokemon/dark_lugia/back.2bpp').read_bytes())
+packed = Path('work/source/gfx/pokemon/dark_lugia/back.2bpp.lz').read_bytes()
+check('and the ROM carries that picture (the packed data sits at DarkLugiaBackpic)', blob('DarkLugiaBackpic', len(packed)) == packed)
+check('it is no longer the Lugia picture', blob('DarkLugiaBackpic', len(packed)) != blob('LugiaBackpic', len(packed)))
 
 report = {'passed': len(tests), 'tests': tests}
 Path('work/v57-story-girl-tests.json' if girl else 'work/v57-story-tests.json').write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')

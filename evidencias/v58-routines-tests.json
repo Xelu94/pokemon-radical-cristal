@@ -1,0 +1,133 @@
+{
+  "passed": 32,
+  "tests": [
+    {
+      "name": "4 badges: all 251 wild species get four different moves",
+      "passed": true
+    },
+    {
+      "name": "4 badges: the first move is an attack of the first type, as strong as the type allows (power 60 or the best the type has in its better category) in 60 percent of the species",
+      "passed": true
+    },
+    {
+      "name": "4 badges: the second is an attack of the second type (or the first again), the third a coverage attack",
+      "passed": true
+    },
+    {
+      "name": "4 badges: the fourth is a coverage attack",
+      "passed": true
+    },
+    {
+      "name": "4 badges: attacks never have less than 85 percent accuracy",
+      "passed": true
+    },
+    {
+      "name": "4 badges: the first attack is of the category the Pokemon is better at in at least 90 percent of the species",
+      "passed": true
+    },
+    {
+      "name": "7 badges: all 251 wild species get four different moves",
+      "passed": true
+    },
+    {
+      "name": "7 badges: the first move is an attack of the first type, as strong as the type allows (power 75 or the best the type has in its better category) in 60 percent of the species",
+      "passed": true
+    },
+    {
+      "name": "7 badges: the second is an attack of the second type (or the first again), the third a coverage attack",
+      "passed": true
+    },
+    {
+      "name": "7 badges: the fourth is a set-up, recovery or status move",
+      "passed": true
+    },
+    {
+      "name": "7 badges: attacks never have less than 85 percent accuracy",
+      "passed": true
+    },
+    {
+      "name": "7 badges: the first attack is of the category the Pokemon is better at in at least 90 percent of the species",
+      "passed": true
+    },
+    {
+      "name": "10 badges: all 251 wild species get four different moves",
+      "passed": true
+    },
+    {
+      "name": "10 badges: the first move is an attack of the first type, as strong as the type allows (power 90 or the best the type has in its better category) in 60 percent of the species",
+      "passed": true
+    },
+    {
+      "name": "10 badges: the second is an attack of the second type (or the first again), the third a coverage attack",
+      "passed": true
+    },
+    {
+      "name": "10 badges: the fourth is a set-up, recovery or status move",
+      "passed": true
+    },
+    {
+      "name": "10 badges: attacks never have less than 85 percent accuracy",
+      "passed": true
+    },
+    {
+      "name": "10 badges: the first attack is of the category the Pokemon is better at in at least 90 percent of the species",
+      "passed": true
+    },
+    {
+      "name": "16 badges: all 251 wild species get four different moves",
+      "passed": true
+    },
+    {
+      "name": "16 badges: the first move is an attack of the first type, as strong as the type allows (power 90 or the best the type has in its better category) in 60 percent of the species",
+      "passed": true
+    },
+    {
+      "name": "16 badges: the second is an attack of the second type (or the first again), the third a coverage attack",
+      "passed": true
+    },
+    {
+      "name": "16 badges: the fourth is a set-up, recovery or status move",
+      "passed": true
+    },
+    {
+      "name": "16 badges: attacks never have less than 85 percent accuracy",
+      "passed": true
+    },
+    {
+      "name": "16 badges: the first attack is of the category the Pokemon is better at in at least 90 percent of the species",
+      "passed": true
+    },
+    {
+      "name": "the average power of the attacks grows with the badges (4 -> 7 -> 10)",
+      "passed": true
+    },
+    {
+      "name": "with three badges the moves stay random (average power well below the fourth-badge sets)",
+      "passed": true
+    },
+    {
+      "name": "with all badges every Pokemon of every trainer party (2074) has the full competitive set",
+      "passed": true
+    },
+    {
+      "name": "Azul's Super League team (12 draws): three strong non-legendary Pokemon and three different legendaries",
+      "passed": true
+    },
+    {
+      "name": "Lance's Super League team (12 draws): three strong non-legendary Pokemon and three different legendaries",
+      "passed": true
+    },
+    {
+      "name": "Rojo's Super League team (12 draws): three strong non-legendary Pokemon and three different legendaries",
+      "passed": true
+    },
+    {
+      "name": "Ulex's Super League team (12 draws): three strong Pokemon, two legendaries and Dark Lugia as the last one",
+      "passed": true
+    },
+    {
+      "name": "the champion's own team is unchanged (Tito keeps his six)",
+      "passed": true
+    }
+  ]
+}

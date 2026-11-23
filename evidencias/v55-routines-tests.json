@@ -42,11 +42,11 @@
       "passed": true
     },
     {
-      "name": "a Pokemon that already has one keeps its moves",
+      "name": "from the fourth badge on the set is rebuilt (the weak moves are replaced, an own-type attack is always there)",
       "passed": true
     },
     {
-      "name": "with only five badges nothing is added",
+      "name": "with only three badges nothing is added",
       "passed": true
     },
     {
@@ -114,7 +114,7 @@
       "passed": true
     },
     {
-      "name": "with five badges some are still generated without one",
+      "name": "with three badges some are still generated without one",
       "passed": true
     },
     {

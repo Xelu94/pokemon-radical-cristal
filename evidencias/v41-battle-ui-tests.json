@@ -9,8 +9,8 @@
   "counts": {
     "Start": 1,
     "_Start": 1,
-    "BattleMenu": 13,
-    "MoveInfoBox": 14,
+    "BattleMenu": 15,
+    "MoveInfoBox": 16,
     "BattleCommand_SpeedDown": 12,
     "ScrollingMenu": 5,
     "_InitScrollingMenu": 5,

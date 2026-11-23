@@ -1,4 +1,4 @@
-# Mecánicas y reglas vigentes (v5.7)
+# Mecánicas y reglas vigentes (v5.8)
 
 Descripción de la ROM normal. Los datos numéricos se contrastaron con la fuente integrada (`engine/pokemon/v2_balance.asm`, `data/moves/moves.asm`, `data/pokemon/evos_attacks.asm`). Cuando una regla depende del emulador o de la semilla, se indica.
 
@@ -34,7 +34,7 @@ Ver [NIVELES-Y-EVOLUCIONES.md](NIVELES-Y-EVOLUCIONES.md) para la tabla completa.
 
 - El límite sigue al **primer líder pendiente** en el orden de progresión, aunque se visiten los gimnasios en otro orden.
 - Con ocho medallas de Johto el límite es 65 hasta superar la Liga. Con las dieciséis medallas es 95. **Rojo exige las dieciséis medallas y tiene seis Pokémon al nivel 95.** Al derrotarlo se desbloquea el nivel 100 (el equipo de Rojo no está al 100).
-- Salvajes (en hierba, al pescar y en árboles) y entrenadores no bajan del **nivel del último líder derrotado**, con excepciones para rutas iniciales (29, 30 y 31) y encuentros de nivel especial. Desde la 5.5, además, salen evolucionados hasta donde su nivel lo permite, y desde la sexta medalla todos conocen un ataque de daño de su tipo.
+- Salvajes (en hierba, al pescar y en árboles) y entrenadores no bajan del **nivel del último líder derrotado**, con excepciones para rutas iniciales (29, 30 y 31) y encuentros de nivel especial. Desde la 5.5, además, salen evolucionados hasta donde su nivel lo permite. Desde la cuarta medalla (5.8) los ataques de salvajes y entrenadores dejan de ser al azar y siguen una curva de dificultad: ver [NIVELES-Y-EVOLUCIONES.md](NIVELES-Y-EVOLUCIONES.md).
 - Líderes y Alto Mando suben 5 niveles; progresión revisada entre Johto y Kanto y objetos equipados útiles.
 - Una partida actualizada no pierde los niveles que ya tuviera por encima de un nuevo tope.
 

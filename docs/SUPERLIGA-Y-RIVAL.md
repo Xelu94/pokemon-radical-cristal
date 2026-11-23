@@ -54,7 +54,7 @@ Si la pierdes, queda cerrada hasta que vuelvas a ganar a Tito.
 
 ### Reglas
 
-- Todos los rivales están a **nivel 100**, sin medallas ni topes.
+- Todos los rivales están a **nivel 100**, sin medallas ni topes. Desde la 5.8 los equipos de Azul, Lance y Rojo llevan tres legendarios distintos cada uno (más tres Pokémon totalmente evolucionados con 500 o más de estadísticas base) y Ulex lleva dos legendarios y **Dark Lugia como último Pokémon**; todos con los conjuntos de ataques competitivos de las 16 medallas.
 - **Sin muertes.** En la Superliga tus Pokémon pueden debilitarse pero no mueren y no cuentan para la regla Nuzlocke.
 - Antes de entrar, el oficial del vestíbulo te da **99 RESTAU. TODO**.
 - **Si caes**, conservas todos tus Pokémon y se curan, pero pierdes todos los RESTAU. TODO (también los que tuvieras) y vuelves al Centro Pokémon de la Meseta. Para participar de nuevo hay que ganar otra vez a Tito.
